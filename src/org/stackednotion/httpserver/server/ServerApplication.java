@@ -15,6 +15,7 @@ import org.stackednotion.httpserver.server.resources.ContactResource;
 import org.stackednotion.httpserver.server.resources.ContactsResource;
 import org.stackednotion.httpserver.server.resources.MessagesResource;
 import org.stackednotion.httpserver.server.resources.ThreadResource;
+import org.stackednotion.httpserver.server.resources.ThreadsResource;
 
 import android.util.Log;
 
@@ -28,6 +29,7 @@ public class ServerApplication extends Application {
 		router.attach("/contacts/{contactKey}/photo",
 				ContactPhotoResource.class);
 		router.attach("/messages", MessagesResource.class);
+		router.attach("/threads", ThreadsResource.class);
 		router.attach("/threads/{threadKey}", ThreadResource.class);
 
 		return router;
