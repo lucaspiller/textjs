@@ -1,0 +1,9 @@
+<div id="threadlist">
+  <% threads.each(function(thread) { %>
+  <div class="thread">
+    <%= thread.get('id') %></br>
+    <%= thread.get('address') %></br>
+    <%= thread.get('body') %></br>
+  </div>
+  <% }); %>
+</div>

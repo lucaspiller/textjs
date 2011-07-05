@@ -1,0 +1,15 @@
+watch('^views/(.*)\.coffee') do |m|
+  target = "build/#{m[1]}"
+  system("rake #{target}")
+  system("rake assets")
+end
+
+watch('^views/(.*)\.scss') do |m|
+  target = "build/#{m[1]}"
+  system("rake #{target}")
+  system("rake assets")
+end
+
+watch('^views/(.*)\.jst') do |m|
+  system("rake assets")
+end

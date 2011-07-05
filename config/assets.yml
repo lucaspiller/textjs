@@ -1,0 +1,17 @@
+package_path: assets
+#gzip_assets: off
+#javascript_compressor: yui
+
+javascripts:
+  all:
+    - public/javascripts/underscore.js
+    - public/javascripts/backbone.js
+    - build/javascripts/application.js
+    - build/javascripts/models/*.js
+    - build/javascripts/views/**/*.js
+    - build/javascripts/controllers/*.js
+    - views/javascripts/views/**/*.jst
+
+stylesheets:
+  all:
+    - build/stylesheets/*.css

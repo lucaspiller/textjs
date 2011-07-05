@@ -1,0 +1,21 @@
+!!! 5
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
+    %title SmsJs
+    = javascript_include_tag 'http://code.jquery.com/jquery-1.6.1.min.js'
+    = javascript_include_tag 'http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js'
+    = javascript_include_tag '/assets/all.js'
+    = include_stylesheets :all
+    = yield_content :head
+  %body{:class => page_classes}
+    = yield
+  :javascript
+    var config = {
+      endpoint: "http://192.168.1.64:8080/"
+    };
+
+    $(function() {
+      Application.init(config);
+    });
