@@ -14,10 +14,17 @@ import android.net.Uri;
 // for reading SMS messages
 // based upon: http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob;f=core/java/android/provider/Telephony.java;h=bf9e8549aaaf406230cff15346eb1ff2add862e1;hb=HEAD
 public class MessagesAdapter {
+	public static final String[] MESSAGES_PROJECTION = { SmsColumns.ID,
+			SmsColumns.TYPE, SmsColumns.THREAD_ID, SmsColumns.ADDRESS,
+			SmsColumns.DATE, SmsColumns.READ, SmsColumns.STATUS,
+			SmsColumns.BODY };
+
 	public static Collection<Message> all(Integer page, Integer limit) {
-		Cursor cursor = Settings.getContext().getContentResolver()
-				.query(Uri.parse("content://sms"), null, null, null, null);
-		cursor.moveToFirst();
+		Cursor cursor = Settings
+				.getContext()
+				.getContentResolver()
+				.query(Uri.parse("content://sms"), MESSAGES_PROJECTION, null,
+						null, null);
 
 		ArrayList<Message> messages = new ArrayList<Message>();
 
@@ -34,23 +41,24 @@ public class MessagesAdapter {
 
 		return messages;
 	}
-	
+
 	public static Collection<Message> find_by_thread_id(Integer threadId) {
-			Cursor cursor = Settings.getContext().getContentResolver()
-					.query(Uri.parse("content://sms"), null, null, null, null);
-			cursor.moveToFirst();
+		Cursor cursor = Settings
+				.getContext()
+				.getContentResolver()
+				.query(Uri.parse("content://sms"), MESSAGES_PROJECTION,
+						"thread_id=" + Integer.toString(threadId), null, null);
 
-			ArrayList<Message> messages = new ArrayList<Message>();
-			cursor.moveToFirst();
-			while (cursor.moveToNext()) {
-				Message c = createMessageFromCursor(cursor);
-				if (c.thread_id == threadId) {
-				  messages.add(c);
-				}
-			}
-			cursor.close();
+		ArrayList<Message> messages = new ArrayList<Message>();
+		
+		cursor.moveToFirst();
+		while (cursor.moveToNext()) {
+			Message c = createMessageFromCursor(cursor);
+			messages.add(c);
+		}
+		cursor.close();
 
-			return messages;
+		return messages;
 	}
 
 	public static Message createMessageFromCursor(Cursor cursor) {
