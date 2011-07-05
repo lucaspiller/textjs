@@ -14,16 +14,21 @@ import android.net.Uri;
 // for reading SMS messages
 // based upon: http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob;f=core/java/android/provider/Telephony.java;h=bf9e8549aaaf406230cff15346eb1ff2add862e1;hb=HEAD
 public class MessagesAdapter {
-	public static Collection<Message> all() {
+	public static Collection<Message> all(Integer page, Integer limit) {
 		Cursor cursor = Settings.getContext().getContentResolver()
 				.query(Uri.parse("content://sms"), null, null, null, null);
 		cursor.moveToFirst();
 
 		ArrayList<Message> messages = new ArrayList<Message>();
 
-		while (cursor.moveToNext()) {
+		Integer offset = limit * (page - 1);
+		Integer remaining = limit;
+
+		cursor.moveToPosition(offset);
+		while (remaining > 0 && cursor.moveToNext()) {
 			Message c = createMessageFromCursor(cursor);
 			messages.add(c);
+			remaining--;
 		}
 		cursor.close();
 
