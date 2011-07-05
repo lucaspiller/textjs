@@ -7,15 +7,16 @@ import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 import org.stackednotion.httpserver.adapters.ThreadsAdapter;
+import org.stackednotion.httpserver.adapters.ThreadsAdapter.Thread;;
 
 public class ThreadsResource extends ServerResource {
 	@Get
 	public JsonRepresentation represent() {
-		Collection<String> messages = ThreadsAdapter.all();
+		Collection<Thread> threads = ThreadsAdapter.all();
 		JSONArray array = new JSONArray();
 
-		for (String m : messages) {
-			array.put(m);
+		for (Thread t : threads) {
+			array.put(t.toJson());
 		}
 
 		return new JsonRepresentation(array);

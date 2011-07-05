@@ -3,78 +3,86 @@ package org.stackednotion.httpserver.adapters;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.json.JSONObject;
 import org.stackednotion.httpserver.Settings;
+import org.stackednotion.httpserver.adapters.MessagesAdapter.MessageColumns;
 
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.Telephony.MmsSms;
 import android.text.TextUtils;
 import android.util.Log;
 
 public class ThreadsAdapter {
-	public static Collection<String> all() {
-		Uri contentUri = Uri.withAppendedPath(
-				MmsSms.CONTENT_URI, "conversations");
+	public static Collection<Thread> all() {
+		
+		Uri contentUri = Uri.parse("content://mms-sms/conversations");
 		Cursor cursor = Settings
 				.getContext()
 				.getContentResolver()
 				.query(contentUri, null, null, null, null);
 
-		ArrayList<String> threads = new ArrayList<String>();
+		ArrayList<Thread> threads = new ArrayList<Thread>();
 		cursor.moveToFirst();
 		while (cursor.moveToNext()) {
-			Log.v("HttpServer", "Columns: " + TextUtils.join(",", cursor.getColumnNames()));
-			Integer threadId = cursor.getInt(cursor.getColumnIndex("thread_id"));
-			Log.v("HttpServer", "Got id: " + threadId);
-			String body = cursor.getString(cursor.getColumnIndex("body"));
-			Log.v("HttpServer", "Got body: " + body);
-			String person = cursor.getString(cursor.getColumnIndex("address"));
-			Log.v("HttpServer", "Got person: " + person);
-			String t = String.valueOf(threadId) + ": " + body + ":" + person;
+			Thread t = createThreadFromCursor(cursor);
 			threads.add(t);
 		}
 		cursor.close();
 		return threads;
 	}
 	
+	public static Thread createThreadFromCursor(Cursor cursor) {
+		Thread thread = new Thread();
+		
+		thread.id = cursor.getInt(cursor.getColumnIndex(ThreadColumns.ID));
+		
+		thread.address = cursor.getString(cursor
+				.getColumnIndex(ThreadColumns.ADDRESS));
+		
+		thread.sender_key = ContactsAdapter
+		.find_key_from_phone_number(thread.address);
+		
+		thread.body = cursor.getString(cursor
+				.getColumnIndex(ThreadColumns.BODY));
+		
+		return thread;
+	}
+	
+	public static class Thread {
+		public int id;
+		public String address;
+		public String sender_key;
+		public String body;
+		
+		public JSONObject toJson() {
+			try {
+				JSONObject json = new JSONObject();
+
+				json.put("id", id);
+				json.put("address", address);
+				json.put("sender_key", sender_key);
+				json.put("body", body);
+
+				return json;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	
 	/**
 	 * Columns for the "threads" table used by MMS and SMS.
 	 */
 	public interface ThreadColumns {
-		public static final String ID = "_id";
-		
-		/**
-		 * The date at which the thread was created.
-		 * 
-		 * <P>
-		 * Type: INTEGER (long)
-		 * </P>
-		 */
-		public static final String DATE = "date";
+		public static final String ID = "thread_id";
 
 		/**
-		 * A string encoding of the recipient IDs of the recipients of the
-		 * message, in numerical order and separated by spaces.
+		 * The address of the other party
 		 * <P>
 		 * Type: TEXT
 		 * </P>
 		 */
-		public static final String RECIPIENT_IDS = "recipient_ids";
-
-		/**
-		 * The message count of the thread.
-		 * <P>
-		 * Type: INTEGER
-		 * </P>
-		 */
-		public static final String MESSAGE_COUNT = "message_count";
-		/**
-		 * Indicates whether all messages of the thread have been read.
-		 * <P>
-		 * Type: INTEGER
-		 * </P>
-		 */
-		public static final String READ = "read";
+		public static final String ADDRESS = "address";
 
 		/**
 		 * The snippet of the latest message in the thread.
@@ -82,53 +90,7 @@ public class ThreadsAdapter {
 		 * Type: TEXT
 		 * </P>
 		 */
-		public static final String SNIPPET = "snippet";
-		/**
-		 * The charset of the snippet.
-		 * <P>
-		 * Type: INTEGER
-		 * </P>
-		 */
-		public static final String SNIPPET_CHARSET = "snippet_cs";
-		/**
-		 * Type of the thread, either Threads.COMMON_THREAD or
-		 * Threads.BROADCAST_THREAD.
-		 * <P>
-		 * Type: INTEGER
-		 * </P>
-		 */
-		public static final String TYPE = "type";
-		/**
-		 * Indicates whether there is a transmission error in the thread.
-		 * <P>
-		 * Type: INTEGER
-		 * </P>
-		 */
-		public static final String ERROR = "error";
-		/**
-		 * Indicates whether this thread contains any attachments.
-		 * <P>
-		 * Type: INTEGER
-		 * </P>
-		 */
-		public static final String HAS_ATTACHMENT = "has_attachment";
-	}
-
-	/**
-	 * Helper functions for the "threads" table used by MMS and SMS.
-	 */
-	public static final class Threads implements ThreadColumns {
-		public static final Uri CONTENT_URI = Uri.withAppendedPath(
-				MmsSms.CONTENT_URI, "conversations");
-		public static final Uri OBSOLETE_THREADS_URI = Uri.withAppendedPath(
-				CONTENT_URI, "obsolete");
-
-		public static final int COMMON_THREAD = 0;
-		public static final int BROADCAST_THREAD = 1;
-
-		// No one should construct an instance of this class.
-		private Threads() {
-		}
+		public static final String BODY = "body";
 	}
 
 }
