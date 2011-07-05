@@ -24,9 +24,8 @@ public class ServerApplication extends Application {
 		Router router = new Router(getContext());
 		router.attach("/contacts", ContactsResource.class);
 		router.attach("/contacts/{contactKey}", ContactResource.class);
-		router
-				.attach("/contacts/{contactKey}/photo",
-						ContactPhotoResource.class);
+		router.attach("/contacts/{contactKey}/photo",
+				ContactPhotoResource.class);
 		router.attach("/messages", MessagesResource.class);
 
 		return router;
@@ -36,12 +35,12 @@ public class ServerApplication extends Application {
 
 	public static void startServer(int port) {
 		try {
-			if (!Network.isConnected())
-			{
-				Log.v(Settings.LOG_TAG, "Cannot start server, Wifi not connected.");
+			if (!Network.isConnected()) {
+				Log.v(Settings.LOG_TAG,
+						"Cannot start server, Wifi not connected.");
 				return;
 			}
-			
+
 			component = new Component();
 			component.getServers().add(Protocol.HTTP, port);
 			component.getDefaultHost().attach(new ServerApplication());

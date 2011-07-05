@@ -28,12 +28,12 @@ public class ContactsAdapter {
 			return phoneNumberToKey.get(number);
 		} else {
 
-			Uri uri = Uri.withAppendedPath(Uri
-					.parse("content://com.android.contacts/phone_lookup"), Uri
-					.encode(number));
+			Uri uri = Uri.withAppendedPath(
+					Uri.parse("content://com.android.contacts/phone_lookup"),
+					Uri.encode(number));
 
-			Cursor cursor = Settings.getContext().getContentResolver().query(
-					uri, null, null, null, null);
+			Cursor cursor = Settings.getContext().getContentResolver()
+					.query(uri, null, null, null, null);
 
 			if (cursor.moveToFirst()) {
 				String key = cursor.getString(cursor
@@ -59,8 +59,8 @@ public class ContactsAdapter {
 	public static Contact find_by_key(String key) {
 		Uri lookupUri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, key);
 
-		Cursor cursor = Settings.getContext().getContentResolver().query(
-				lookupUri, null, null, null, null);
+		Cursor cursor = Settings.getContext().getContentResolver()
+				.query(lookupUri, null, null, null, null);
 		cursor.moveToFirst();
 
 		if (cursor.getCount() > 0) {
@@ -81,7 +81,9 @@ public class ContactsAdapter {
 	}
 
 	public static Collection<Contact> all() {
-		Cursor cursor = Settings.getContext().getContentResolver()
+		Cursor cursor = Settings
+				.getContext()
+				.getContentResolver()
 				.query(ContactsContract.Contacts.CONTENT_URI, null,
 						ContactsContract.Contacts.HAS_PHONE_NUMBER + " = 1",
 						null, null);
@@ -109,10 +111,13 @@ public class ContactsAdapter {
 				.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
 		// get phone numbers
-		Cursor phonesCur = Settings.getContext().getContentResolver().query(
-				ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-				ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY + " = ?",
-				new String[] { c.key }, null);
+		Cursor phonesCur = Settings
+				.getContext()
+				.getContentResolver()
+				.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+						null,
+						ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY
+								+ " = ?", new String[] { c.key }, null);
 
 		c.numbers = new ArrayList<Contact.PhoneNumber>();
 
@@ -128,10 +133,13 @@ public class ContactsAdapter {
 		phonesCur.close();
 
 		// get emails
-		Cursor emailsCur = Settings.getContext().getContentResolver().query(
-				ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
-				ContactsContract.CommonDataKinds.Email.LOOKUP_KEY + " = ?",
-				new String[] { c.key }, null);
+		Cursor emailsCur = Settings
+				.getContext()
+				.getContentResolver()
+				.query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+						null,
+						ContactsContract.CommonDataKinds.Email.LOOKUP_KEY
+								+ " = ?", new String[] { c.key }, null);
 
 		c.emails = new ArrayList<Contact.EmailAddress>();
 

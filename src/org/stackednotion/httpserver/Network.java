@@ -15,14 +15,15 @@ public class Network {
 
 	private static Integer getLocalIp() {
 		try {
-			WifiManager wifiManager = (WifiManager) Settings.getContext().getSystemService(Context.WIFI_SERVICE);
+			WifiManager wifiManager = (WifiManager) Settings.getContext()
+					.getSystemService(Context.WIFI_SERVICE);
 			DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
 			return dhcpInfo.ipAddress;
 		} catch (NullPointerException e) {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Source:
 	 * http://teneo.wordpress.com/2008/12/23/java-ip-address-to-integer-and

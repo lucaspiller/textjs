@@ -15,8 +15,8 @@ import android.net.Uri;
 // based upon: http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob;f=core/java/android/provider/Telephony.java;h=bf9e8549aaaf406230cff15346eb1ff2add862e1;hb=HEAD
 public class MessagesAdapter {
 	public static Collection<Message> all() {
-		Cursor cursor = Settings.getContext().getContentResolver().query(
-				Uri.parse("content://sms"), null, null, null, null);
+		Cursor cursor = Settings.getContext().getContentResolver()
+				.query(Uri.parse("content://sms"), null, null, null, null);
 		cursor.moveToFirst();
 
 		ArrayList<Message> messages = new ArrayList<Message>();
@@ -34,24 +34,27 @@ public class MessagesAdapter {
 		Message message = new Message();
 
 		message.id = cursor.getInt(cursor.getColumnIndex(SmsColumns.ID));
-		
-		message.type = cursor.getInt(cursor
-				.getColumnIndex(SmsColumns.TYPE));
-		
-		message.thread_id = cursor.getInt(cursor.getColumnIndex(SmsColumns.THREAD_ID));
-		
-		message.address = cursor.getString(cursor.getColumnIndex(SmsColumns.ADDRESS));
-		
-		message.sender_key = ContactsAdapter.find_key_from_phone_number(message.address);
-		
+
+		message.type = cursor.getInt(cursor.getColumnIndex(SmsColumns.TYPE));
+
+		message.thread_id = cursor.getInt(cursor
+				.getColumnIndex(SmsColumns.THREAD_ID));
+
+		message.address = cursor.getString(cursor
+				.getColumnIndex(SmsColumns.ADDRESS));
+
+		message.sender_key = ContactsAdapter
+				.find_key_from_phone_number(message.address);
+
 		message.date = cursor.getLong(cursor.getColumnIndex(SmsColumns.DATE));
-		
+
 		message.read = cursor.getInt(cursor.getColumnIndex(SmsColumns.READ));
-		
-		message.status = cursor.getInt(cursor.getColumnIndex(SmsColumns.STATUS));
-		
+
+		message.status = cursor
+				.getInt(cursor.getColumnIndex(SmsColumns.STATUS));
+
 		message.body = cursor.getString(cursor.getColumnIndex(SmsColumns.BODY));
-		
+
 		return message;
 	}
 
@@ -65,7 +68,7 @@ public class MessagesAdapter {
 		public int read;
 		public int status;
 		public String body;
-		
+
 		public JSONObject toJson() {
 			try {
 				JSONObject json = new JSONObject();

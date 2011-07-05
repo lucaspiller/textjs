@@ -10,16 +10,15 @@ import org.stackednotion.httpserver.adapters.MessagesAdapter;
 import org.stackednotion.httpserver.adapters.MessagesAdapter.Message;
 
 public class MessagesResource extends ServerResource {
-    @Get  
-    public JsonRepresentation represent() {
-    	Collection<Message> messages = MessagesAdapter.all();
-    	JSONArray array = new JSONArray();
-    	
-    	for (Message m : messages)
-    	{
-    		array.put(m.toJson());
-    	}
-    	
-    	return new JsonRepresentation(array);
-    }
+	@Get
+	public JsonRepresentation represent() {
+		Collection<Message> messages = MessagesAdapter.all();
+		JSONArray array = new JSONArray();
+
+		for (Message m : messages) {
+			array.put(m.toJson());
+		}
+
+		return new JsonRepresentation(array);
+	}
 }

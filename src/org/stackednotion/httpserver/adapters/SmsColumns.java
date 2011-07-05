@@ -24,7 +24,7 @@ public interface SmsColumns {
 	 * </P>
 	 */
 	public static final String ID = "_id";
-	
+
 	public static final String TYPE = "type";
 
 	public static final int MESSAGE_TYPE_ALL = 0;
