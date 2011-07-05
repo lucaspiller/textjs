@@ -34,6 +34,24 @@ public class MessagesAdapter {
 
 		return messages;
 	}
+	
+	public static Collection<Message> find_by_thread_id(Integer threadId) {
+			Cursor cursor = Settings.getContext().getContentResolver()
+					.query(Uri.parse("content://sms"), null, null, null, null);
+			cursor.moveToFirst();
+
+			ArrayList<Message> messages = new ArrayList<Message>();
+			cursor.moveToFirst();
+			while (cursor.moveToNext()) {
+				Message c = createMessageFromCursor(cursor);
+				if (c.thread_id == threadId) {
+				  messages.add(c);
+				}
+			}
+			cursor.close();
+
+			return messages;
+	}
 
 	public static Message createMessageFromCursor(Cursor cursor) {
 		Message message = new Message();
