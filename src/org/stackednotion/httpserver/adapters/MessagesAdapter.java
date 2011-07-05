@@ -126,14 +126,14 @@ public class MessagesAdapter {
 	}
 
 	public interface MessageColumns {
+		public static final String ID = "_id";
+		
 		/**
 		 * The type of the message
 		 * <P>
 		 * Type: INTEGER
 		 * </P>
 		 */
-		public static final String ID = "_id";
-
 		public static final String TYPE = "type";
 
 		public static final int MESSAGE_TYPE_ALL = 0;
