@@ -1,9 +1,9 @@
 package org.stackednotion.httpserver;
 
-import org.stackednotion.httpserver.server.ServerApplication;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -15,16 +15,15 @@ public class MainActivity extends Activity {
 
 	@Override
 	public void onResume() {
+		Intent service = new Intent(this, ServerService.class);
+		startService(service);
+		
 		Settings.init(getApplicationContext());
-		ServerApplication.startServer(8080);
+		String ip = Network.getLocalIpAddress().replace(".", ".\n");
+		
+		TextView statusText = (TextView) findViewById(R.id.status_text);
+		statusText.setText(ip);
 
 		super.onResume();
-	}
-
-	@Override
-	public void onPause() {
-		ServerApplication.stopServer();
-
-		super.onPause();
 	}
 }

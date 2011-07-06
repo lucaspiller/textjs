@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, HttpServer!</string>
     <string name="app_name">HttpServer</string>
+    <string name="server_service_started">Server Started</string>
+    <string name="server_service_stopped">Server Stopped</string>
 </resources>
