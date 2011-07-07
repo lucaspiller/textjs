@@ -1,15 +1,24 @@
-watch('^views/(.*)\.coffee') do |m|
+require 'ruby-growl'
+
+def growl
+  @growl ||= Growl.new "127.0.0.1", "ruby-growl", ["watchfile-notification"]
+end
+
+watch(/(.*)\.coffee/) do |m|
+  system("rake compile")
+  system("rake assets")
+  growl.notify "watchfile-notification", "Rebuild successful", "#{m}"
+end
+
+watch(/(.*)\.scss/) do |m|
   target = "build/#{m[1]}"
   system("rake #{target}")
   system("rake assets")
+  growl.notify "watchfile-notification", "Rebuild successful", "#{m}"
 end
 
-watch('^views/(.*)\.scss') do |m|
-  target = "build/#{m[1]}"
-  system("rake #{target}")
+watch(/(.*)\.jst/) do |m|
+  puts "Building #{m}"
   system("rake assets")
-end
-
-watch('^views/(.*)\.jst') do |m|
-  system("rake assets")
+  growl.notify "watchfile-notification", "Rebuild successful", "#{m}"
 end

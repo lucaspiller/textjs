@@ -74,6 +74,7 @@ GEM
     rack-test (0.5.7)
       rack (>= 1.0)
     rake (0.8.7)
+    ruby-growl (3.0)
     sass (3.1.1)
     shotgun (0.8)
       rack (>= 1.0)
@@ -109,4 +110,5 @@ DEPENDENCIES
   middleman-jammit
   middleman-smusher
   rack-reverse-proxy
+  ruby-growl
   watchr
