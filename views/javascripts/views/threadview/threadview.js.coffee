@@ -6,5 +6,4 @@ class Application.Views.Threadview extends Backbone.View
     @render()
 
   render: ->
-    console.log 'Rendering', @messages
     $(this.el).html(JST['threadview/threadview']({ messages: @messages }))
