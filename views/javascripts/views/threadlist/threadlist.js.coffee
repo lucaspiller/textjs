@@ -6,4 +6,4 @@ class Application.Views.Threadlist extends Backbone.View
     @render()
 
   render: ->
-    $(this.el).html(JST.threadlist({ threads: @threads }))
+    $(this.el).html(JST['threadlist/threadlist']({ threads: @threads }))
