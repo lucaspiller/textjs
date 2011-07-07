@@ -1,9 +1,9 @@
-<div id="threadlist">
+<table>
   <% threads.each(function(thread) { %>
-  <div class="thread">
-    <%= thread.get('id') %></br>
-    <%= thread.get('address') %></br>
-    <%= thread.get('body') %></br>
+  <tr id="thread<%= thread.get('id') %>">
+    <td class="contact"><%= thread.get('address') %></td>
+    <td><%= thread.get('body') %></td>
+    <td>Date</td>
   </div>
   <% }); %>
-</div>
+</table>
