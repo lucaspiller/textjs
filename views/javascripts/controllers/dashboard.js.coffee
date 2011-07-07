@@ -11,3 +11,10 @@ class Application.Controllers.Dashboard extends Backbone.Controller
       error: (collection, response) ->
         console.log "Error response fetching threads: ", response
     })
+    new Application.Collections.Contacts().fetch({
+      success: (collection, response) ->
+        new Application.Views.Contactslist({ contacts: collection })
+
+      error: (collection, response) ->
+        console.log "Error response fetching contacts: ", response
+    })
