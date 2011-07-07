@@ -1,0 +1,9 @@
+<table>
+  <% messages.each(function(message) { %>
+  <tr class="summary" data-id="<%= message.get('id') %>">
+    <td class="contact"><%= message.get('address') %></td>
+    <td><%= message.get('body') %></td>
+    <td>Date</td>
+  </div>
+  <% }); %>
+</table>
