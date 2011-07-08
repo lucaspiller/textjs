@@ -1,4 +1,4 @@
-class Application.Controllers.Dashboard extends Backbone.Controller
+class Application.Controllers.Dashboard extends Backbone.Router
   routes: {
     '': 'dashboard'
   }
