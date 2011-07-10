@@ -28,7 +28,7 @@ class Application.Models.Thread extends Backbone.Model
     if @get('contact')
       @get('contact').get('name')
     else
-      @get('name')
+      @get('address')
 
 class Application.Collections.Threads extends Backbone.Collection
   model: Application.Models.Thread

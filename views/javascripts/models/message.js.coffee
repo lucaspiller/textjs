@@ -15,7 +15,7 @@ class Application.Models.Message extends Backbone.Model
     if @get('contact')
       @get('contact').get('name')
     else
-      @get('name')
+      @get('address')
 
   date: ->
     unixDateMs = @get('date')
