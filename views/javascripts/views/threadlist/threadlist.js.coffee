@@ -1,5 +1,5 @@
 class Application.Views.Threadlist extends Backbone.View
-  el: '#threads'
+  el: '#threadList'
 
   events: {
     "click .thread": "showThread"
