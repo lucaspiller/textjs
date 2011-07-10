@@ -1,5 +1,5 @@
 class Application.Views.Contactslist extends Backbone.View
-  el: '#contacts'
+  el: '#contactsList'
 
   initialize: ->
     @bindCollectionChangeEvent()
@@ -10,4 +10,6 @@ class Application.Views.Contactslist extends Backbone.View
       @render()
 
   render: ->
-    $(this.el).html(JST['contactslist/contactslist']({ contacts: @collection }))
+    uki('#contactsList')[0].data(@collection.map (contact) ->
+      JST['contactslist/contactslist']({ contact: contact })
+    )
