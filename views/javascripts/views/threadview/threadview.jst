@@ -1,9 +1,13 @@
 <table>
   <% messages.each(function(message) { %>
     <tr class="summary" data-id="<%= message.get('id') %>">
-      <td class="contact"><%= message.contactName() %></td>
+      <% if (message.get('type') == message.TYPE_INBOX) { %>
+        <td class="contact"><%= message.contactName() %></td>
+      <% } else { %>
+        <td class="contact">You</td>
+      <% } %>
       <td><%= message.get('body') %></td>
-      <td>Date</td>
+      <td><%= message.date() %></td>
     </div>
   <% }); %>
 </table>

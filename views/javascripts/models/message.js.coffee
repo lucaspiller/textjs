@@ -1,4 +1,6 @@
 class Application.Models.Message extends Backbone.Model
+  TYPE_INBOX: 1
+
   initialize: (options) ->
     Application.Contacts.bind 'all', =>
       @fetchContact()
@@ -14,6 +16,29 @@ class Application.Models.Message extends Backbone.Model
       @get('contact').get('name')
     else
       @get('name')
+
+  date: ->
+    unixDateMs = @get('date')
+    date = new Date(unixDateMs)
+
+    hours = date.getHours()
+    if hours < 10
+      hours = '0' + hours
+    minutes = date.getMinutes()
+    if minutes < 10
+      minutes = '0' + minutes
+    day = date.getDate()
+
+    months = [
+      'Jan', 'Feb', 'Mar',
+      'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep',
+      'Oct', 'Nov', 'Dec'
+    ]
+    month = months[date.getMonth()]
+
+    # 10:54, 10 Jul
+    hours + ":" + minutes + ", " + day + " " + month
 
 class Application.Collections.Messages extends Backbone.Collection
   model: Application.Models.Message
