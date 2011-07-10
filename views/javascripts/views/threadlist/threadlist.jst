@@ -3,7 +3,7 @@
     <tr class="thread" data-id="<%= thread.get('id') %>">
       <td class="contact"><%= thread.contactName() %></td>
       <td><%= thread.get('body') %></td>
-      <td>Date</td>
+      <td><%= thread.date() %></td>
     </div>
   <% }); %>
 </table>
