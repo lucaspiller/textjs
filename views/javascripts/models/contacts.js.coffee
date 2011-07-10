@@ -9,3 +9,7 @@ class Application.Collections.Contacts extends Backbone.Collection
   model: Application.Models.Contact
   url: ->
       "/contacts"
+
+  # sort in alphabetical
+  comparator: (contact) ->
+      contact.get('name')
