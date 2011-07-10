@@ -69,6 +69,16 @@ Application = {
                 view: 'ScrollPane',
                 rect: '0 0 539 400',
                 anchors: 'top left right bottom',
+                childViews: [
+                  {
+                    view: 'List',
+                    id: 'threadView',
+                    rect: '539 400',
+                    anchors: 'top left bottom right',
+                    rowHeight: '50',
+                    textSelectable: true
+                  }
+                ]
               }
             ],
             bottomChildViews: [

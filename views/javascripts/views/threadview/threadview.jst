@@ -1,13 +1,15 @@
-<table>
-  <% messages.each(function(message) { %>
-    <tr class="summary" data-id="<%= message.get('id') %>">
-      <% if (message.get('type') == message.TYPE_INBOX) { %>
-        <td class="contact"><%= message.contactName() %></td>
-      <% } else { %>
-        <td class="contact">You</td>
-      <% } %>
-      <td><%= message.get('body') %></td>
-      <td><%= message.date() %></td>
-    </div>
-  <% }); %>
-</table>
+<div class="message">
+  <span class="contact">
+    <% if (message.get('type') == message.TYPE_INBOX) { %>
+      <%= message.contactName() %>
+    <% } else { %>
+      You
+    <% } %>
+  </span>
+  <span class="date">
+    <%= message.date() %>
+  </span>
+  <p>
+    <%= message.get('body') %>
+  </p>
+</div>

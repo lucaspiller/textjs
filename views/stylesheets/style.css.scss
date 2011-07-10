@@ -4,23 +4,21 @@ body {
   font-size: 0.8em;
 }
 
-#threadList {
-  .thread {
-    position: relative;
-    padding-top: 8px;
-    cursor: pointer;
-    span.contact {
-      position: absolute;
-      top: -12px;
-      left: 0px;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-    span.date {
-      position: absolute;
-      top: -12px;
-      right: 15px;
-      color: #999;
-    }
+#threadList .thread, #threadView .message {
+  position: relative;
+  padding-top: 8px;
+  cursor: pointer;
+  span.contact {
+    position: absolute;
+    top: -12px;
+    left: 0px;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  span.date {
+    position: absolute;
+    top: -12px;
+    right: 15px;
+    color: #999;
   }
 }
