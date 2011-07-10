@@ -18,22 +18,22 @@ Application = {
     buildUi: ->
       uki({
         view: 'HSplitPane',
-        rect: '800 600',
+        rect: '1000 1000',
         anchors: 'left top right bottom',
-        handlePosition: 260,
+        handlePosition: 249,
         handleWidth: 1,
-        leftMin: 260,
+        leftMin: 249,
         rightMin: 200,
         leftChildViews: [
           {
             view: 'Box',
-            rect: '0 0 260 30',
+            rect: '0 0 249 30',
             anchors: 'top left right',
             background: '#000',
             childViews: [
               {
                  view: 'TextField',
-                 rect: '5 5 250 20',
+                 rect: '5 5 239 20',
                  anchors: 'top left right',
                  placeholder: 'Search'
               }
@@ -41,14 +41,14 @@ Application = {
           },
           {
             view: 'ScrollPane',
-            rect: '0 30 260 570',
+            rect: '0 30 249 970',
             anchors: 'left top bottom right',
             background: '#fff',
             childViews: [
               {
                 view: 'List',
                 id: 'contactsList',
-                rect: '260 570',
+                rect: '249 970',
                 anchors: 'top left bottom right',
                 rowHeight: '30',
                 textSelectable: false
@@ -58,27 +58,27 @@ Application = {
         ],
         rightChildViews: [{
             view: 'VSplitPane',
-            handlePosition: 400,
+            handlePosition: 600,
             handleWidth: 1,
             topMin: 200,
             bottomMin: 100,
-            rect: '0 0 539 600',
+            rect: '0 0 750 1000',
             anchors: 'top left right bottom',
             topChildViews: [
               {
                 view: 'Box',
-                rect: '0 0 539 400',
+                rect: '0 0 750 600',
                 anchors: 'top left right bottom',
                 childViews: [
                   {
                     view: 'ScrollPane',
-                    rect: '0 0 539 330',
+                    rect: '0 0 750 530',
                     anchors: 'top left right bottom',
                     childViews: [
                       {
                         view: 'List',
                         id: 'threadView',
-                        rect: '539 330',
+                        rect: '750 530',
                         anchors: 'top left bottom right',
                         rowHeight: '50',
                         textSelectable: true
@@ -87,26 +87,26 @@ Application = {
                   },
                   {
                     view: 'Box',
-                    rect: '0 330 539 70',
+                    rect: '0 530 750 70',
                     anchors: 'left right bottom',
                     background: '#eee',
                     childViews: [
                       {
                         view: 'MultilineTextField',
-                        rect: '5 5 449 60',
+                        rect: '5 5 660 60',
                         anchors: 'left right bottom',
                         id: 'composeBody'
                       },
                       {
                         view: 'Button',
-                        rect: '459 41 75 24',
+                        rect: '670 41 75 24',
                         text: 'Send',
                         anchors: 'right bottom',
                         id: 'sendButton'
                       },
                       {
                         view: 'Label',
-                        rect: '459 18 75 24',
+                        rect: '670 18 75 24',
                         anchors: 'right bottom',
                         text: '160 / 1',
                         id: 'composeLength'
@@ -119,13 +119,13 @@ Application = {
             bottomChildViews: [
               {
                 view: 'ScrollPane',
-                rect: '0 0 539 199',
+                rect: '0 0 750 399',
                 anchors: 'top left right bottom',
                 childViews: [
                   {
                     view: 'List',
                     id: 'threadList',
-                    rect: '539 199',
+                    rect: '750 399',
                     anchors: 'top left bottom right',
                     rowHeight: '50',
                     textSelectable: false
@@ -134,5 +134,5 @@ Application = {
               }
             ]
         }]
-      }).attachTo( window, '800 600')
+      }).attachTo(window, '1000 1000')
 }
