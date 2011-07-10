@@ -61,22 +61,57 @@ Application = {
             handlePosition: 400,
             handleWidth: 1,
             topMin: 200,
-            bottomMin: 200,
+            bottomMin: 100,
             rect: '0 0 539 600',
             anchors: 'top left right bottom',
             topChildViews: [
               {
-                view: 'ScrollPane',
+                view: 'Box',
                 rect: '0 0 539 400',
                 anchors: 'top left right bottom',
                 childViews: [
                   {
-                    view: 'List',
-                    id: 'threadView',
-                    rect: '539 400',
-                    anchors: 'top left bottom right',
-                    rowHeight: '50',
-                    textSelectable: true
+                    view: 'ScrollPane',
+                    rect: '0 0 539 330',
+                    anchors: 'top left right bottom',
+                    childViews: [
+                      {
+                        view: 'List',
+                        id: 'threadView',
+                        rect: '539 330',
+                        anchors: 'top left bottom right',
+                        rowHeight: '50',
+                        textSelectable: true
+                      }
+                    ]
+                  },
+                  {
+                    view: 'Box',
+                    rect: '0 330 539 70',
+                    anchors: 'left right bottom',
+                    background: '#eee',
+                    childViews: [
+                      {
+                        view: 'MultilineTextField',
+                        rect: '5 5 449 60',
+                        anchors: 'left right bottom',
+                        id: 'composeBody'
+                      },
+                      {
+                        view: 'Button',
+                        rect: '459 41 75 24',
+                        text: 'Send',
+                        anchors: 'right bottom',
+                        id: 'sendButton'
+                      },
+                      {
+                        view: 'Label',
+                        rect: '459 18 75 24',
+                        anchors: 'right bottom',
+                        text: '160 / 1',
+                        id: 'composeLength'
+                      }
+                    ]
                   }
                 ]
               }
