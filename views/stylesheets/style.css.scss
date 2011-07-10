@@ -51,6 +51,7 @@ body {
  */
 
 #threads {
+  overflow: auto;
   margin-left: 270px;
   background-color: #59C6EB;
   -moz-border-radius: 5px;
@@ -88,16 +89,23 @@ body {
   border-radius: 5px;
   padding: 7px;
   > * {
-    background-color: #fff; }
-  table {
-    width: 100%;
-    td {
-      &.contact {
-        color: #333; }
-      padding: 3px; }
-    tr {
-      background-color: #eee;
-      padding: 3px; } }
+    background-color: #fff;
+  }
+  #threadview {
+    background-color: #eee;
+    max-height: 400px;
+    overflow: auto;
+    padding-right: 5px;
+    table {
+      width: 100%;
+      td {
+        &.contact {
+          color: #333; }
+        padding: 3px; }
+      tr {
+        background-color: #eee;
+        padding: 3px; } }
+  }
   form {
     background-color: #eee;
     padding: 5px;
