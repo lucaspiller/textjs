@@ -6,15 +6,20 @@ class Application.Views.Threadlist extends Backbone.View
   }
 
   initialize: ->
-    @threads = @options.threads
+    @bindCollectionChangeEvent()
     @render()
 
+  bindCollectionChangeEvent: ->
+    @collection.bind 'change', =>
+      @render()
+
   render: ->
-    $(this.el).html(JST['threadlist/threadlist']({ threads: @threads }))
+    $(@el).html(JST['threadlist/threadlist']({ threads: @collection }))
+    this
 
   showThread: (evt) ->
     threadId = $(evt.currentTarget).attr('data-id')
-    thread = @threads.get(threadId)
+    thread = @collection.get(threadId)
     thread.fetchMessages({
       success: (messages) ->
         new Application.Views.Threadview({ thread: thread, messages: messages })

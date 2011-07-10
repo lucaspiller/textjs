@@ -6,7 +6,7 @@ class Application.Controllers.Dashboard extends Backbone.Controller
   loading: ->
     Application.Threads.fetch({
       success: (collection, response) ->
-        new Application.Views.Threadlist({ threads: collection })
+        new Application.Views.Threadlist({ collection: collection })
 
       error: (collection, response) ->
         console.log "Error response fetching threads: ", response
