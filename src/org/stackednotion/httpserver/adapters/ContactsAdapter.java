@@ -14,7 +14,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.util.Log;
 
 public class ContactsAdapter {
 	private static Map<String, String> phoneNumberToKey;
@@ -46,9 +45,7 @@ public class ContactsAdapter {
 
 				return key;
 			} else {
-				Log.i(Settings.LOG_TAG, "Couldn't find contact id for number: "
-						+ number);
-
+				// no contact exists for the number
 				cursor.close();
 
 				return null;
