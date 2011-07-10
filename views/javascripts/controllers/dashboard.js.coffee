@@ -4,7 +4,6 @@ class Application.Controllers.Dashboard extends Backbone.Controller
   }
 
   dashboard: ->
-    $('#threads').css('height', ($(window).height() - 460) + 'px');
     Application.Threads.fetch({
       success: (collection, response) ->
         new Application.Views.Threadlist({ collection: collection })

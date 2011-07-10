@@ -53,6 +53,7 @@ body {
 #threads {
   overflow: auto;
   margin-left: 270px;
+  height: 250px;
   background-color: #59C6EB;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -93,7 +94,7 @@ body {
   }
   #threadview {
     background-color: #eee;
-    max-height: 400px;
+    height: 400px;
     overflow: auto;
     padding-right: 5px;
     table {
