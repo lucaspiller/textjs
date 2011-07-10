@@ -24,6 +24,12 @@ class Application.Models.Thread extends Backbone.Model
     contactId = @get('sender_key')
     @set({'contact': Application.Contacts.get(contactId)})
 
+  contactName: ->
+    if @get('contact')
+      @get('contact').get('name')
+    else
+      @get('name')
+
 class Application.Collections.Threads extends Backbone.Collection
   model: Application.Models.Thread
   url: ->
