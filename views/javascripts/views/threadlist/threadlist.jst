@@ -1,9 +1,11 @@
-<table>
-  <% threads.each(function(thread) { %>
-    <tr class="thread" data-id="<%= thread.get('id') %>">
-      <td class="contact"><%= thread.contactName() %></td>
-      <td><%= thread.get('body') %></td>
-      <td><%= thread.date() %></td>
-    </div>
-  <% }); %>
-</table>
+<div class="thread">
+  <span class="contact">
+    <%= thread.contactName() %>
+  </span>
+  <span class="date">
+    <%= thread.date() %>
+  </span>
+  <p>
+    <%= thread.get('body') %>
+  </p>
+</div>

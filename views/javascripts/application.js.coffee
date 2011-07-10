@@ -50,7 +50,7 @@ Application = {
                 id: 'contactsList',
                 rect: '260 570',
                 anchors: 'top left bottom right',
-                rowHeight: '40',
+                rowHeight: '30',
                 textSelectable: false
               }
             ]
@@ -76,6 +76,16 @@ Application = {
                 view: 'ScrollPane',
                 rect: '0 0 539 199',
                 anchors: 'top left right bottom',
+                childViews: [
+                  {
+                    view: 'List',
+                    id: 'threadList',
+                    rect: '539 199',
+                    anchors: 'top left bottom right',
+                    rowHeight: '50',
+                    textSelectable: false
+                  }
+                ]
               }
             ]
         }]
