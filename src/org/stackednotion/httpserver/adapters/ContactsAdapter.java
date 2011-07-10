@@ -84,7 +84,7 @@ public class ContactsAdapter {
 				.query(ContactsContract.Contacts.CONTENT_URI, null,
 						ContactsContract.Contacts.HAS_PHONE_NUMBER + " = 1",
 						null, null);
-		cursor.moveToFirst();
+		cursor.moveToPosition(-1);
 
 		ArrayList<Contact> contacts = new ArrayList<Contact>();
 

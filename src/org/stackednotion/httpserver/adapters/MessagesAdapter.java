@@ -20,11 +20,9 @@ public class MessagesAdapter {
 			MessageColumns.STATUS, MessageColumns.BODY };
 
 	public static Collection<Message> all(Integer page, Integer limit) {
-		Cursor cursor = Settings
-				.getContext()
-				.getContentResolver()
-				.query(Uri.parse("content://sms"), MESSAGES_PROJECTION, null,
-						null, null);
+		Cursor cursor = Settings.getContext().getContentResolver().query(
+				Uri.parse("content://sms"), MESSAGES_PROJECTION, null, null,
+				null);
 
 		ArrayList<Message> messages = new ArrayList<Message>();
 
@@ -43,15 +41,13 @@ public class MessagesAdapter {
 	}
 
 	public static Collection<Message> find_by_thread_id(Integer threadId) {
-		Cursor cursor = Settings
-				.getContext()
-				.getContentResolver()
-				.query(Uri.parse("content://sms"), MESSAGES_PROJECTION,
-						"thread_id=" + Integer.toString(threadId), null, null);
+		Cursor cursor = Settings.getContext().getContentResolver().query(
+				Uri.parse("content://sms"), MESSAGES_PROJECTION,
+				"thread_id=" + Integer.toString(threadId), null, null);
 
 		ArrayList<Message> messages = new ArrayList<Message>();
 
-		cursor.moveToFirst();
+		cursor.moveToPosition(-1);
 		while (cursor.moveToNext()) {
 			Message c = createMessageFromCursor(cursor);
 			messages.add(c);
@@ -127,7 +123,7 @@ public class MessagesAdapter {
 
 	public interface MessageColumns {
 		public static final String ID = "_id";
-		
+
 		/**
 		 * The type of the message
 		 * <P>

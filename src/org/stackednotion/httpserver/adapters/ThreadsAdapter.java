@@ -13,19 +13,20 @@ public class ThreadsAdapter {
 	public static final String[] THREADS_PROJECTION = { ThreadColumns.ID,
 			ThreadColumns.ADDRESS, ThreadColumns.DATE, ThreadColumns.BODY };
 
+	public static final Uri THREADS_URI = Uri.parse("content://mms-sms/conversations");
+	
 	public static Collection<Thread> all() {
-
-		Uri contentUri = Uri.parse("content://mms-sms/conversations");
 		Cursor cursor = Settings.getContext().getContentResolver().query(
-				contentUri, THREADS_PROJECTION, null, null, null);
+				THREADS_URI, THREADS_PROJECTION, null, null, null);
 
 		ArrayList<Thread> threads = new ArrayList<Thread>();
-		cursor.moveToFirst();
+		cursor.moveToPosition(-1);
 		while (cursor.moveToNext()) {
 			Thread t = createThreadFromCursor(cursor);
 			threads.add(t);
 		}
 		cursor.close();
+		
 		return threads;
 	}
 
