@@ -2,8 +2,15 @@ class Application.Views.Threadview extends Backbone.View
   el: '#threadview'
 
   initialize: ->
-    @messages = @options.messages
+    @bindChangeEvent()
     @render()
 
+  bindChangeEvent: ->
+    @collection.bind 'change', =>
+      @render()
+    @model.bind 'change', =>
+      @render()
+
   render: ->
-    $(this.el).html(JST['threadview/threadview']({ messages: @messages }))
+    $(@el).html(JST['threadview/threadview']({ messages: @collection }))
+    this

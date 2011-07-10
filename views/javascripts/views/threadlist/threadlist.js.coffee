@@ -22,5 +22,5 @@ class Application.Views.Threadlist extends Backbone.View
     thread = @collection.get(threadId)
     thread.fetchMessages({
       success: (messages) ->
-        new Application.Views.Threadview({ thread: thread, messages: messages })
+        new Application.Views.Threadview({ model: thread, collection: messages })
     })
