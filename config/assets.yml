@@ -1,6 +1,6 @@
 package_path: assets
-#gzip_assets: off
-#javascript_compressor: yui
+gzip_assets: off
+compress_assets: off
 
 javascripts:
   all:
