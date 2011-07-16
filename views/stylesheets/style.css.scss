@@ -1,24 +1,81 @@
-body {
-  font-family: arial, sans-serif;
-  padding: 10px;
-  font-size: 0.8em;
+html {
+  height: 100%;
 }
 
-#threadList .thread, #threadView .message {
-  position: relative;
-  padding-top: 8px;
-  cursor: pointer;
-  span.contact {
-    position: absolute;
-    top: -12px;
-    left: 0px;
-    font-weight: bold;
-    font-size: 1.2em;
+// colors
+$dark-text: #323232;
+$light-text: #717272;
+$dark-background: #252525;
+$light-background: #fbfbfb;
+$divider: #ebeeee;
+
+body {
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-size: 0.8em;
+  background-color: $light-background;
+  color: $dark-text;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#menubar {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 75px;
+  height: 100%;
+  background-color: $dark-background;
+}
+
+#threadList {
+  position: absolute;
+  top: 0px;
+  left: 75px;
+  width: 350px;
+  height: 100%;
+  border-right: 1px solid $divider;
+  overflow: auto;
+  .thread {
+    border-bottom: 1px solid $divider;
+    padding: 14px 7px;
+    position: relative;
+    cursor: pointer;
+    header {
+      position: relative;
+      margin-bottom: 5px;
+      .contact {
+        font-weight: bold;
+      }
+      .date {
+        position: absolute;
+        right: 5px;
+        color: $light-text;
+      }
+    }
   }
-  span.date {
+}
+
+#rightColumn {
+  position: absolute;
+  top: 0;
+  left: 425px;
+  width: 400px;
+  height: 100%;
+  #messageView {
     position: absolute;
-    top: -12px;
-    right: 15px;
-    color: #999;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    .no-conversation {
+      width: 300px;
+      padding-top: 300px;
+      font-size: 1.8em;
+      color: $light-text;
+      margin: 0 auto;
+      text-align: center;
+    }
   }
 }

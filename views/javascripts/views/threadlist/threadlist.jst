@@ -1,11 +1,15 @@
-<div class="thread" data-id="<%= thread.id %>">
-  <span class="contact">
-    <%= thread.contactName() %>
-  </span>
-  <span class="date">
-    <%= thread.date() %>
-  </span>
-  <p>
-    <%= thread.get('body') %>
-  </p>
-</div>
+<% threads.each(function(thread) { %>
+  <div class="thread" data-id="<%= thread.id %>">
+    <header>
+      <span class="contact">
+        <%= thread.contactName() %>
+      </span>
+      <span class="date">
+        <%= thread.date() %>
+      </span>
+    </header>
+    <p>
+      <%= thread.get('body') %>
+    </p>
+  </div>
+<% }); %>

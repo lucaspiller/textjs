@@ -14,10 +14,7 @@ class Application.Views.Threadlist extends Backbone.View
       @render()
 
   render: ->
-    uki('#threadList')[0].data(@collection.map (thread) ->
-      JST['threadlist/threadlist']({ thread: thread })
-    )
-    uki('#threadList')[0].relayout()
+    $(@el).html JST['threadlist/threadlist']({ threads: @collection })
 
   showThread: (evt) ->
     threadId = $(evt.currentTarget).attr('data-id')
