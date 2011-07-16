@@ -29,6 +29,11 @@ body {
   width: 75px;
   height: 100%;
   background-color: $dark-background;
+  a {
+    display: block;
+    width: 40px;
+    margin: 10px auto;
+  }
 }
 
 #threadList {
