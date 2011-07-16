@@ -1,15 +1,19 @@
-<div class="message">
-  <span class="contact">
-    <% if (message.get('type') == message.TYPE_INBOX) { %>
-      <%= message.contactName() %>
-    <% } else { %>
-      You
-    <% } %>
-  </span>
-  <span class="date">
-    <%= message.date() %>
-  </span>
-  <p>
-    <%= message.get('body') %>
-  </p>
-</div>
+<% messages.each(function(message) { %>
+  <div class="message">
+    <header>
+      <span class="contact">
+        <% if (message.get('type') == message.TYPE_INBOX) { %>
+          <%= message.contactName() %>
+        <% } else { %>
+          You
+        <% } %>
+      </span>
+      <span class="date">
+        <%= message.date() %>
+      </span>
+    </header>
+    <p>
+      <%= message.get('body') %>
+    </p>
+  </div>
+<% }); %>

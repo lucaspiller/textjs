@@ -1,4 +1,6 @@
 class Application.Views.Threadview extends Backbone.View
+  el: '#threadView'
+
   initialize: ->
     @bindChangeEvent()
     @render()
@@ -10,7 +12,4 @@ class Application.Views.Threadview extends Backbone.View
       @render()
 
   render: ->
-    uki('#threadView')[0].data(@collection.map (message) ->
-      JST['threadview/threadview']({ message: message })
-    )
-    uki('#threadView')[0].relayout()
+    $(@el).html JST['threadview/threadview']({ messages: @collection })

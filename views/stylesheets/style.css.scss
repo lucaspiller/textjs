@@ -6,6 +6,7 @@ html {
 $dark-text: #323232;
 $light-text: #717272;
 $dark-background: #252525;
+$selected-background: #d0d2d2;
 $light-background: #fbfbfb;
 $divider: #ebeeee;
 
@@ -54,6 +55,9 @@ body {
       }
     }
   }
+  .thread:hover {
+    background-color: $selected-background;
+  }
 }
 
 #rightColumn {
@@ -62,7 +66,7 @@ body {
   left: 425px;
   width: 400px;
   height: 100%;
-  #messageView {
+  #threadView {
     position: absolute;
     top: 0;
     left: 0;
@@ -76,6 +80,24 @@ body {
       color: $light-text;
       margin: 0 auto;
       text-align: center;
+    }
+    .message {
+      border-bottom: 1px solid $divider;
+      padding: 14px 7px;
+      position: relative;
+      cursor: pointer;
+      header {
+        position: relative;
+        margin-bottom: 5px;
+        .contact {
+          font-weight: bold;
+        }
+        .date {
+          position: absolute;
+          right: 5px;
+          color: $light-text;
+        }
+      }
     }
   }
 }
