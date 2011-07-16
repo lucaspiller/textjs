@@ -18,6 +18,17 @@
       <span class="date">
         <%= message.date() %>
       </span>
+      <span class="menu">
+        <a href="#" class="info" title="Message Information">
+          I
+        </a>
+        <a href="#" class="forward" title="Forward">
+          F
+        </a>
+        <a href="#" class="delete" title="Delete">
+          X
+        </a>
+      </span>
     </header>
     <p>
       <%= message.get('body') %>

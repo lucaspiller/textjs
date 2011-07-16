@@ -111,15 +111,28 @@ body {
         .contact {
           font-weight: bold;
         }
-        .date {
+        .date, .menu {
           position: absolute;
           right: 5px;
+        }
+        .date, .menu a {
           color: $light-text;
+        }
+        .menu {
+          display: none;
         }
       }
     }
     .message.you {
       background-color: $mid-background;
+    }
+    .message:hover {
+      .date {
+        display: none;
+      }
+      .menu {
+        display: inline;
+      }
     }
   }
 }
