@@ -80,3 +80,9 @@ task :assets do
   full_package_path = File.join(full_build_dir, ::Jammit.package_path)
   ::Jammit.packager.precache_all(full_package_path, Middleman::Server.root)
 end
+
+desc "Run Varnish"
+task :varnish do
+  system("killall varnishd")
+  system("/usr/local/Cellar/varnish/3.0.0/sbin/varnishd -a :8081 -f varnish.vcl -s malloc")
+end
