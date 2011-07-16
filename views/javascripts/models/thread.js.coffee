@@ -1,4 +1,6 @@
 class Application.Models.Thread extends Backbone.Model
+  MAX_PREVIEW_LENGTH: 45
+
   initialize: (options) ->
     Application.Contacts.bind 'all', =>
       @fetchContact()
@@ -52,6 +54,16 @@ class Application.Models.Thread extends Backbone.Model
 
     # 10:54, 10 Jul
     hours + ":" + minutes + ", " + day + " " + month
+
+  preview: ->
+    if !@_preview
+      body = @get('body')
+      if body.length > @MAX_PREVIEW_LENGTH
+        @_preview = body.substring(0, @MAX_PREVIEW_LENGTH)
+        @_preview = @_preview.replace(/\s*\w+$/, '') + '...'
+      else
+        @_preview = body
+    @_preview
 
 class Application.Collections.Threads extends Backbone.Collection
   model: Application.Models.Thread
