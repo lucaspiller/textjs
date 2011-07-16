@@ -22,3 +22,10 @@ watch(/(.*)\.jst/) do |m|
   system("rake assets")
   growl.notify "watchfile-notification", "Rebuild successful", "#{m}"
 end
+
+Signal.trap("INT") do
+  puts "Rebuilding..."
+  system("rake compile")
+  system("rake assets")
+  growl.notify "watchfile-notification", "Rebuild successful", "Forced"
+end
