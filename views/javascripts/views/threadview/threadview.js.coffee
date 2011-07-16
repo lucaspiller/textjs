@@ -12,4 +12,4 @@ class Application.Views.Threadview extends Backbone.View
       @render()
 
   render: ->
-    $(@el).html JST['threadview/threadview']({ messages: @collection })
+    $(@el).html JST['threadview/threadview']({ thread: @model, messages: @collection })

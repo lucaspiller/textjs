@@ -7,13 +7,15 @@ $dark-text: #323232;
 $light-text: #717272;
 $dark-background: #252525;
 $selected-background: #d0d2d2;
-$light-background: #fbfbfb;
+$mid-background: #fbfbfb;
+$header-background: $selected-background;
+$light-background: #fff;
 $divider: #ebeeee;
 
 body {
   font-family: 'Helvetica', Arial, sans-serif;
   font-size: 0.8em;
-  background-color: $light-background;
+  background-color: $mid-background;
   color: $dark-text;
   height: 100%;
   margin: 0;
@@ -66,6 +68,7 @@ body {
   left: 425px;
   width: 400px;
   height: 100%;
+  background-color: $light-background;
   #threadView {
     position: absolute;
     top: 0;
@@ -81,11 +84,18 @@ body {
       margin: 0 auto;
       text-align: center;
     }
+    > header {
+      background-color: $header-background;
+      font-weight: bold;
+      padding: 15px;
+      font-size: 1.2em;
+    }
     .message {
       border-bottom: 1px solid $divider;
-      padding: 14px 7px;
+      padding: 15px;
       position: relative;
       cursor: pointer;
+      line-height: 130%;
       header {
         position: relative;
         margin-bottom: 5px;
@@ -98,6 +108,9 @@ body {
           color: $light-text;
         }
       }
+    }
+    .message.you {
+      background-color: $mid-background;
     }
   }
 }

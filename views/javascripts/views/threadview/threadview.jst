@@ -1,5 +1,12 @@
+<header>
+  Conversation with <%= thread.contactName() %>
+</header>
 <% messages.each(function(message) { %>
-  <div class="message">
+  <% if (message.get('type') == message.TYPE_INBOX) { %>
+    <div class="message other">
+  <% } else { %>
+    <div class="message you">
+  <% } %>
     <header>
       <span class="contact">
         <% if (message.get('type') == message.TYPE_INBOX) { %>
