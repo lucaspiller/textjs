@@ -6,9 +6,10 @@ html {
 $dark-text: #323232;
 $light-text: #717272;
 $dark-background: #252525;
-$selected-background: #d0d2d2;
+$hover-background: #d0d2d2;
+$selected-background: #65ade3;
 $mid-background: #fbfbfb;
-$header-background: $selected-background;
+$header-background: $hover-background;
 $light-background: #fff;
 $divider: #ebeeee;
 
@@ -63,6 +64,9 @@ body {
     }
   }
   .thread:hover {
+    background-color: $hover-background;
+  }
+  .thread.selected {
     background-color: $selected-background;
   }
 }

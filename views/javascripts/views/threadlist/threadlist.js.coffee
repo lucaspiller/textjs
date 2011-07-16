@@ -23,3 +23,5 @@ class Application.Views.Threadlist extends Backbone.View
       success: (messages) ->
         new Application.Views.Threadview({ model: thread, collection: messages })
     })
+    $('.thread').removeClass('selected')
+    $(evt.currentTarget).addClass('selected')
