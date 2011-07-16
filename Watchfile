@@ -1,41 +1,24 @@
 require 'ruby-growl'
-require 'rake'
-
-Rake.application.init
-Rake.application.load_rakefile
-
-def run_task(name)
-  Rake.application[name].reenable
-  Rake.application[name].invoke
-rescue Exception => e
-  puts "Error running task `#{name}': #{e.class} #{e.message}"
-end
 
 def growl
   @growl ||= Growl.new "127.0.0.1", "ruby-growl", ["watchfile-notification"]
 end
 
 watch(/(.*)\.coffee/) do |m|
-  run_task 'compile'
-  run_task 'assets'
+  system("rake compile")
+  system("rake assets")
   growl.notify "watchfile-notification", "Rebuild successful", "#{m}"
 end
 
 watch(/(.*)\.scss/) do |m|
   target = "build/#{m[1]}"
-  run_task target
-  run_task 'assets'
+  system("rake #{target}")
+  system("rake assets")
   growl.notify "watchfile-notification", "Rebuild successful", "#{m}"
 end
 
 watch(/(.*)\.jst/) do |m|
-  run_task 'assets'
+  puts "Building #{m}"
+  system("rake assets")
   growl.notify "watchfile-notification", "Rebuild successful", "#{m}"
-end
-
-trap("SIGINT") do
-  puts 'Rebuilding...'
-  run_task 'compile'
-  run_task 'assets'
-  growl.notify "watchfile-notification", "Rebuild successful", "Forced"
 end
