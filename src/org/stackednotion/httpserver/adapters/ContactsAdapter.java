@@ -1,5 +1,6 @@
 package org.stackednotion.httpserver.adapters;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.stackednotion.httpserver.Settings;
 
+import android.R;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -17,6 +19,8 @@ import android.provider.ContactsContract.Contacts;
 
 public class ContactsAdapter {
 	private static Map<String, String> phoneNumberToKey;
+	private static final String[] PHOTO_ID_PROJECTION = { ContactsContract.CommonDataKinds.Photo.PHOTO_ID };
+	private static final String[] PHOTO_DATA_PROJECTION = { ContactsContract.CommonDataKinds.Photo.PHOTO };
 
 	public static String find_key_from_phone_number(String number) {
 		if (phoneNumberToKey == null) {
@@ -67,14 +71,34 @@ public class ContactsAdapter {
 		}
 	}
 
-	public static InputStream find_photo(String id) {
-		Uri uri = Uri.parse(ContactsContract.Contacts.CONTENT_URI + "/" + id);
+	public static InputStream find_photo(String key) {
+		Uri lookupUri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, key);
 
-		InputStream stream = ContactsContract.Contacts
-				.openContactPhotoInputStream(Settings.getContext()
-						.getContentResolver(), uri);
+		Cursor cursor = Settings.getContext().getContentResolver().query(
+				lookupUri, PHOTO_ID_PROJECTION, null, null, null);
+		cursor.moveToFirst();
 
-		return stream;
+		if (cursor.getCount() > 0) {
+			long photoId = cursor.getLong(0);
+			return fetchPhoto(String.valueOf(photoId));
+		} else {
+			return null;
+		}
+	}
+
+	private static InputStream fetchPhoto(String photoId) {
+		Uri lookupUri = Uri.withAppendedPath(ContactsContract.Data.CONTENT_URI,
+				photoId);
+		Cursor cursor = Settings.getContext().getContentResolver().query(
+				lookupUri, PHOTO_DATA_PROJECTION, null, null, null);
+
+		cursor.moveToFirst();
+		try {
+			byte[] data = cursor.getBlob(0);
+			return new ByteArrayInputStream(data);
+		} catch (android.database.CursorIndexOutOfBoundsException e) {
+		    return null;
+		}
 	}
 
 	public static Collection<Contact> all() {

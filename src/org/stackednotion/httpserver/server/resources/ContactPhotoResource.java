@@ -12,23 +12,23 @@ import org.restlet.resource.ServerResource;
 import org.stackednotion.httpserver.adapters.ContactsAdapter;
 
 public class ContactPhotoResource extends ServerResource {
-	private String contactId;
+	private String contactKey;
 
 	@Override
 	protected void doInit() throws ResourceException {
-		contactId = (String) getRequest().getAttributes().get("contactId");
+		contactKey = (String) getRequest().getAttributes().get("contactKey");
 	}
 
 	@Get
 	public Representation represent() {
-		InputStream photo = ContactsAdapter.find_photo(contactId);
+		InputStream photo = ContactsAdapter.find_photo(contactKey);
 
 		if (photo != null) {
 			return new InputRepresentation(photo);
 		} else {
 			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
 			return new StringRepresentation("Image not available for Contact #"
-					+ contactId + " or contact doesn't exist.");
+					+ contactKey + " or contact doesn't exist.");
 		}
 	}
 }
