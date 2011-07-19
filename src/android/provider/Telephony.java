@@ -17,6 +17,8 @@
 package android.provider;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -207,6 +209,51 @@ public final class Telephony {
 		 * The default sort order for this table
 		 */
 		public static final String DEFAULT_SORT_ORDER = "date DESC";
+
+        /**
+         * Move a message to the given folder.
+         *
+         * @param context the context to use
+         * @param uri the message to move
+         * @param folder the folder to move to
+         * @return true if the operation succeeded
+         */
+        public static boolean moveMessageToFolder(Context context,
+                Uri uri, int folder, int error) {
+            if (uri == null) {
+                return false;
+            }
+
+            boolean markAsUnread = false;
+            boolean markAsRead = false;
+            switch(folder) {
+            case MESSAGE_TYPE_INBOX:
+            case MESSAGE_TYPE_DRAFT:
+                break;
+            case MESSAGE_TYPE_OUTBOX:
+            case MESSAGE_TYPE_SENT:
+                markAsRead = true;
+                break;
+            case MESSAGE_TYPE_FAILED:
+            case MESSAGE_TYPE_QUEUED:
+                markAsUnread = true;
+                break;
+            default:
+                return false;
+            }
+
+            ContentValues values = new ContentValues(3);
+
+            values.put(TYPE, folder);
+            if (markAsUnread) {
+                values.put(READ, Integer.valueOf(0));
+            } else if (markAsRead) {
+                values.put(READ, Integer.valueOf(1));
+            }
+            values.put(ERROR_CODE, error);
+            
+            return 1 == context.getContentResolver().update(uri, values, null, null);
+        }
 	}
 	
 	/**

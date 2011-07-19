@@ -11,6 +11,15 @@
 		</activity>
 
 		<service android:name=".ServerService"></service>
+
+		<receiver android:name=".sms.SenderBroadcastReceiver">
+			<intent-filter>
+				<action android:name="com.stackednotion.httpserver.sms.SEND_QUEUED" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="com.stackednotion.httpserver.sms.MESSAGE_SENT" />
+			</intent-filter>
+		</receiver>
 	</application>
 	<uses-sdk android:minSdkVersion="7" />
 
