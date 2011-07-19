@@ -14,6 +14,7 @@ import org.stackednotion.httpserver.server.resources.ContactPhotoResource;
 import org.stackednotion.httpserver.server.resources.ContactResource;
 import org.stackednotion.httpserver.server.resources.ContactsResource;
 import org.stackednotion.httpserver.server.resources.MessagesResource;
+import org.stackednotion.httpserver.server.resources.SmsResource;
 import org.stackednotion.httpserver.server.resources.ThreadResource;
 import org.stackednotion.httpserver.server.resources.ThreadsResource;
 
@@ -31,6 +32,7 @@ public class ServerApplication extends Application {
 		router.attach("/messages", MessagesResource.class);
 		router.attach("/threads", ThreadsResource.class);
 		router.attach("/threads/{threadKey}", ThreadResource.class);
+		router.attach("/sms", SmsResource.class);
 
 		return router;
 	}
