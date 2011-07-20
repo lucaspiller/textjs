@@ -11,10 +11,9 @@ import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
-import org.stackednotion.httpserver.sms.Sender;
+import org.stackednotion.httpserver.SmsAdapter;
 
 import android.net.Uri;
-import android.util.Log;
 
 public class SmsResource extends ServerResource {
 	private String resourceId;
@@ -44,7 +43,7 @@ public class SmsResource extends ServerResource {
 			String destination = data.getString("destination");
 			String body = data.getString("body");
 
-			Uri result = Sender.send(destination, body);
+			Uri result = SmsAdapter.sendSms(destination, body);
 			
 			if (result != null)
 			{
@@ -65,7 +64,7 @@ public class SmsResource extends ServerResource {
 	}
 	
 	private Representation resendSms(Representation entity) {
-		Uri result = Sender.resendMessage(resourceId);
+		Uri result = SmsAdapter.resendSms(resourceId);
 		if (result != null)
 		{
 			setStatus(Status.SUCCESS_ACCEPTED);

@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.stackednotion.httpserver.Settings;
 
-import android.R;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;

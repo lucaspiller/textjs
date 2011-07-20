@@ -12,12 +12,12 @@
 
 		<service android:name=".ServerService"></service>
 
-		<receiver android:name=".sms.SenderBroadcastReceiver">
+		<receiver android:name=".SmsBroadcastReceiver">
 			<intent-filter>
-				<action android:name="com.stackednotion.httpserver.sms.SEND_QUEUED" />
+				<action android:name="com.stackednotion.httpserver.SEND_QUEUED" />
 			</intent-filter>
 			<intent-filter>
-				<action android:name="com.stackednotion.httpserver.sms.MESSAGE_SENT" />
+				<action android:name="com.stackednotion.httpserver.SMS_SENT" />
 			</intent-filter>
 		</receiver>
 	</application>
