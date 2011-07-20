@@ -26,16 +26,14 @@ public class SmsResource extends ServerResource {
 	@Post
 	public Representation acceptItem(Representation entity) { 
 		if (resourceId == null) {
-			return createSms(entity);
-		} else if (this.getOriginalRef().getLastSegment().equals("resend")) {
-			return resendSms(entity);
+			return createAction(entity);
+		} else {
+			// if (this.getOriginalRef().getLastSegment().equals("resend"))
+			return resendAction(entity);
 		}
-
-		// shouldn't ever get here
-		return null;
 	}
 
-	public Representation createSms(Representation entity) {
+	public Representation createAction(Representation entity) {
 		try {
 			String value = entity.getText();
 			JSONObject data = (JSONObject) new JSONTokener(value).nextValue();
@@ -63,7 +61,7 @@ public class SmsResource extends ServerResource {
 		return null;
 	}
 	
-	private Representation resendSms(Representation entity) {
+	private Representation resendAction(Representation entity) {
 		Uri result = SmsAdapter.resendSms(resourceId);
 		if (result != null)
 		{
