@@ -33,6 +33,7 @@ public class ServerApplication extends Application {
 		router.attach("/threads", ThreadsResource.class);
 		router.attach("/threads/{threadKey}", ThreadResource.class);
 		router.attach("/sms", SmsResource.class);
+		router.attach("/sms/{id}/resend", SmsResource.class);
 
 		return router;
 	}

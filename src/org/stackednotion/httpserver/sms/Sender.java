@@ -15,13 +15,8 @@ import android.telephony.SmsManager;
 import android.util.Log;
 
 public class Sender {
-	public static final Uri SMS_URI = Uri.parse("content://sms");
 	private static final Uri QUEUED_MESSAGES_URI = Uri.withAppendedPath(
-			SMS_URI, "queued");
-
-	private static final String ID_KEY = "_id";
-	private static final String BODY_KEY = "body";
-	private static final String DESTINATION_KEY = "address";
+			Sms.CONTENT_URI, "queued");
 
 	public static Uri send(String destination, String body) {
 		if (destination == null || body == null || destination.length() == 0
@@ -31,39 +26,54 @@ public class Sender {
 
 		// write sms to queued messages
 		ContentValues values = new ContentValues();
-		values.put(DESTINATION_KEY, destination);
-		values.put(BODY_KEY, body);
+		values.put(Sms.ADDRESS, destination);
+		values.put(Sms.BODY, body);
 		Uri uri = Settings.getContext().getContentResolver().insert(
 				QUEUED_MESSAGES_URI, values);
 
 		// dispatch send event
-		if (uri != null) {
-			Log.v("HttpServer", "Queued message: " + uri);
-			Settings.getContext().sendBroadcast(
-					new Intent(
-							SenderBroadcastReceiver.MESSAGE_SEND_QUEUED_ACTION,
-							null, Settings.getContext(),
-							SenderBroadcastReceiver.class));
-		}
+		sendMessage(uri);
 
 		return uri;
 	}
 
+	public static Uri resendMessage(String id) {
+		Uri uri = Uri.withAppendedPath(Sms.CONTENT_URI, id);
+		Cursor cursor = Settings.getContext().getContentResolver().query(uri,
+				null, Sms.TYPE + " = " + Sms.MESSAGE_TYPE_FAILED, null, null);
+		if (cursor.moveToFirst()) {
+			// queue message, then send
+			Sms.moveMessageToFolder(Settings.getContext(), uri, Sms.MESSAGE_TYPE_QUEUED, 0);
+			sendMessage(uri);
+			return uri;
+		} else {
+			return null;
+		}
+	}
+
+	public static void sendMessage(Uri uri) {
+		// dispatch send event
+		Log.v("HttpServer", "Queued message: " + uri);
+		Settings.getContext().sendBroadcast(
+				new Intent(SenderBroadcastReceiver.MESSAGE_SEND_QUEUED_ACTION,
+						null, Settings.getContext(),
+						SenderBroadcastReceiver.class));
+	}
+
 	public static void handleSendQueuedMessage(Context context, Intent intent) {
-		// get first queued message
-		Cursor cursor = context.getContentResolver().query(
-				QUEUED_MESSAGES_URI, null, null, null, "date ASC");
+		// get oldest queued message
+		Cursor cursor = context.getContentResolver().query(QUEUED_MESSAGES_URI,
+				null, null, null, "date ASC");
 		if (cursor.moveToFirst() == false) {
 			Log.v("HttpServer", "No more messages to send");
 			return;
 		}
 
-		int id = cursor.getInt(cursor.getColumnIndex(ID_KEY));
-		Uri uri = Uri.withAppendedPath(SMS_URI, String.valueOf(id));
-		
-		String destination = cursor.getString(cursor
-				.getColumnIndex(DESTINATION_KEY)).replaceAll(" ", "");;
-		String body = cursor.getString(cursor.getColumnIndex(BODY_KEY));
+		int id = cursor.getInt(cursor.getColumnIndex(Sms._ID));
+		Uri uri = Uri.withAppendedPath(Sms.CONTENT_URI, String.valueOf(id));
+		String destination = cursor.getString(
+				cursor.getColumnIndex(Sms.ADDRESS)).replaceAll(" ", "");
+		String body = cursor.getString(cursor.getColumnIndex(Sms.BODY));
 
 		// prepare to send
 		SmsManager manager = SmsManager.getDefault();
@@ -89,8 +99,8 @@ public class Sender {
 						SenderBroadcastReceiver.EXTRA_MESSAGE_SENT_SEND_NEXT,
 						true);
 			}
-			sentIntents.add(PendingIntent.getBroadcast(context,
-					requestCode, sendIntent, 0));
+			sentIntents.add(PendingIntent.getBroadcast(context, requestCode,
+					sendIntent, 0));
 		}
 
 		// send the message
