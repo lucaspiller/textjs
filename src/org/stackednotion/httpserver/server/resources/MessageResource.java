@@ -5,14 +5,19 @@ import java.util.Collection;
 import org.json.JSONArray;
 import org.restlet.data.Form;
 import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 import org.stackednotion.httpserver.adapters.MessagesAdapter;
 import org.stackednotion.httpserver.adapters.MessagesAdapter.Message;
 
-public class MessagesResource extends ServerResource {
+public class MessageResource extends ServerResource {
 	@Get
-	public JsonRepresentation represent() {
+	public Representation represent() {
+		return indexAction();
+	}
+	
+	public Representation indexAction() {
 		// fetch query params for pagination
 		Form queryParams = getRequest().getResourceRef().getQueryAsForm();
 

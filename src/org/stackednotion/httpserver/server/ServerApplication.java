@@ -11,7 +11,7 @@ import org.restlet.routing.Router;
 import org.stackednotion.httpserver.Network;
 import org.stackednotion.httpserver.Settings;
 import org.stackednotion.httpserver.server.resources.ContactResource;
-import org.stackednotion.httpserver.server.resources.MessagesResource;
+import org.stackednotion.httpserver.server.resources.MessageResource;
 import org.stackednotion.httpserver.server.resources.SmsResource;
 import org.stackednotion.httpserver.server.resources.ThreadResource;
 
@@ -22,11 +22,11 @@ public class ServerApplication extends Application {
 	@Override
 	public synchronized Restlet createInboundRoot() {
 		Router router = new Router(getContext());
-		router.attach("/contacts", ContactResource.class);
-		router.attach("/contacts/{id}", ContactResource.class);
-		router.attach("/contacts/{id}/photo",
+		router.attach("/contact", ContactResource.class);
+		router.attach("/contact/{id}", ContactResource.class);
+		router.attach("/contact/{id}/photo",
 				ContactResource.class);
-		router.attach("/messages", MessagesResource.class);
+		router.attach("/message", MessageResource.class);
 		router.attach("/thread", ThreadResource.class);
 		router.attach("/thread/{id}", ThreadResource.class);
 		router.attach("/sms", SmsResource.class);
