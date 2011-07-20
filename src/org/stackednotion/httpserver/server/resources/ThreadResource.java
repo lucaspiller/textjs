@@ -11,23 +11,44 @@ import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 import org.stackednotion.httpserver.adapters.MessagesAdapter;
+import org.stackednotion.httpserver.adapters.ThreadsAdapter;
 import org.stackednotion.httpserver.adapters.MessagesAdapter.Message;
+import org.stackednotion.httpserver.adapters.ThreadsAdapter.Thread;
 
 public class ThreadResource extends ServerResource {
-	private String threadIdStr;
+	private String resourceId;
 
 	@Override
 	protected void doInit() throws ResourceException {
-		threadIdStr = (String) getRequest().getAttributes().get("threadKey");
+		resourceId = (String) getRequest().getAttributes().get("id");
 	}
 
 	@Get
 	public Representation represent() {
-		
+		if (resourceId == null) {
+			return indexAction();
+		} else {
+			return showAction();
+		}
+	}
+
+	public Representation indexAction() {
+		Collection<Thread> threads = ThreadsAdapter.all();
+		JSONArray array = new JSONArray();
+
+		for (Thread t : threads) {
+			array.put(t.toJson());
+		}
+
+		return new JsonRepresentation(array);
+	}
+
+	public Representation showAction() {
 		try {
-			Integer threadId = Integer.valueOf(threadIdStr);
-		
-			Collection<Message> messages = MessagesAdapter.find_by_thread_id(threadId);
+			Integer threadId = Integer.valueOf(resourceId);
+
+			Collection<Message> messages = MessagesAdapter
+					.find_by_thread_id(threadId);
 
 			if (!messages.isEmpty()) {
 				JSONArray array = new JSONArray();
@@ -38,12 +59,12 @@ public class ThreadResource extends ServerResource {
 				return new JsonRepresentation(array);
 			} else {
 				setStatus(Status.CLIENT_ERROR_NOT_FOUND);
-				return new StringRepresentation("thread #" + threadIdStr
+				return new StringRepresentation("thread #" + resourceId
 						+ " doesn't exist.");
 			}
 		} catch (java.lang.NumberFormatException e) {
-				setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
-				return new StringRepresentation("Invalid Thread #" + threadIdStr);
+			setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+			return new StringRepresentation("Invalid Thread #" + resourceId);
 		}
 	}
 }
