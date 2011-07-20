@@ -1,6 +1,9 @@
-package org.stackednotion.httpserver;
+package org.stackednotion.httpserver.adapters;
 
 import java.util.ArrayList;
+
+import org.stackednotion.httpserver.Settings;
+import org.stackednotion.httpserver.SmsBroadcastReceiver;
 
 import android.app.PendingIntent;
 import android.content.ContentValues;

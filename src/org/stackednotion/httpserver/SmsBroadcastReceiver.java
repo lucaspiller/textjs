@@ -1,5 +1,7 @@
 package org.stackednotion.httpserver;
 
+import org.stackednotion.httpserver.adapters.SmsAdapter;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;

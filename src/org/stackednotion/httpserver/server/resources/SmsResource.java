@@ -11,7 +11,7 @@ import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
-import org.stackednotion.httpserver.SmsAdapter;
+import org.stackednotion.httpserver.adapters.SmsAdapter;
 
 import android.net.Uri;
 
