@@ -22,13 +22,13 @@ public class ServerApplication extends Application {
 	@Override
 	public synchronized Restlet createInboundRoot() {
 		Router router = new Router(getContext());
-		router.attach("/contact", ContactResource.class);
-		router.attach("/contact/{id}", ContactResource.class);
-		router.attach("/contact/{id}/photo",
+		router.attach("/contacts", ContactResource.class);
+		router.attach("/contacts/{id}", ContactResource.class);
+		router.attach("/contacts/{id}/photo",
 				ContactResource.class);
-		router.attach("/message", MessageResource.class);
-		router.attach("/thread", ThreadResource.class);
-		router.attach("/thread/{id}", ThreadResource.class);
+		router.attach("/messages", MessageResource.class);
+		router.attach("/threads", ThreadResource.class);
+		router.attach("/threads/{id}", ThreadResource.class);
 		router.attach("/sms", SmsResource.class);
 		router.attach("/sms/{id}/resend", SmsResource.class);
 
