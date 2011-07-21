@@ -9,7 +9,6 @@ import org.stackednotion.httpserver.Settings;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Telephony.Sms;
-import android.util.Log;
 
 // o hai: this could break sometime in the future
 // because as-of 2.2 there isn't yet a stable API
@@ -18,8 +17,7 @@ import android.util.Log;
 public class MessagesAdapter {
 	public static final String[] MESSAGES_PROJECTION = { MessageColumns.ID,
 			MessageColumns.TYPE, MessageColumns.THREAD_ID,
-			MessageColumns.ADDRESS, MessageColumns.DATE, MessageColumns.READ,
-			MessageColumns.STATUS, MessageColumns.BODY };
+			MessageColumns.ADDRESS, MessageColumns.DATE, MessageColumns.READ, MessageColumns.BODY };
 
 	public static Collection<Message> all(Integer page, Integer limit) {
 		Cursor cursor = Settings.getContext().getContentResolver().query(
@@ -95,9 +93,6 @@ public class MessagesAdapter {
 		message.read = cursor
 				.getInt(cursor.getColumnIndex(MessageColumns.READ));
 
-		message.status = cursor.getInt(cursor
-				.getColumnIndex(MessageColumns.STATUS));
-
 		message.body = cursor.getString(cursor
 				.getColumnIndex(MessageColumns.BODY));
 
@@ -112,7 +107,6 @@ public class MessagesAdapter {
 		public String sender_key;
 		public long date;
 		public int read;
-		public int status;
 		public String body;
 
 		public JSONObject toJson() {
@@ -126,7 +120,6 @@ public class MessagesAdapter {
 				json.put("sender_key", sender_key);
 				json.put("date", date);
 				json.put("read", read);
-				json.put("status", status);
 				json.put("body", body);
 
 				return json;
