@@ -8,6 +8,8 @@ import org.stackednotion.httpserver.Settings;
 
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.Telephony.Sms;
+import android.util.Log;
 
 // o hai: this could break sometime in the future
 // because as-of 2.2 there isn't yet a stable API
@@ -38,6 +40,19 @@ public class MessagesAdapter {
 		cursor.close();
 
 		return messages;
+	}
+	
+	public static Message find_by_id(String id) {
+		Cursor cursor = Settings.getContext().getContentResolver().query(
+				Uri.parse("content://sms"), MESSAGES_PROJECTION,
+				Sms._ID + " = " + id, null, null);
+
+		cursor.moveToPosition(-1);
+		if (cursor.moveToNext()) {
+			return createMessageFromCursor(cursor);
+		} else {
+			return null;
+		}
 	}
 
 	public static Collection<Message> find_by_thread_id(Integer threadId) {

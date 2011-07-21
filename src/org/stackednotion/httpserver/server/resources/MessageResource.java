@@ -32,7 +32,24 @@ public class MessageResource extends ServerResource {
 	
 	@Get
 	public Representation represent() {
-		return indexAction();
+		if (resourceId == null)
+		{
+			return indexAction();
+		} else {
+			return showAction();
+		}
+	}
+	
+	@Post
+	public Representation acceptItem(Representation entity) { 
+		if (resourceId == null) {
+			return createAction(entity);
+		} else if (this.getOriginalRef().getLastSegment().equals("resend")) {
+			return resendAction(entity);
+		} else {
+			setStatus(Status.CLIENT_ERROR_METHOD_NOT_ALLOWED);
+			return null;
+		}
 	}
 	
 	public Representation indexAction() {
@@ -67,14 +84,14 @@ public class MessageResource extends ServerResource {
 		return new JsonRepresentation(array);
 	}
 	
-
-	@Post
-	public Representation acceptItem(Representation entity) { 
-		if (resourceId == null) {
-			return createAction(entity);
+	public Representation showAction() {
+		Message message = MessagesAdapter.find_by_id(resourceId);
+		if (message != null)
+		{
+			return new JsonRepresentation(message.toJson());
 		} else {
-			// if (this.getOriginalRef().getLastSegment().equals("resend"))
-			return resendAction(entity);
+			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
+			return null;
 		}
 	}
 
