@@ -83,6 +83,6 @@ end
 
 desc "Run Varnish"
 task :varnish do
-  system("killall varnishd")
+  system("killall varnishd || true")
   system("/usr/local/Cellar/varnish/3.0.0/sbin/varnishd -a :8081 -f varnish.vcl -s malloc")
 end
