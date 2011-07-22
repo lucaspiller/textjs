@@ -5,9 +5,10 @@ html {
 // colors
 $dark-text: #323232;
 $light-text: #717272;
+$info-text: #65ade3;
 $dark-background: #252525;
 $hover-background: #d0d2d2;
-$selected-background: #65ade3;
+$selected-background: $info-text;
 $mid-background: #fbfbfb;
 $header-background: $hover-background;
 $light-background: #fff;
@@ -27,54 +28,65 @@ body {
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 75px;
+  width: 50px;
   height: 100%;
   background-color: $dark-background;
   a {
     display: block;
     width: 40px;
-    margin: 10px auto;
+    margin: 5px auto;
   }
 }
 
-#threadList {
-  position: absolute;
-  top: 0px;
-  left: 75px;
-  width: 350px;
-  height: 100%;
-  border-right: 1px solid $divider;
-  overflow: auto;
-  .thread {
-    border-bottom: 1px solid $divider;
-    padding: 14px 7px;
-    position: relative;
-    cursor: pointer;
-    header {
+#leftColumn {
+  border-right: 2px solid $divider;
+  #threadList {
+    position: absolute;
+    top: 0px;
+    left: 50px;
+    width: 299px;
+    height: 100%;
+    overflow: auto;
+    border-right: 1px solid $divider;
+    .thread {
+      border-bottom: 1px solid $divider;
+      padding: 7px;
       position: relative;
-      margin-bottom: 5px;
-      .contact {
-        font-weight: bold;
-      }
-      .date {
-        position: absolute;
-        right: 5px;
-        color: $light-text;
+      cursor: pointer;
+      color: $light-text;
+      header {
+        position: relative;
+        margin-bottom: 5px;
+        .contact {
+          font-weight: bold;
+          color: $dark-text;
+        }
+        .date {
+          position: absolute;
+          right: 5px;
+          color: $info-text;
+        }
       }
     }
-  }
-  .thread:hover {
-    background-color: $hover-background;
-  }
-  .thread.selected {
-    background-color: $selected-background;
+    .thread:hover {
+      background-color: $hover-background;
+    }
+    .thread.selected {
+      background-color: $selected-background;
+      color: #fff;
+      header {
+        .date {
+          color: #fff;
+        }
+      }
+    }
   }
 }
 
 #rightColumn {
   position: absolute;
   top: 0;
-  left: 425px;
+  left: 350px;
   width: 400px;
   height: 100%;
   background-color: $light-background;
@@ -96,14 +108,14 @@ body {
     > header {
       background-color: $header-background;
       font-weight: bold;
-      padding: 15px;
+      padding: 10px 15px;
       font-size: 1.2em;
     }
     .message {
+      font-size: 1.2em;
       border-bottom: 1px solid $divider;
-      padding: 15px;
+      padding: 10px 20px;
       position: relative;
-      cursor: pointer;
       line-height: 130%;
       header {
         position: relative;
