@@ -100,10 +100,10 @@ public class MessageResource extends ServerResource {
 			String value = entity.getText();
 			JSONObject data = (JSONObject) new JSONTokener(value).nextValue();
 
-			String destination = data.getString("destination");
+			String address = data.getString("address");
 			String body = data.getString("body");
 
-			Uri result = SmsAdapter.sendSms(destination, body);
+			Uri result = SmsAdapter.sendSms(address, body);
 			
 			if (result != null)
 			{
