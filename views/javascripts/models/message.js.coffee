@@ -41,6 +41,13 @@ class Application.Models.Message extends Backbone.Model
         @set({'address', address})
     super attrs, options
 
+  parse: (resp, xhr) ->
+    if _.include(@TYPES_SENDING(), resp.type)
+      setTimeout =>
+        @fetch()
+      , 1000
+    super resp, xhr
+
   initialize: (options) ->
     Application.Contacts.bind 'all', =>
       @fetchContact()
