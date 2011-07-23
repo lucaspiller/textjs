@@ -70,3 +70,11 @@ class Application.Collections.Messages extends Backbone.Collection
   # sort in reverse date order
   comparator: (message) ->
       -message.get('date')
+
+  _add: (model, options) ->
+    super model, options
+    @trigger('change')
+
+  _remove: (model, options) ->
+    super model, options
+    @trigger('change')
