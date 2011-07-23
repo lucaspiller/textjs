@@ -90,6 +90,7 @@ body {
   width: 400px;
   height: 100%;
   background-color: $light-background;
+  border-bottom: 1px solid $divider;
   #threadView {
     position: absolute;
     top: 0;
@@ -105,11 +106,36 @@ body {
       margin: 0 auto;
       text-align: center;
     }
+    #replyView {
+      position: absolute;
+      top: 35px;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      .reply-cont {
+        width: 90%;
+        margin: 0 auto;
+        background-color: $header-background;
+        border: 1px solid $divider;
+        padding: 5px;
+        textarea {
+          height: 200px;
+          padding: 10px;
+          font-family: 'Helvetica', Arial, sans-serif;
+          font-size: 1.8em;
+        }
+      }
+    }
     > header {
       background-color: $header-background;
       font-weight: bold;
       padding: 10px 15px;
       font-size: 1.2em;
+      .reply-button {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+      }
     }
     .message {
       font-size: 1.2em;
