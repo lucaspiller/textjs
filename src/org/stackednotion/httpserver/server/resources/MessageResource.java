@@ -110,7 +110,7 @@ public class MessageResource extends ServerResource {
 				String id = result.getLastPathSegment();
 				Message message = MessagesAdapter.find_by_id(id);
 				
-				setStatus(Status.SUCCESS_ACCEPTED);
+				setStatus(Status.SUCCESS_CREATED);
 				this.setLocationRef("/messages/" + id);
 				return new JsonRepresentation(message.toJson());
 			} else {
