@@ -21,6 +21,7 @@ activate :jammit
 use Rack::ReverseProxy do
   reverse_proxy '/threads', 'http://127.0.0.1:8080'
   reverse_proxy '/contacts', 'http://127.0.0.1:8080'
+  reverse_proxy '/messages', 'http://127.0.0.1:8080'
 end
 
 # Helpers
