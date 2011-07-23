@@ -1,5 +1,28 @@
 class Application.Models.Message extends Backbone.Model
   TYPE_INBOX: 1
+  TYPE_SENT: 2
+  TYPE_DRAFT: 3
+  TYPE_OUTBOX: 4
+  TYPE_FAILED: 5
+  TYPE_QUEUED: 6
+
+  # TODO handle draft messages properly
+  TYPES_INBOX: -> [@TYPE_INBOX]
+  TYPES_SENT: -> [@TYPE_INBOX, @TYPE_SENT]
+  TYPES_SENDING: -> [@TYPE_QUEUED, @TYPE_OUTBOX]
+  TYPES_FAILED: -> [@TYPE_FAILED, @TYPE_DRAFT]
+
+  inbox: ->
+    _.include(@TYPES_INBOX(), @get('type'))
+
+  sent: ->
+    _.include(@TYPES_SENT(), @get('type'))
+
+  sending: ->
+    _.include(@TYPES_SENDING(), @get('type'))
+
+  failed: ->
+    _.include(@TYPES_FAILED(), @get('type'))
 
   # TODO fix routes
   urlRoot: '/messages'

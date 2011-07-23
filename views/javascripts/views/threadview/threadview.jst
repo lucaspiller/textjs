@@ -2,21 +2,27 @@
   Conversation with <%= thread.contactName() %>
 </header>
 <% messages.each(function(message) { %>
-  <% if (message.get('type') == message.TYPE_INBOX) { %>
+  <% if (message.inbox()) { %>
     <div class="message other">
   <% } else { %>
     <div class="message you">
   <% } %>
     <header>
       <span class="contact">
-        <% if (message.get('type') == message.TYPE_INBOX) { %>
+        <% if (message.inbox()) { %>
           <%= message.contactName() %>
         <% } else { %>
           You
         <% } %>
       </span>
       <span class="date">
-        <%= message.date() %>
+        <% if (message.sending()) { %>
+          Sending
+        <% } else if (message.failed()) { %>
+          Failed
+        <% } else { %>
+          <%= message.date() %>
+        <% } %>
       </span>
       <span class="menu">
         <a href="#" class="info" title="Message Information">
