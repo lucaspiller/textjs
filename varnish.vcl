@@ -5,6 +5,10 @@ backend default {
 
 sub vcl_recv {
   unset req.http.cookie;
+
+  if (req.url ~ "/messages") {
+    return (pass);
+  }
 }
 
 sub vcl_fetch {
