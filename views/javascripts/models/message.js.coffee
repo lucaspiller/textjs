@@ -1,6 +1,23 @@
 class Application.Models.Message extends Backbone.Model
   TYPE_INBOX: 1
 
+  # TODO fix routes
+  urlRoot: '/messages'
+
+  url: ->
+    base = @urlRoot || urlError()
+    if @isNew()
+      base
+    else
+      base + '/' + encodeURIComponent(@id)
+
+  save: (attrs, options) ->
+    if !@get('address')
+      if @collection
+        address = @collection.thread().get('address')
+        @set({'address', address})
+    super attrs, options
+
   initialize: (options) ->
     Application.Contacts.bind 'all', =>
       @fetchContact()
@@ -42,6 +59,13 @@ class Application.Models.Message extends Backbone.Model
 
 class Application.Collections.Messages extends Backbone.Collection
   model: Application.Models.Message
+
+  thread: ->
+    Application.Threads.get(@threadId())
+
+  threadId: ->
+    # /threads/52
+    @url.split('/')[2]
 
   # sort in reverse date order
   comparator: (message) ->
