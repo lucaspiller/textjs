@@ -1,6 +1,9 @@
 <header>
   Conversation with <%= thread.contactName() %>
+  <span class="reply-button">R</a>
 </header>
+<div id="replyView" style="display: none">
+</div>
 <% messages.each(function(message) { %>
   <% if (message.inbox()) { %>
     <div class="message other">
