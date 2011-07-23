@@ -3,6 +3,7 @@ class Application.Views.Threadview extends Backbone.View
 
   events: {
     "click .reply-button": "showReply"
+    "click .message-resend-button": "resendMessage"
   }
 
   initialize: ->
@@ -20,3 +21,9 @@ class Application.Views.Threadview extends Backbone.View
 
   showReply: (evt) ->
     new Application.Views.Replyview({ model: @model, collection: @collection })
+
+  resendMessage: (evt) ->
+    messageId = $(evt.currentTarget).closest('.message').attr('data-id')
+    message = @collection.get(messageId)
+    console.log messageId, message
+    message.resend()

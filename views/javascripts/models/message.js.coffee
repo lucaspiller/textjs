@@ -87,6 +87,14 @@ class Application.Models.Message extends Backbone.Model
     # 10:54, 10 Jul
     hours + ":" + minutes + ", " + day + " " + month
 
+  resend: ->
+    $.ajax({
+      url: @url() + '/resend',
+      type: 'POST',
+      success: (resp, status, xhr) =>
+        @parse(resp, xhr)
+    })
+
 class Application.Collections.Messages extends Backbone.Collection
   model: Application.Models.Message
 

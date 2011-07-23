@@ -6,9 +6,9 @@
 </div>
 <% messages.each(function(message) { %>
   <% if (message.inbox()) { %>
-    <div class="message other">
+    <div class="message other" data-id="<%= message.id %>">
   <% } else { %>
-    <div class="message you">
+    <div class="message you" data-id="<%= message.id %>">
   <% } %>
     <header>
       <span class="contact">
@@ -29,8 +29,8 @@
       </span>
       <span class="menu">
         <% if (message.failed()) { %>
-          <a href="#" class="retry" title="Retry">
-            <img src="/images/message_retry.png" alt="Retry"/>
+          <a href="#" class="message-resend-button" title="Resend">
+            <img src="/images/message_retry.png" alt="Resend"/>
           </a>
         <% } %>
         <a href="#" class="delete" title="Delete">
