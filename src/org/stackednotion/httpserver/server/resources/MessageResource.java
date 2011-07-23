@@ -109,7 +109,6 @@ public class MessageResource extends ServerResource {
 			{
 				String id = result.getLastPathSegment();
 				Message message = MessagesAdapter.find_by_id(id);
-				
 				setStatus(Status.SUCCESS_CREATED);
 				this.setLocationRef("/messages/" + id);
 				return new JsonRepresentation(message.toJson());
@@ -131,8 +130,11 @@ public class MessageResource extends ServerResource {
 		Uri result = SmsAdapter.resendSms(resourceId);
 		if (result != null)
 		{
+			String id = result.getLastPathSegment();
+			Message message = MessagesAdapter.find_by_id(id);
 			setStatus(Status.SUCCESS_ACCEPTED);
-			this.setLocationRef("/messages/" + result.getLastPathSegment());
+			this.setLocationRef("/messages/" + id);
+			return new JsonRepresentation(message.toJson());
 		} else {
 			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
 		}
