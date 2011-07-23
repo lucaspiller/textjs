@@ -1,6 +1,6 @@
 <header>
   Conversation with <%= thread.contactName() %>
-  <span class="reply-button">R</a>
+  <img src="/images/message_reply.png" class="reply-button" alt="Reply"/>
 </header>
 <div id="replyView" style="display: none">
 </div>
@@ -20,22 +20,21 @@
       </span>
       <span class="date">
         <% if (message.sending()) { %>
-          Sending
+          <img src="/images/message_sending.png" alt="Sending"/>
         <% } else if (message.failed()) { %>
-          Failed
+          <img src="/images/message_failed.png" alt="Failed"/>
         <% } else { %>
           <%= message.date() %>
         <% } %>
       </span>
       <span class="menu">
-        <a href="#" class="info" title="Message Information">
-          I
-        </a>
-        <a href="#" class="forward" title="Forward">
-          F
-        </a>
+        <% if (message.failed()) { %>
+          <a href="#" class="retry" title="Retry">
+            <img src="/images/message_retry.png" alt="Retry"/>
+          </a>
+        <% } %>
         <a href="#" class="delete" title="Delete">
-          X
+          <img src="/images/message_delete.png" alt="Failed"/>
         </a>
       </span>
     </header>
