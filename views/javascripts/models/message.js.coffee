@@ -88,6 +88,7 @@ class Application.Models.Message extends Backbone.Model
     hours + ":" + minutes + ", " + day + " " + month
 
   resend: ->
+    @set({'type': 6})
     $.ajax({
       url: @url() + '/resend',
       type: 'POST',
