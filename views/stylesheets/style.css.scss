@@ -91,7 +91,7 @@ body {
   height: 100%;
   background-color: $light-background;
   border-bottom: 1px solid $divider;
-  #threadView {
+  .threadView {
     position: absolute;
     top: 0;
     left: 0;
@@ -106,7 +106,7 @@ body {
       margin: 0 auto;
       text-align: center;
     }
-    #replyView {
+    .replyView {
       position: absolute;
       top: 35px;
       left: 0;

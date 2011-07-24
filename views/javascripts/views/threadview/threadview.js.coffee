@@ -1,5 +1,5 @@
 class Application.Views.Threadview extends Backbone.View
-  el: '#threadView'
+  className: 'threadView'
 
   events: {
     "click .reply-button": "showReply"
@@ -7,8 +7,13 @@ class Application.Views.Threadview extends Backbone.View
   }
 
   initialize: ->
+    @attachToParent()
     @bindChangeEvent()
     @render()
+
+  attachToParent: ->
+    $('#rightColumn .threadView').remove()
+    $('#rightColumn').append(@el)
 
   bindChangeEvent: ->
     @collection.bind 'change', =>
@@ -20,10 +25,9 @@ class Application.Views.Threadview extends Backbone.View
     $(@el).html JST['threadview/threadview']({ thread: @model, messages: @collection })
 
   showReply: (evt) ->
-    new Application.Views.Replyview({ model: @model, collection: @collection })
+    new Application.Views.Replyview({ model: @model, collection: @collection, parent: @el })
 
   resendMessage: (evt) ->
     messageId = $(evt.currentTarget).closest('.message').attr('data-id')
     message = @collection.get(messageId)
-    console.log messageId, message
     message.resend()

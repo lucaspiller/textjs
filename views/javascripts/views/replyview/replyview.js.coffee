@@ -1,17 +1,22 @@
 class Application.Views.Replyview extends Backbone.View
-  el: '#replyView'
+  className: 'replyView'
+  attributes: { style: 'display: none' }
 
   events: {
     'click input[type=button].cancel': 'cancelReply'
     'click input[type=submit]': 'sendReply'
   }
 
-  initialize: ->
+  initialize: (options) ->
+    @attachToParent(options.parent)
     @render()
     @resizeTextarea()
     $(@el).resize =>
       @resizeTextarea()
     @startCounterTimer()
+
+  attachToParent: (parent) ->
+    $(parent).append(@el)
 
   render: ->
     $(@el).html JST['replyview/replyview']({})
@@ -40,9 +45,9 @@ class Application.Views.Replyview extends Backbone.View
     , 250
 
   cancelReply: ->
-    $(@el).slideUp()
+    $(@el).slideUp 'fast', => @remove()
 
   sendReply: ->
     body = $(@el).find('textarea')[0].value
     @collection.create({'body': body})
-    $(@el).slideUp()
+    $(@el).slideUp 'fast', => @remove()
