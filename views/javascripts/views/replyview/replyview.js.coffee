@@ -3,6 +3,7 @@ class Application.Views.Replyview extends Backbone.View
   attributes: { style: 'display: none' }
 
   events: {
+    'keyup textarea': 'updateCounter'
     'click input[type=button].cancel': 'cancelReply'
     'click input[type=submit]': 'sendReply'
   }
