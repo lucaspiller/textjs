@@ -4,15 +4,9 @@ class Application.Controllers.Dashboard extends Backbone.Router
   }
 
   dashboard: ->
-    Application.Threads.fetch({
-      success: (collection, response) ->
-        new Application.Views.Threadlist({ collection: collection })
-      error: (collection, response) ->
-        console.log "Error response fetching threads: ", response
-    })
+    new Application.Views.Threadlist({ collection: Application.Threads })
+    #new Application.Views.Contactslist({ collection: Application.Contacts })
     Application.Contacts.fetch({
-      success: (collection, response) ->
-        new Application.Views.Contactslist({ collection: collection })
       error: (collection, response) ->
         console.log "Error response fetching contacts: ", response
     })

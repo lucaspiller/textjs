@@ -1,4 +1,7 @@
 class Application.Views.Threadlist extends Backbone.View
+  THREAD_UPDATE_INTERVAL: 5
+  threadsFetched: false
+
   el: '#threadList'
 
   events: {
@@ -6,12 +9,29 @@ class Application.Views.Threadlist extends Backbone.View
   }
 
   initialize: ->
-    @bindCollectionChangeEvent()
+    @bindCollectionResetEvent()
+    @updateCollection()
     @render()
 
-  bindCollectionChangeEvent: ->
-    @collection.bind 'change', =>
+  bindCollectionResetEvent: ->
+    @collection.bind 'reset', =>
       @render()
+
+  runPeriodicUpdate: ->
+    setTimeout =>
+      @updateCollection()
+    , (@THREAD_UPDATE_INTERVAL * 1000)
+
+  updateCollection: ->
+    @collection.fetch {
+      success: (collection, response) =>
+        @threadsFetched = true
+        @runPeriodicUpdate()
+      error: (collection, response) =>
+        # TODO some sort of offline notification
+        console.log 'Updating threads failed'
+        @runPeriodicUpdate()
+    }
 
   render: ->
     $(@el).html JST['threadlist/threadlist']({ threads: @collection })
