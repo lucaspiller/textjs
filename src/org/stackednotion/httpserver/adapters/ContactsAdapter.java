@@ -17,6 +17,10 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 
 public class ContactsAdapter {
+	public static final String[] CONTACTS_PROJECTION = {
+		ContactsContract.Contacts.LOOKUP_KEY, ContactsContract.Contacts.DISPLAY_NAME,
+	};
+	
 	private static Map<String, String> phoneNumberToKey;
 	private static final String[] PHOTO_ID_PROJECTION = { ContactsContract.CommonDataKinds.Photo.PHOTO_ID };
 	private static final String[] PHOTO_DATA_PROJECTION = { ContactsContract.CommonDataKinds.Photo.PHOTO };
@@ -29,7 +33,6 @@ public class ContactsAdapter {
 		if (phoneNumberToKey.containsKey(number)) {
 			return phoneNumberToKey.get(number);
 		} else {
-
 			Uri uri = Uri.withAppendedPath(Uri
 					.parse("content://com.android.contacts/phone_lookup"), Uri
 					.encode(number));
@@ -102,7 +105,7 @@ public class ContactsAdapter {
 
 	public static Collection<Contact> all() {
 		Cursor cursor = Settings.getContext().getContentResolver()
-				.query(ContactsContract.Contacts.CONTENT_URI, null,
+				.query(ContactsContract.Contacts.CONTENT_URI, CONTACTS_PROJECTION,
 						ContactsContract.Contacts.HAS_PHONE_NUMBER + " = 1",
 						null, null);
 
@@ -127,7 +130,7 @@ public class ContactsAdapter {
 				.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
 		// get phone numbers
-		Cursor phonesCur = Settings.getContext().getContentResolver().query(
+		/*Cursor phonesCur = Settings.getContext().getContentResolver().query(
 				ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
 				ContactsContract.CommonDataKinds.Phone.LOOKUP_KEY + " = ?",
 				new String[] { c.key }, null);
@@ -162,7 +165,7 @@ public class ContactsAdapter {
 							.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
 			c.emails.add(new Contact.EmailAddress(emailType, emailAddress));
 		}
-		emailsCur.close();
+		emailsCur.close();*/
 
 		return c;
 	}
