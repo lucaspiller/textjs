@@ -46,7 +46,4 @@ class Application.Views.Threadlist extends Backbone.View
     $(evt.currentTarget).addClass('selected')
     @currentThreadId = $(evt.currentTarget).attr('data-id')
     thread = @collection.get(@currentThreadId)
-    thread.fetchMessages({
-      success: (messages) ->
-        new Application.Views.Threadview({ model: thread, collection: messages })
-    })
+    new Application.Views.Threadview({ model: thread, collection: thread.messages })
