@@ -5,14 +5,14 @@ class Application.Models.Thread extends Backbone.Model
     Application.Contacts.bind 'all', =>
       @fetchContact()
     @fetchContact()
+    @messages = new Application.Collections.Messages
+    @messages.bind 'reset', =>
+      @updateSnippetText()
+    @messages.url = '/threads/' + @get('id')
     super options
 
   fetchMessages: (options) ->
-    if !@messages
-      @messages = new Application.Collections.Messages
-      @messages.bind 'reset', =>
-        @updateSnippetText()
-      @messages.url = '/threads/' + @get('id')
+    if @messages.size() == 0
       @messages.fetch({
         success: (collection, response) ->
           if options.success
