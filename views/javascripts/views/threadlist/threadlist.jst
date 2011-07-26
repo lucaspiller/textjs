@@ -1,5 +1,5 @@
 <% threads.each(function(thread) { %>
-  <div class="thread" data-id="<%= thread.id %>">
+  <div class="thread <%= thread.unreadMessages() ? "unread" : "" %>" data-id="<%= thread.id %>">
     <header>
       <span class="contact">
         <%= thread.contactName() %>

@@ -65,6 +65,9 @@ class Application.Models.Thread extends Backbone.Model
         @_preview = body
     @_preview
 
+  unreadMessages: ->
+    @get('read') == 0
+
 class Application.Collections.Threads extends Backbone.Collection
   model: Application.Models.Thread
 

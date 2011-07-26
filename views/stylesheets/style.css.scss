@@ -80,6 +80,9 @@ body {
         }
       }
     }
+    .thread.unread {
+      background-color: $hover-background;
+    }
   }
 }
 
