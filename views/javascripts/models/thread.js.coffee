@@ -10,6 +10,8 @@ class Application.Models.Thread extends Backbone.Model
   fetchMessages: (options) ->
     if !@messages
       @messages = new Application.Collections.Messages
+      @messages.bind 'reset', =>
+        @updateSnippetText()
       @messages.url = '/threads/' + @get('id')
       @messages.fetch({
         success: (collection, response) ->
@@ -21,6 +23,12 @@ class Application.Models.Thread extends Backbone.Model
       if options.success
         options.success(@messages)
     @messages
+
+  updateSnippetText: ->
+    @set({
+      'body': @messages.at(0).get('body'),
+      'date': @messages.at(0).get('date')
+    })
 
   fetchContact: ->
     contactId = @get('sender_key')
@@ -56,14 +64,12 @@ class Application.Models.Thread extends Backbone.Model
     hours + ":" + minutes + ", " + day + " " + month
 
   preview: ->
-    if !@_preview
-      body = @get('body')
-      if body.length > @MAX_PREVIEW_LENGTH
-        @_preview = body.substring(0, @MAX_PREVIEW_LENGTH)
-        @_preview = @_preview.replace(/\s*\w+$/, '') + '...'
-      else
-        @_preview = body
-    @_preview
+    body = @get('body')
+    if body.length > @MAX_PREVIEW_LENGTH
+      preview = body.substring(0, @MAX_PREVIEW_LENGTH)
+      preview = preview.replace(/\s*\w+$/, '') + '...'
+    else
+      preview = body
 
   unreadMessages: ->
     @get('read') == 0
