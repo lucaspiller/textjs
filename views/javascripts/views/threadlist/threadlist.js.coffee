@@ -1,6 +1,8 @@
 class Application.Views.Threadlist extends Backbone.View
   THREAD_UPDATE_INTERVAL: 5
+
   threadsFetched: false
+  currentThreadId: -1
 
   el: '#threadList'
 
@@ -35,16 +37,16 @@ class Application.Views.Threadlist extends Backbone.View
 
   render: ->
     if @threadsFetched
-      $(@el).html JST['threadlist/threadlist']({ threads: @collection })
+      $(@el).html JST['threadlist/threadlist']({ threads: @collection, currentThreadId: @currentThreadId })
     else
       $(@el).html JST['threadlist/threadlist_loading']({})
 
   showThread: (evt) ->
-    threadId = $(evt.currentTarget).attr('data-id')
-    thread = @collection.get(threadId)
+    $('.thread').removeClass('selected')
+    $(evt.currentTarget).addClass('selected')
+    @currentThreadId = $(evt.currentTarget).attr('data-id')
+    thread = @collection.get(@currentThreadId)
     thread.fetchMessages({
       success: (messages) ->
         new Application.Views.Threadview({ model: thread, collection: messages })
     })
-    $('.thread').removeClass('selected')
-    $(evt.currentTarget).addClass('selected')
