@@ -11,13 +11,15 @@ import android.net.Uri;
 
 public class ThreadsAdapter {
 	public static final String[] THREADS_PROJECTION = { ThreadColumns.ID,
-			ThreadColumns.ADDRESS, ThreadColumns.DATE, ThreadColumns.BODY };
+			ThreadColumns.ADDRESS, ThreadColumns.DATE, ThreadColumns.BODY,
+			ThreadColumns.READ };
 
-	public static final Uri THREADS_URI = Uri.parse("content://mms-sms/conversations");
-	
+	public static final Uri THREADS_URI = Uri
+			.parse("content://mms-sms/conversations");
+
 	public static Collection<Thread> all() {
-		Cursor cursor = Settings.getContext().getContentResolver().query(
-				THREADS_URI, THREADS_PROJECTION, null, null, null);
+		Cursor cursor = Settings.getContext().getContentResolver()
+				.query(THREADS_URI, THREADS_PROJECTION, null, null, null);
 
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		cursor.moveToPosition(-1);
@@ -26,7 +28,7 @@ public class ThreadsAdapter {
 			threads.add(t);
 		}
 		cursor.close();
-		
+
 		return threads;
 	}
 
@@ -46,6 +48,8 @@ public class ThreadsAdapter {
 
 		thread.date = cursor.getLong(cursor.getColumnIndex(ThreadColumns.DATE));
 
+		thread.read = cursor.getInt(cursor.getColumnIndex(ThreadColumns.READ));
+
 		return thread;
 	}
 
@@ -55,6 +59,7 @@ public class ThreadsAdapter {
 		public String sender_key;
 		public String body;
 		public long date;
+		public int read;
 
 		public JSONObject toJson() {
 			try {
@@ -65,6 +70,7 @@ public class ThreadsAdapter {
 				json.put("sender_key", sender_key);
 				json.put("body", body);
 				json.put("date", date);
+				json.put("read", read);
 
 				return json;
 			} catch (Exception e) {
@@ -102,6 +108,14 @@ public class ThreadsAdapter {
 		 * </P>
 		 */
 		public static final String DATE = "date";
+
+		/**
+		 * Indicates whether all messages of the thread have been read.
+		 * <P>
+		 * Type: INTEGER (boolean)
+		 * </P>
+		 */
+		public static final String READ = "read";
 	}
 
 }
