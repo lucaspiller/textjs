@@ -68,6 +68,9 @@ body {
         }
       }
     }
+    .thread.unread {
+      background-color: $hover-background;
+    }
     .thread:hover {
       background-color: $hover-background;
     }
@@ -79,9 +82,6 @@ body {
           color: #fff;
         }
       }
-    }
-    .thread.unread {
-      background-color: $hover-background;
     }
   }
 }
@@ -135,7 +135,7 @@ body {
         }
       }
     }
-    > header {
+    .cont > header {
       background-color: $header-background;
       font-weight: bold;
       padding: 10px 15px;
