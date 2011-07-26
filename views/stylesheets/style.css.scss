@@ -83,6 +83,20 @@ body {
   }
 }
 
+.loading {
+  width: 300px;
+  padding-top: 300px;
+  font-size: 1.8em;
+  color: $light-text;
+  margin: 0 auto;
+  text-align: center;
+
+  img {
+    display: block;
+    margin: 10px auto;
+  }
+}
+
 #rightColumn {
   position: absolute;
   top: 0;
@@ -98,14 +112,6 @@ body {
     height: 100%;
     width: 100%;
     overflow: auto;
-    .no-conversation {
-      width: 300px;
-      padding-top: 300px;
-      font-size: 1.8em;
-      color: $light-text;
-      margin: 0 auto;
-      text-align: center;
-    }
     .replyView {
       position: absolute;
       top: 35px;
@@ -135,6 +141,7 @@ body {
         position: absolute;
         right: 15px;
         top: 10px;
+        cursor: pointer;
       }
     }
     .message {
