@@ -21,7 +21,7 @@ class Application.Views.Replyview extends Backbone.View
 
   render: ->
     $(@el).html JST['replyview/replyview']({})
-    $(@el).slideDown()
+    $(@el).slideDown => $(@el).find('textarea')[0].focus()
 
   resizeTextarea: ->
     $(@el).find('textarea').width(
