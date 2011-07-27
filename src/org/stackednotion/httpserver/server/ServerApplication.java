@@ -12,6 +12,7 @@ import org.stackednotion.httpserver.Network;
 import org.stackednotion.httpserver.Settings;
 import org.stackednotion.httpserver.server.resources.ContactResource;
 import org.stackednotion.httpserver.server.resources.MessageResource;
+import org.stackednotion.httpserver.server.resources.StaticResource;
 import org.stackednotion.httpserver.server.resources.ThreadResource;
 
 import android.util.Log;
@@ -30,6 +31,7 @@ public class ServerApplication extends Application {
 		router.attach("/messages/{id}/resend", MessageResource.class);
 		router.attach("/threads", ThreadResource.class);
 		router.attach("/threads/{id}", ThreadResource.class);
+		router.attachDefault(StaticResource.class);
 
 		return router;
 	}
