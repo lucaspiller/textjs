@@ -8,7 +8,6 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 public class ServerService extends Service {
-
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
