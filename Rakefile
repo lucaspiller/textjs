@@ -63,6 +63,8 @@ task :assets do
   require "middleman"
   require "middleman/builder"
 
+  system("spicy_bbq public/images > build/javascripts/sb.js")
+
   full_build_dir = File.join(Middleman::Server.root, Middleman::Server.build_dir)
 
   FileUtils.mkdir_p File.join(full_build_dir, Middleman::Server.js_dir)

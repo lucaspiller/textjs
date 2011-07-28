@@ -15,6 +15,7 @@ javascripts:
     - build/javascripts/views/**/*.js
     - build/javascripts/controllers/*.js
     - views/javascripts/views/**/*.jst
+    - build/javascripts/sb.js
 
 stylesheets:
   all:
