@@ -6,6 +6,7 @@ class Application.Views.Threadview extends Backbone.View
   events: {
     "click .reply-button": "showReply"
     "click .message-resend-button": "resendMessage"
+    "click .message-delete-button": "deleteMessage"
   }
 
   initialize: ->
@@ -58,3 +59,9 @@ class Application.Views.Threadview extends Backbone.View
     messageId = $(evt.currentTarget).closest('.message').attr('data-id')
     message = @collection.get(messageId)
     message.resend()
+
+  deleteMessage: (evt) ->
+    if confirm('Are you sure you want to delete this message?')
+      messageId = $(evt.currentTarget).closest('.message').attr('data-id')
+      message = @collection.get(messageId)
+      message.delete(@collection)

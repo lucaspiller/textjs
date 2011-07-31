@@ -109,6 +109,14 @@ class Application.Models.Message extends Backbone.Model
         @parse(resp, xhr)
     })
 
+  delete: (collection) ->
+    collection.remove(this)
+    collection.trigger 'reset'
+    $.ajax({
+      url: @url(),
+      type: 'DELETE'
+    })
+
 class Application.Collections.Messages extends Backbone.Collection
   model: Application.Models.Message
 
