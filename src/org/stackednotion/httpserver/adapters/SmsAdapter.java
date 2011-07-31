@@ -7,6 +7,7 @@ import org.stackednotion.httpserver.SmsBroadcastReceiver;
 
 import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -18,15 +19,14 @@ public class SmsAdapter {
 	private static final Uri QUEUED_SMSS_URI = Uri.withAppendedPath(
 			Sms.CONTENT_URI, "queued");
 
-
 	public static void sendSms(Uri uri) {
 		// dispatch send event
 		Log.v("HttpServer", "Queued sms: " + uri);
 		Settings.getContext().sendBroadcast(
-				new Intent(SmsBroadcastReceiver.SMS_SEND_QUEUED_ACTION, null, Settings
-						.getContext(), SmsBroadcastReceiver.class));
+				new Intent(SmsBroadcastReceiver.SMS_SEND_QUEUED_ACTION, null,
+						Settings.getContext(), SmsBroadcastReceiver.class));
 	}
-	
+
 	public static Uri sendSms(String destination, String body) {
 		if (destination == null || body == null || destination.length() == 0
 				|| body.length() == 0) {
@@ -37,8 +37,8 @@ public class SmsAdapter {
 		ContentValues values = new ContentValues();
 		values.put(Sms.ADDRESS, destination);
 		values.put(Sms.BODY, body);
-		Uri uri = Settings.getContext().getContentResolver().insert(
-				QUEUED_SMSS_URI, values);
+		Uri uri = Settings.getContext().getContentResolver()
+				.insert(QUEUED_SMSS_URI, values);
 
 		// dispatch send event
 		sendSms(uri);
@@ -48,8 +48,11 @@ public class SmsAdapter {
 
 	public static Uri resendSms(String id) {
 		Uri uri = Uri.withAppendedPath(Sms.CONTENT_URI, id);
-		Cursor cursor = Settings.getContext().getContentResolver().query(uri,
-				null, Sms.TYPE + " = " + Sms.MESSAGE_TYPE_FAILED, null, null);
+		Cursor cursor = Settings
+				.getContext()
+				.getContentResolver()
+				.query(uri, null, Sms.TYPE + " = " + Sms.MESSAGE_TYPE_FAILED,
+						null, null);
 		if (cursor.moveToFirst()) {
 			// queue sms, then send
 			Sms.moveMessageToFolder(Settings.getContext(), uri,
@@ -61,10 +64,27 @@ public class SmsAdapter {
 		}
 	}
 
+	public static Uri readSms(String id) {
+		Uri uri = Uri.withAppendedPath(Sms.CONTENT_URI, id);
+		Cursor cursor = Settings
+				.getContext()
+				.getContentResolver()
+				.query(uri, null, null, null, null);
+		if (cursor.moveToFirst()) {
+			ContentValues values = new ContentValues(1);
+			values.put(Sms.READ, Integer.valueOf(1));
+			Settings.getContext().getContentResolver()
+					.update(uri, values, null, null);
+			return uri;
+		} else {
+			return null;
+		}
+	}
+
 	public static void sendQueuedSms() {
 		// get oldest queued sms
-		Cursor cursor = Settings.getContext().getContentResolver().query(QUEUED_SMSS_URI,
-				null, null, null, "date ASC");
+		Cursor cursor = Settings.getContext().getContentResolver()
+				.query(QUEUED_SMSS_URI, null, null, null, "date ASC");
 		if (cursor.moveToFirst() == false) {
 			Log.v("HttpServer", "No more smss to send");
 			return;
@@ -79,7 +99,8 @@ public class SmsAdapter {
 		// prepare to send
 		SmsManager manager = SmsManager.getDefault();
 		ArrayList<String> smss = manager.divideMessage(body);
-		Sms.moveMessageToFolder(Settings.getContext(), uri, Sms.MESSAGE_TYPE_OUTBOX, 0);
+		Sms.moveMessageToFolder(Settings.getContext(), uri,
+				Sms.MESSAGE_TYPE_OUTBOX, 0);
 
 		// setup intents so we know whether sms delivery fails
 		int smsCount = smss.size();
@@ -87,8 +108,8 @@ public class SmsAdapter {
 				smsCount);
 		for (int i = 0; i < smsCount; i++) {
 			Intent sendIntent = new Intent(
-					SmsBroadcastReceiver.SMS_SENT_ACTION, uri, Settings
-							.getContext(), SmsBroadcastReceiver.class);
+					SmsBroadcastReceiver.SMS_SENT_ACTION, uri,
+					Settings.getContext(), SmsBroadcastReceiver.class);
 
 			int requestCode = 0;
 			if (i == smsCount - 1) {
@@ -97,11 +118,10 @@ public class SmsAdapter {
 				// EXTRA_SMS_SENT_SEND_NEXT set to true.
 				requestCode = 1;
 				sendIntent.putExtra(
-						SmsBroadcastReceiver.EXTRA_SMS_SENT_SEND_NEXT,
-						true);
+						SmsBroadcastReceiver.EXTRA_SMS_SENT_SEND_NEXT, true);
 			}
-			sentIntents.add(PendingIntent.getBroadcast(Settings.getContext(), requestCode,
-					sendIntent, 0));
+			sentIntents.add(PendingIntent.getBroadcast(Settings.getContext(),
+					requestCode, sendIntent, 0));
 		}
 
 		// send the sms
@@ -110,12 +130,10 @@ public class SmsAdapter {
 					sentIntents, null);
 			Log.v("HttpServer", "Sms dispatched: " + uri.toString());
 		} catch (Exception e) {
-			Log.v("HttpServer", "Error sending sms: " + uri.toString()
-					+ " Exception: " + e.getClass().getName() + ":"
-					+ e.getMessage());
+			Log.v("HttpServer",
+					"Error sending sms: " + uri.toString() + " Exception: "
+							+ e.getClass().getName() + ":" + e.getMessage());
 		}
 	}
-	
-
 
 }
