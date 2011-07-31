@@ -20,19 +20,20 @@ class Application.Views.Threadlist extends Backbone.View
       @render()
 
   runPeriodicUpdate: ->
-    setTimeout =>
+    $(@el).oneTime @THREAD_UPDATE_INTERVAL * 1000, =>
       @updateCollection()
-    , (@THREAD_UPDATE_INTERVAL * 1000)
 
   updateCollection: ->
     @collection.fetch {
       success: (collection, response) =>
         @threadsFetched = true
+        @render()
         @runPeriodicUpdate()
       error: (collection, response) =>
         # TODO some sort of offline notification
         console.log 'Updating threads failed'
         @runPeriodicUpdate()
+      silent: true
     }
 
   render: ->
