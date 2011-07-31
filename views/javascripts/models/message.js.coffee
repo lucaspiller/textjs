@@ -49,6 +49,8 @@ class Application.Models.Message extends Backbone.Model
     super resp, xhr
 
   initialize: (options) ->
+    unless @get('type')
+      @set({'type': @TYPE_QUEUED})
     Application.Contacts.bind 'all', =>
       @fetchContact()
     @fetchContact()

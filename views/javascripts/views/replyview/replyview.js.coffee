@@ -50,5 +50,8 @@ class Application.Views.Replyview extends Backbone.View
 
   sendReply: ->
     body = $(@el).find('textarea')[0].value
-    @collection.create({'body': body})
+    model = new @collection.model({'body': body})
+    @collection.add(model)
+    @collection.trigger('reset')
+    model.save()
     $(@el).slideUp 'fast', => @remove()
