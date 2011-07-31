@@ -26,19 +26,19 @@ class Application.Views.Threadview extends Backbone.View
       @render()
 
   runPeriodicUpdate: ->
-    setTimeout =>
+    $(@el).oneTime @THREAD_UPDATE_INTERVAL * 1000, =>
       @updateCollection()
-    , (@MESSAGES_UPDATE_INTERVAL * 1000)
 
   updateCollection: ->
-    @collection.fetch {
-      success: (collection, response) =>
-        @runPeriodicUpdate()
-      error: (collection, response) =>
-        # TODO some sort of offline notification
-        console.log 'Updating messages failed'
-        @runPeriodicUpdate()
-    }
+    if $(@el).parent()[0]
+      @collection.fetch {
+        success: (collection, response) =>
+          @runPeriodicUpdate()
+        error: (collection, response) =>
+          # TODO some sort of offline notification
+          console.log 'Updating messages failed'
+          @runPeriodicUpdate()
+      }
 
   render: ->
     if @collection.size() == 0
