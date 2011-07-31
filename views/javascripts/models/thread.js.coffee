@@ -25,10 +25,14 @@ class Application.Models.Thread extends Backbone.Model
     @messages
 
   updateSnippetText: ->
-    @set({
-      'body': @messages.at(0).get('body'),
-      'date': @messages.at(0).get('date')
-    })
+    if @messages.at(0)
+      @set({
+        'body': @messages.at(0).get('body'),
+        'date': @messages.at(0).get('date')
+      })
+    else
+      Application.Threads.remove(this)
+      Application.Threads.trigger 'reset'
 
   fetchContact: ->
     contactId = @get('sender_key')
