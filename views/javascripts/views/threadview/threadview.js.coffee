@@ -45,6 +45,11 @@ class Application.Views.Threadview extends Backbone.View
       $(@el).find('.cont').html JST['threadview/threadview_loading']({ thread: @model, messages: @collection })
     else
       $(@el).find('.cont').html JST['threadview/threadview']({ thread: @model, messages: @collection })
+      @markMessagesAsRead()
+
+  markMessagesAsRead: ->
+    @collection.each (message) ->
+      message.markAsRead()
 
   showReply: (evt) ->
     new Application.Views.Replyview({ model: @model, collection: @collection, parent: @el })

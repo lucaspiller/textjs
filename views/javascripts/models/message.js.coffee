@@ -98,6 +98,17 @@ class Application.Models.Message extends Backbone.Model
         @parse(resp, xhr)
     })
 
+  markAsRead: ->
+    return unless @id
+    return if @get('read') == 1
+    @set({'read': 1})
+    $.ajax({
+      url: @url() + '/read',
+      type: 'POST',
+      success: (resp, status, xhr) =>
+        @parse(resp, xhr)
+    })
+
 class Application.Collections.Messages extends Backbone.Collection
   model: Application.Models.Message
 
