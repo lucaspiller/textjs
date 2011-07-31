@@ -80,6 +80,20 @@ public class SmsAdapter {
 			return null;
 		}
 	}
+	
+	public static Uri deleteSms(String id) {
+		Uri uri = Uri.withAppendedPath(Sms.CONTENT_URI, id);
+		Cursor cursor = Settings
+				.getContext()
+				.getContentResolver()
+				.query(uri, null, null, null, null);
+		if (cursor.moveToFirst()) {
+			Settings.getContext().getContentResolver().delete(uri, null, null);
+			return uri;
+		} else {
+			return null;
+		}
+	}
 
 	public static void sendQueuedSms() {
 		// get oldest queued sms
