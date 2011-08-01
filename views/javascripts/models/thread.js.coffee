@@ -50,11 +50,14 @@ class Application.Models.Thread extends Backbone.Model
 
   preview: ->
     body = @get('body')
-    if body.length > @MAX_PREVIEW_LENGTH
-      preview = body.substring(0, @MAX_PREVIEW_LENGTH)
-      preview = preview.replace(/\s*\w+$/, '') + '...'
+    if body == undefined
+      ""
     else
-      preview = body
+      if body.length > @MAX_PREVIEW_LENGTH
+        preview = body.substring(0, @MAX_PREVIEW_LENGTH)
+        preview.replace(/\s*\w+$/, '') + '...'
+      else
+        body
 
   unreadMessages: ->
     @get('read') == 0
