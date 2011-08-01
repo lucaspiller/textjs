@@ -12,6 +12,7 @@ javascripts:
     - public/javascripts/backbone.js
   application:
     - build/javascripts/application.js
+    - build/javascripts/*.js
     - build/javascripts/models/*.js
     - build/javascripts/views/**/*.js
     - build/javascripts/controllers/*.js

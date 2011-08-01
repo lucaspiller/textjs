@@ -46,26 +46,7 @@ class Application.Models.Thread extends Backbone.Model
 
   date: ->
     unixDateMs = @get('date')
-    date = new Date(unixDateMs)
-
-    hours = date.getHours()
-    if hours < 10
-      hours = '0' + hours
-    minutes = date.getMinutes()
-    if minutes < 10
-      minutes = '0' + minutes
-    day = date.getDate()
-
-    months = [
-      'Jan', 'Feb', 'Mar',
-      'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep',
-      'Oct', 'Nov', 'Dec'
-    ]
-    month = months[date.getMonth()]
-
-    # 10:54, 10 Jul
-    hours + ":" + minutes + ", " + day + " " + month
+    new Date(unixDateMs).timeAgoInWords()
 
   preview: ->
     body = @get('body')
