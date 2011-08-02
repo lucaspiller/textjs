@@ -32,6 +32,7 @@ public class ServerApplication extends Application {
 		router.attach("/messages/{id}/read", MessageResource.class);
 		router.attach("/threads", ThreadResource.class);
 		router.attach("/threads/{id}", ThreadResource.class);
+		router.attach("/version", StaticResource.class);
 		router.attachDefault(StaticResource.class);
 
 		return router;

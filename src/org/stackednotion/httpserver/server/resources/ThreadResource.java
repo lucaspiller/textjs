@@ -9,17 +9,18 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
-import org.restlet.resource.ServerResource;
 import org.stackednotion.httpserver.adapters.MessagesAdapter;
-import org.stackednotion.httpserver.adapters.ThreadsAdapter;
 import org.stackednotion.httpserver.adapters.MessagesAdapter.Message;
+import org.stackednotion.httpserver.adapters.ThreadsAdapter;
 import org.stackednotion.httpserver.adapters.ThreadsAdapter.Thread;
+import org.stackednotion.httpserver.server.SecuredResource;
 
-public class ThreadResource extends ServerResource {
+public class ThreadResource extends SecuredResource {
 	private String resourceId;
 
 	@Override
 	protected void doInit() throws ResourceException {
+		verifyAccessToken();
 		resourceId = (String) getRequest().getAttributes().get("id");
 	}
 

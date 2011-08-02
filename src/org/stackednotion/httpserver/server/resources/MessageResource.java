@@ -16,18 +16,19 @@ import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
-import org.restlet.resource.ServerResource;
 import org.stackednotion.httpserver.adapters.MessagesAdapter;
 import org.stackednotion.httpserver.adapters.MessagesAdapter.Message;
 import org.stackednotion.httpserver.adapters.SmsAdapter;
+import org.stackednotion.httpserver.server.SecuredResource;
 
 import android.net.Uri;
 
-public class MessageResource extends ServerResource {
+public class MessageResource extends SecuredResource {
 	private String resourceId;
 
 	@Override
 	protected void doInit() throws ResourceException {
+		verifyAccessToken();
 		resourceId = (String) getRequest().getAttributes().get("id");
 	}
 

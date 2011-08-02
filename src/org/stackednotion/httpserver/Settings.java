@@ -14,4 +14,8 @@ public class Settings {
 	public static Context getContext() {
 		return context;
 	}
+	
+	public static String getAccessCode() {
+		return "1234";
+	}
 }

@@ -11,15 +11,16 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
-import org.restlet.resource.ServerResource;
 import org.stackednotion.httpserver.adapters.ContactsAdapter;
 import org.stackednotion.httpserver.adapters.ContactsAdapter.Contact;
+import org.stackednotion.httpserver.server.SecuredResource;
 
-public class ContactResource extends ServerResource {
+public class ContactResource extends SecuredResource {
 	private String resourceId;
 
 	@Override
 	protected void doInit() throws ResourceException {
+		verifyAccessToken();
 		resourceId = (String) getRequest().getAttributes().get("id");
 	}
 
