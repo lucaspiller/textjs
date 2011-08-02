@@ -170,6 +170,13 @@ body {
           display: none;
         }
       }
+      a {
+        color: $info-text;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
     }
     .message.you {
       background-color: $mid-background;

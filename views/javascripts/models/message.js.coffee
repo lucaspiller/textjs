@@ -98,6 +98,13 @@ class Application.Models.Message extends Backbone.Model
       type: 'DELETE'
     })
 
+  body: ->
+    body = @get('body')
+    if body
+      body.formatBody()
+    else
+      ""
+
 class Application.Collections.Messages extends Backbone.Collection
   model: Application.Models.Message
 
