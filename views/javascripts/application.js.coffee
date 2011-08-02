@@ -8,8 +8,10 @@ Application = {
     Collections: {},
     Config: {},
 
+    AccessToken: '1234',
     Contacts: undefined,
     Threads: undefined,
+
     init: (config) ->
       @buildUi()
       Application.Config = config
