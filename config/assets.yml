@@ -10,6 +10,7 @@ javascripts:
     - public/javascripts/json2.js
     - public/javascripts/underscore.js
     - public/javascripts/backbone.js
+    - public/javascripts/stacktrace.js
   application:
     - build/javascripts/application.js
     - build/javascripts/*.js
