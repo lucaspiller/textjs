@@ -8,12 +8,13 @@ javascripts:
     - public/javascripts/jquery.layout-1.3.0.js
     - public/javascripts/jquery.timers.js
     - public/javascripts/json2.js
+    - public/javascripts/patches.js
     - public/javascripts/underscore.js
     - public/javascripts/backbone.js
     - public/javascripts/stacktrace.js
   application:
     - build/javascripts/application.js
-    - build/javascripts/*.js
+    - build/javascripts/*_util.js
     - build/javascripts/models/*.js
     - build/javascripts/views/**/*.js
     - build/javascripts/controllers/*.js
