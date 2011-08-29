@@ -37,7 +37,7 @@ public class ServerService extends Service {
 	private Notification createServiceNotification() {
 		Context context = Settings.getContext();
 		CharSequence tickerText = context.getText(R.string.notification_ticker);
-		Notification notification = new Notification(R.drawable.icon, tickerText, 0);
+		Notification notification = new Notification(R.drawable.stat_service, tickerText, 0);
 
 		CharSequence contentTitle = context.getText(R.string.notification_title);
 		CharSequence contentText = context.getText(R.string.notification_text);
