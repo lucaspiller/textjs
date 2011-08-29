@@ -5,11 +5,12 @@
 	<string name="notification_text_pre"></string>
 	<string name="notification_text_post">- Touch to configure</string>
 
-	<string name="settings_service_enabled">Enabled</string>
-	<string name="settings_service_enabled_substring">The SmsJs service will be enabled</string>
+	<string name="settings_service_started">SmsJs Service</string>
+	<string name="settings_service_started_substring_inactive">Touch to start the SmsJs service</string>
+	<string name="settings_service_started_substring_active">Touch to stop the SmsJs service</string>
 
 	<string name="settings_service_settings_category">Service Settings</string>
 
-	<string name="settings_start_on_boot">Start On Boot</string>
-	<string name="settings_start_on_boot_substring">The SmsJs service will start when your phoned is switched on</string>
+	<string name="settings_start_on_wifi">Start On Wi-Fi</string>
+	<string name="settings_start_on_wifi_substring">Start the SmsJs service when a Wi-Fi connection is active</string>
 </resources>

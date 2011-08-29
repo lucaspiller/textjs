@@ -20,15 +20,19 @@ public class ServerService extends Service {
 	}
 
 	public static void startService() {
-		Context context = Settings.getContext();
-		Intent service = new Intent(context, ServerService.class);
-		context.startService(service);
+		if (!Settings.isServiceRunning()) {
+			Context context = Settings.getContext();
+			Intent service = new Intent(context, ServerService.class);
+			context.startService(service);
+		}
 	}
-	
+
 	public static void stopService() {
-		Context context = Settings.getContext();
-		Intent service = new Intent(context, ServerService.class);
-		context.stopService(service);
+		if (Settings.isServiceRunning()) {
+			Context context = Settings.getContext();
+			Intent service = new Intent(context, ServerService.class);
+			context.stopService(service);
+		}
 	}
 
 	@Override
@@ -42,26 +46,33 @@ public class ServerService extends Service {
 
 	private Notification createServiceNotification() {
 		Context context = Settings.getContext();
-		Notification notification = new Notification(R.drawable.stat_service, null, 0);
-		
+		Notification notification = new Notification(R.drawable.stat_service,
+				null, 0);
+
 		String ip = Network.getLocalIpAddress();
-		String port = "8080"; 
+		String port = "8080";
 		String url = "http://" + ip + ":" + port + "/ ";
 
-		CharSequence contentTitle = context.getText(R.string.notification_title);
-		CharSequence contentText = context.getText(R.string.notification_text_pre) + url + context.getText(R.string.notification_text_post);
+		CharSequence contentTitle = context
+				.getText(R.string.notification_title);
+		CharSequence contentText = context
+				.getText(R.string.notification_text_pre)
+				+ url
+				+ context.getText(R.string.notification_text_post);
 		Intent notificationIntent = new Intent(this, SettingsActivity.class);
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				notificationIntent, 0);
 
-		notification.setLatestEventInfo(Settings.getContext(), contentTitle, contentText, contentIntent);
-		
+		notification.setLatestEventInfo(Settings.getContext(), contentTitle,
+				contentText, contentIntent);
+
 		return notification;
 	}
 
 	@Override
 	public void onDestroy() {
 		ServerApplication.stopServer();
-		
+
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager notificationManager = (NotificationManager) getSystemService(ns);
 		notificationManager.cancel(NOTIFICATION_ID);

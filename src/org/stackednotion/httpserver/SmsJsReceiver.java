@@ -25,7 +25,7 @@ public class SmsJsReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		// init settings from context
 		Settings.init(context);
-		
+
 		if (intent.getAction().equals(SMS_SEND_QUEUED_ACTION)) {
 			handleSendQueuedSms(context, intent);
 		} else if (intent.getAction().equals(SMS_SENT_ACTION)) {
@@ -34,7 +34,8 @@ public class SmsJsReceiver extends BroadcastReceiver {
 		} else if (intent.getAction().equals(CONNECTION_STATE_CHANGE_ACTION)) {
 			handleConnectionStateChange(context, intent);
 		} else {
-			Log.d("HttpServer", "Unhandled intent received: " + intent.getAction());
+			Log.d("HttpServer",
+					"Unhandled intent received: " + intent.getAction());
 		}
 	}
 
@@ -76,15 +77,17 @@ public class SmsJsReceiver extends BroadcastReceiver {
 	private void handleSendQueuedSms(Context context, Intent intent) {
 		SmsAdapter.sendQueuedSms();
 	}
-	
+
 	private void handleConnectionStateChange(Context context, Intent intent) {
-		NetworkInfo info = (NetworkInfo) intent
-				.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-		if (info.getType() == ConnectivityManager.TYPE_WIFI) {
-			if (info.isConnected()) {
-				ServerService.startService();
-			} else {
-				ServerService.stopService();
+		if (Settings.startOnWifi()) {
+			NetworkInfo info = (NetworkInfo) intent
+					.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+			if (info.getType() == ConnectivityManager.TYPE_WIFI) {
+				if (info.isConnected()) {
+					ServerService.startService();
+				} else {
+					ServerService.stopService();
+				}
 			}
 		}
 	}
