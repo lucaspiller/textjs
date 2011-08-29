@@ -10,16 +10,13 @@
 			</intent-filter>
 		</activity>
 
-		<receiver android:name=".SmsBroadcastReceiver">
+		<receiver android:name=".SmsJsReceiver">
 			<intent-filter>
 				<action android:name="com.stackednotion.httpserver.SEND_QUEUED" />
 			</intent-filter>
 			<intent-filter>
 				<action android:name="com.stackednotion.httpserver.SMS_SENT" />
 			</intent-filter>
-		</receiver>
-
-		<receiver android:name=".AutoStarter">
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 			</intent-filter>

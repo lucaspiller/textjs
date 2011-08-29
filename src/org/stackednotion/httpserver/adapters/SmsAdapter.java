@@ -3,7 +3,7 @@ package org.stackednotion.httpserver.adapters;
 import java.util.ArrayList;
 
 import org.stackednotion.httpserver.Settings;
-import org.stackednotion.httpserver.SmsBroadcastReceiver;
+import org.stackednotion.httpserver.SmsJsReceiver;
 
 import android.app.PendingIntent;
 import android.content.ContentValues;
@@ -23,8 +23,8 @@ public class SmsAdapter {
 		// dispatch send event
 		Log.v("HttpServer", "Queued sms: " + uri);
 		Settings.getContext().sendBroadcast(
-				new Intent(SmsBroadcastReceiver.SMS_SEND_QUEUED_ACTION, null,
-						Settings.getContext(), SmsBroadcastReceiver.class));
+				new Intent(SmsJsReceiver.SMS_SEND_QUEUED_ACTION, null,
+						Settings.getContext(), SmsJsReceiver.class));
 	}
 
 	public static Uri sendSms(String destination, String body) {
@@ -122,8 +122,8 @@ public class SmsAdapter {
 				smsCount);
 		for (int i = 0; i < smsCount; i++) {
 			Intent sendIntent = new Intent(
-					SmsBroadcastReceiver.SMS_SENT_ACTION, uri,
-					Settings.getContext(), SmsBroadcastReceiver.class);
+					SmsJsReceiver.SMS_SENT_ACTION, uri,
+					Settings.getContext(), SmsJsReceiver.class);
 
 			int requestCode = 0;
 			if (i == smsCount - 1) {
@@ -132,7 +132,7 @@ public class SmsAdapter {
 				// EXTRA_SMS_SENT_SEND_NEXT set to true.
 				requestCode = 1;
 				sendIntent.putExtra(
-						SmsBroadcastReceiver.EXTRA_SMS_SENT_SEND_NEXT, true);
+						SmsJsReceiver.EXTRA_SMS_SENT_SEND_NEXT, true);
 			}
 			sentIntents.add(PendingIntent.getBroadcast(Settings.getContext(),
 					requestCode, sendIntent, 0));
