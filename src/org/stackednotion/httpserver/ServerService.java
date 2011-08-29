@@ -42,9 +42,7 @@ public class ServerService extends Service {
 
 	private Notification createServiceNotification() {
 		Context context = Settings.getContext();
-		
-		CharSequence tickerText = context.getText(R.string.notification_ticker);
-		Notification notification = new Notification(R.drawable.stat_service, tickerText, 0);
+		Notification notification = new Notification(R.drawable.stat_service, null, 0);
 		
 		String ip = Network.getLocalIpAddress();
 		String port = "8080"; 
