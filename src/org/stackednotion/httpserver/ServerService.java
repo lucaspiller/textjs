@@ -36,11 +36,16 @@ public class ServerService extends Service {
 
 	private Notification createServiceNotification() {
 		Context context = Settings.getContext();
+		
 		CharSequence tickerText = context.getText(R.string.notification_ticker);
 		Notification notification = new Notification(R.drawable.stat_service, tickerText, 0);
+		
+		String ip = Network.getLocalIpAddress();
+		String port = "8080"; 
+		String url = "http://" + ip + ":" + port + "/ ";
 
 		CharSequence contentTitle = context.getText(R.string.notification_title);
-		CharSequence contentText = context.getText(R.string.notification_text);
+		CharSequence contentText = context.getText(R.string.notification_text_pre) + url + context.getText(R.string.notification_text_post);
 		Intent notificationIntent = new Intent(this, SettingsActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
