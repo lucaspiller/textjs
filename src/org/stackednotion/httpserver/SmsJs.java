@@ -1,7 +1,6 @@
 package org.stackednotion.httpserver;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -15,14 +14,18 @@ public class SmsJs extends Activity {
 
 	@Override
 	public void onResume() {
-		Intent service = new Intent(this, ServerService.class);
-		startService(service);
+		ServerService.startService(this);
 		
 		Settings.init(getApplicationContext());
-		String ip = Network.getLocalIpAddress().replace(".", ".\n");
+		String ip = Network.getLocalIpAddress();
+		String port = "8080"; // TODO
+		String authCode = "1234"; //String.valueOf(Settings.getAccessCode()); 
 		
-		TextView statusText = (TextView) findViewById(R.id.status_text);
-		statusText.setText(ip);
+		TextView ipText = (TextView) findViewById(R.id.ip_text);
+		ipText.setText("http://" + ip + ":" + port + "/");
+		
+		TextView authText = (TextView) findViewById(R.id.auth_text);
+		authText.setText(authCode);
 
 		super.onResume();
 	}
