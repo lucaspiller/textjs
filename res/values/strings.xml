@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SmsJs</string>
-    <string name="notification_ticker">SmsJs started</string>
-    <string name="notification_title">SmsJs</string>
-    <string name="notification_text">Touch to configure</string>
+	<string name="app_name">SmsJs</string>
+	<string name="notification_ticker">SmsJs started</string>
+	<string name="notification_title">SmsJs</string>
+	<string name="notification_text">Touch to configure</string>
+
+	<string name="settings_service_enabled">Enabled</string>
+	<string name="settings_service_enabled_substring">The SmsJs service will be enabled</string>
+
+	<string name="settings_service_settings_category">Service Settings</string>
+
+	<string name="settings_start_on_boot">Start On Boot</string>
+	<string name="settings_start_on_boot_substring">The SmsJs service will start when your phoned is switched on</string>
 </resources>

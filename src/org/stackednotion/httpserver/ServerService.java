@@ -19,7 +19,8 @@ public class ServerService extends Service {
 		return null;
 	}
 
-	public static void startService(Context context) {
+	public static void startService() {
+		Context context = Settings.getContext();
 		Intent service = new Intent(context, ServerService.class);
 		context.startService(service);
 	}
@@ -40,7 +41,7 @@ public class ServerService extends Service {
 
 		CharSequence contentTitle = context.getText(R.string.notification_title);
 		CharSequence contentText = context.getText(R.string.notification_text);
-		Intent notificationIntent = new Intent(this, SmsJs.class);
+		Intent notificationIntent = new Intent(this, SettingsActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
 		notification.setLatestEventInfo(Settings.getContext(), contentTitle, contentText, contentIntent);
