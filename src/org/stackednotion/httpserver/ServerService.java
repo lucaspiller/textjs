@@ -24,6 +24,12 @@ public class ServerService extends Service {
 		Intent service = new Intent(context, ServerService.class);
 		context.startService(service);
 	}
+	
+	public static void stopService() {
+		Context context = Settings.getContext();
+		Intent service = new Intent(context, ServerService.class);
+		context.stopService(service);
+	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {

@@ -25,6 +25,9 @@ public class SettingsActivity extends PreferenceActivity {
 					if (sharedPreferences.getBoolean(key, false)) {
 						// start service
 						ServerService.startService();
+					} else {
+						// stop service
+						ServerService.stopService();
 					}
 				}
 			}
