@@ -7,7 +7,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.provider.Telephony.Sms;
 import android.util.Log;
@@ -15,14 +18,17 @@ import android.util.Log;
 public class SmsJsReceiver extends BroadcastReceiver {
 	public static final String SMS_SEND_QUEUED_ACTION = "com.stackednotion.httpserver.SEND_QUEUED";
 	public static final String SMS_SENT_ACTION = "com.stackednotion.httpserver.SMS_SENT";
-	public static final String START_ON_BOOT_ACTION = "android.intent.action.BOOT_COMPLETED";
+	public static final String START_ON_BOOT_ACTION = Intent.ACTION_BOOT_COMPLETED;
+	public static final String CONNECTION_STATE_CHANGE_ACTION = ConnectivityManager.CONNECTIVITY_ACTION;
 	public static final String EXTRA_SMS_SENT_SEND_NEXT = "sms_sent_send_next";
 	public static final String EXTRA_RESULT_CODE = "result_code";
 	public static final String EXTRA_ERROR_CODE = "errorCode";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Log.v("HttpServer", "Received intent: " + intent.getAction());
+		// init settings from context
+		Settings.init(context);
+		
 		if (intent.getAction().equals(SMS_SEND_QUEUED_ACTION)) {
 			handleSendQueuedSms(context, intent);
 		} else if (intent.getAction().equals(SMS_SENT_ACTION)) {
@@ -30,6 +36,10 @@ public class SmsJsReceiver extends BroadcastReceiver {
 			handleSentSms(context, intent);
 		} else if (intent.getAction().equals(START_ON_BOOT_ACTION)) {
 			handleStartOnBoot(context, intent);
+		} else if (intent.getAction().equals(CONNECTION_STATE_CHANGE_ACTION)) {
+			handleConnectionStateChange(context, intent);
+		} else {
+			Log.d("HttpServer", "Unhandled intent received: " + intent.getAction());
 		}
 	}
 
@@ -73,9 +83,6 @@ public class SmsJsReceiver extends BroadcastReceiver {
 	}
 
 	private void handleStartOnBoot(Context context, Intent intent) {
-		// init settings from context
-		Settings.init(context);
-
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 
@@ -85,6 +92,18 @@ public class SmsJsReceiver extends BroadcastReceiver {
 			if (sharedPreferences.getBoolean("service_enabled", false)) {
 				// start service
 				ServerService.startService();
+			}
+		}
+	}
+	
+	private void handleConnectionStateChange(Context context, Intent intent) {
+		NetworkInfo info = (NetworkInfo) intent
+				.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+		if (info.getType() == ConnectivityManager.TYPE_WIFI) {
+			if (info.isConnected()) {
+				ServerService.startService();
+			} else {
+				ServerService.stopService();
 			}
 		}
 	}

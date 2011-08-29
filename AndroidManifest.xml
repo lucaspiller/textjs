@@ -20,17 +20,21 @@
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
 			</intent-filter>
+			<intent-filter>
+				<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+			</intent-filter>
 		</receiver>
 
 		<service android:name=".ServerService"></service>
 	</application>
 	<uses-sdk android:minSdkVersion="7" />
 
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />	
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
 	<uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
 	<uses-permission android:name="android.permission.READ_SMS"></uses-permission>
 	<uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>
 	<uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 </manifest> 
