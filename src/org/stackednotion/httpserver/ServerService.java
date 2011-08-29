@@ -8,10 +8,13 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.IBinder;
 
 public class ServerService extends Service {
 	private static final int NOTIFICATION_ID = 43429;
+	private static final String WIFI_LOCK_TAG = "HttpServer/ServerService";
+	private WifiManager.WifiLock mWifiLock;
 
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -38,12 +41,36 @@ public class ServerService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Settings.init(getApplicationContext());
+		obtainWifiLock();
 		ServerApplication.startServer(8080);
-
 		startForeground(NOTIFICATION_ID, createServiceNotification());
 		return START_STICKY;
+
 	}
 
+	@Override
+	public void onDestroy() {
+		ServerApplication.stopServer();
+		String ns = Context.NOTIFICATION_SERVICE;
+		NotificationManager notificationManager = (NotificationManager) getSystemService(ns);
+		notificationManager.cancel(NOTIFICATION_ID);
+		releaseWifiLock();
+	}
+	
+	private void obtainWifiLock() {
+		WifiManager wm = (WifiManager) Settings.getContext().getSystemService(Context.WIFI_SERVICE);
+        mWifiLock = wm.createWifiLock(WIFI_LOCK_TAG);
+        if(!mWifiLock.isHeld()){
+            mWifiLock.acquire();
+        }
+	}
+	
+	private void releaseWifiLock() {
+		if (mWifiLock != null) {
+			mWifiLock.release();
+		}
+	}
+	
 	private Notification createServiceNotification() {
 		Context context = Settings.getContext();
 		Notification notification = new Notification(R.drawable.stat_service,
@@ -67,15 +94,6 @@ public class ServerService extends Service {
 				contentText, contentIntent);
 
 		return notification;
-	}
-
-	@Override
-	public void onDestroy() {
-		ServerApplication.stopServer();
-
-		String ns = Context.NOTIFICATION_SERVICE;
-		NotificationManager notificationManager = (NotificationManager) getSystemService(ns);
-		notificationManager.cancel(NOTIFICATION_ID);
 	}
 
 }
