@@ -17,10 +17,12 @@ Date::timeAgoInWords = ->
     'Saturday'
   ]
 
-  if dayDiff < 1
+  day = @getDay()
+  dayToday = new Date().getDay()
+
+  if dayDiff < 1 and day == dayToday
     return hours + ':' + minutes
   else if dayDiff < 7
-    day = @getDay()
     return days[day]
 
   date = @getDate()
