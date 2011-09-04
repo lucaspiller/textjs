@@ -1,12 +1,19 @@
 package org.stackednotion.httpserver.server.resources;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.restlet.data.MediaType;
 import org.restlet.data.Status;
+import org.restlet.representation.InputRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
 import org.stackednotion.httpserver.Settings;
 import org.stackednotion.httpserver.server.SecuredResource;
+
+import android.content.res.AssetManager;
+import android.util.Log;
 
 public class StaticResource extends SecuredResource {
 	@Get
@@ -22,15 +29,26 @@ public class StaticResource extends SecuredResource {
 		}
 
 		if (getOriginalRef().getLastSegment() == null) {
-			String body = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8' /><meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' /><title>SmsJs</title><script src=\"https://s3.amazonaws.com/smsjs/"
-					+ version
-					+ "-libs.js\" type=\"text/javascript\"></script><script src=\"https://s3.amazonaws.com/smsjs/"
-					+ version
-					+ "-application.js\" type=\"text/javascript\"></script><link rel=\"stylesheet\" href=\"https://s3.amazonaws.com/smsjs/"
-					+ version
-					+ "-all.css\" /></head><body class='index'><div id='leftColumn'><div id='menubar'></div><div id='threadList'></div><div id='contactsList'></div></div><div id='rightColumn'><div class='threadView'><div class='loading'>No Conversation Selected</div></div></div></body><script type='text/javascript'>//<![CDATA[\nvar config = {}; $(function() { Application.init(config); });\n//]]></script></html>";
-			representation = new StringRepresentation(body);
-			representation.setMediaType(MediaType.TEXT_HTML);
+			try {
+				representation = new InputRepresentation(getAsset("index.html"));
+				Log.d("HttpServer", "Dis: " + representation.getDisposition());
+				representation.setMediaType(MediaType.TEXT_HTML);
+			} catch (IOException e) {
+				Log.e("HttpServer",
+						"IoException reading index.html: " + e.getMessage()
+								+ "\n" + e.getStackTrace());
+				setStatus(Status.SERVER_ERROR_INTERNAL);
+			}
+		} else if (getOriginalRef().getLastSegment().equals("favicon.ico")) {
+			try {
+				representation = new InputRepresentation(getAsset("favicon.ico"));
+				representation.setMediaType(MediaType.IMAGE_ICON);
+			} catch (IOException e) {
+				Log.e("HttpServer",
+						"IoException reading index.html: " + e.getMessage()
+								+ "\n" + e.getStackTrace());
+				setStatus(Status.SERVER_ERROR_INTERNAL);
+			}
 		} else if (getOriginalRef().getLastSegment().equals("version")) {
 			verifyAccessToken();
 			representation = new StringRepresentation(version);
@@ -40,5 +58,10 @@ public class StaticResource extends SecuredResource {
 		}
 
 		return representation;
+	}
+	
+	private InputStream getAsset(String filename) throws IOException {
+		AssetManager assets = Settings.getContext().getAssets();
+		return assets.open(filename);
 	}
 }
