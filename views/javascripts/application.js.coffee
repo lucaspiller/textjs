@@ -28,6 +28,6 @@ Application = {
 
     resizeRightColumn: ->
       $('#rightColumn').width(
-        ($('body').width() - 350) + 'px'
+        ($('body').width() - 320) + 'px'
       )
 }
