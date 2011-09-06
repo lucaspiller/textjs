@@ -8,6 +8,7 @@ import org.stackednotion.httpserver.Settings;
 
 public abstract class SecuredResource extends ServerResource {
 	protected void verifyAccessToken() throws ResourceException {
+		Settings.wakeUpDevice();
 		Form requestHeaders = (Form) getRequest().getAttributes().get("org.restlet.http.headers");
 		String suppliedAccessCode = requestHeaders.getFirstValue("Xaccesscode");
 		if (!Settings.getAccessCode().equals(suppliedAccessCode)) {
