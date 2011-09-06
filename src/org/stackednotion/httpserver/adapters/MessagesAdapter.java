@@ -17,16 +17,26 @@ public class MessagesAdapter {
 	public static final Integer THREAD_PAGE_SIZE = 50;
 	public static final Integer MESSAGE_PAGE_SIZE = 5;
 	
-	public static final String[] MESSAGES_PROJECTION = { Sms._ID,
-			Sms.TYPE, Sms.THREAD_ID,
-			Sms.ADDRESS, Sms.DATE, Sms.READ, Sms.BODY };
+	public static final String[] MESSAGES_RECENT_PROJECTION = { Sms._ID, Sms.ADDRESS, Sms.BODY };
+	public static final String[] MESSAGES_PROJECTION = { Sms._ID, Sms.TYPE, Sms.DATE, Sms.READ, Sms.BODY };
 	
 	public static Collection<Message> recentSent() {
 		long recentTime = System.currentTimeMillis() - (5 * 60 * 1000); // 5 mins ago
 		Cursor cursor = Settings.getContext().getContentResolver().query(
-				Sms.CONTENT_URI, MESSAGES_PROJECTION,
-				Sms.TYPE + " !=" + Sms.MESSAGE_TYPE_INBOX + " AND " + Sms.DATE + " > " + recentTime, null, Sms.DATE + " DESC LIMIT " + MESSAGE_PAGE_SIZE);
-		return generate_find_by_thread_id_response(cursor);
+				Sms.CONTENT_URI, MESSAGES_RECENT_PROJECTION,
+				Sms.TYPE + " !=" + Sms.MESSAGE_TYPE_INBOX + " AND " + Sms.DATE + " > " + recentTime,
+				null, Sms.DATE + " DESC LIMIT " + MESSAGE_PAGE_SIZE);
+		
+		ArrayList<Message> messages = new ArrayList<Message>();
+
+		cursor.moveToPosition(-1);
+		while (cursor.moveToNext()) {
+			Message c = createRecentMessageFromCursor(cursor);
+			messages.add(c);
+		}
+		cursor.close();
+
+		return messages;
 	}
 	
 	public static Message find_by_id(String id) {
@@ -70,24 +80,30 @@ public class MessagesAdapter {
 
 		return messages;
 	}
+	
+
+	public static Message createRecentMessageFromCursor(Cursor cursor) {
+		Message message = new Message();
+
+		message.id = cursor.getInt(cursor.getColumnIndex(Sms._ID));
+		
+		message.address = cursor
+				.getString(cursor.getColumnIndex(Sms.ADDRESS));
+
+		message.body = cursor.getString(cursor
+				.getColumnIndex(Sms.BODY));
+
+		return message;
+	}
 
 	public static Message createMessageFromCursor(Cursor cursor) {
 		Message message = new Message();
 
 		message.id = cursor.getInt(cursor.getColumnIndex(Sms._ID));
-
+		
 		message.type = cursor
 				.getInt(cursor.getColumnIndex(Sms.TYPE));
-
-		message.thread_id = cursor.getInt(cursor
-				.getColumnIndex(Sms.THREAD_ID));
-
-		message.address = cursor.getString(cursor
-				.getColumnIndex(Sms.ADDRESS));
-
-		message.sender_key = ContactsAdapter
-				.find_key_from_phone_number(message.address);
-
+		
 		message.date = cursor.getLong(cursor
 				.getColumnIndex(Sms.DATE));
 
@@ -103,12 +119,10 @@ public class MessagesAdapter {
 	public static class Message {
 		public int id;
 		public int type;
-		public int thread_id;
-		public String address;
-		public String sender_key;
 		public long date;
 		public int read;
 		public String body;
+		public String address;
 
 		public JSONObject toJson() {
 			try {
@@ -116,9 +130,6 @@ public class MessagesAdapter {
 
 				json.put("id", id);
 				json.put("type", type);
-				json.put("thread_id", thread_id);
-				json.put("address", address);
-				json.put("sender_key", sender_key);
 				json.put("date", date);
 				json.put("read", read);
 				json.put("body", body);
