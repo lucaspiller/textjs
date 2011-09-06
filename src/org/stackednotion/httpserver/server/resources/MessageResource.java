@@ -78,6 +78,13 @@ public class MessageResource extends SecuredResource {
 
 			String address = data.getString("address");
 			String body = data.getString("body");
+			
+			for (Message message : MessagesAdapter.recentSent()) {
+				if (message.body.equals(body) && message.address.equals(address)) {
+					setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
+					return new StringRepresentation("Duplicate message (original #" + message.id + ")");
+				}
+			}
 
 			Uri result = SmsAdapter.sendSms(address, body);
 

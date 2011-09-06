@@ -15,10 +15,19 @@ import android.provider.Telephony.Sms;
 // based upon: http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob;f=core/java/android/provider/Telephony.java;h=bf9e8549aaaf406230cff15346eb1ff2add862e1;hb=HEAD
 public class MessagesAdapter {
 	public static final Integer THREAD_PAGE_SIZE = 50;
+	public static final Integer MESSAGE_PAGE_SIZE = 5;
 	
 	public static final String[] MESSAGES_PROJECTION = { Sms._ID,
 			Sms.TYPE, Sms.THREAD_ID,
 			Sms.ADDRESS, Sms.DATE, Sms.READ, Sms.BODY };
+	
+	public static Collection<Message> recentSent() {
+		long recentTime = System.currentTimeMillis() - (5 * 60 * 1000); // 5 mins ago
+		Cursor cursor = Settings.getContext().getContentResolver().query(
+				Sms.CONTENT_URI, MESSAGES_PROJECTION,
+				Sms.TYPE + " !=" + Sms.MESSAGE_TYPE_INBOX + " AND " + Sms.DATE + " > " + recentTime, null, Sms.DATE + " DESC LIMIT " + MESSAGE_PAGE_SIZE);
+		return generate_find_by_thread_id_response(cursor);
+	}
 	
 	public static Message find_by_id(String id) {
 		Cursor cursor = Settings.getContext().getContentResolver().query(
