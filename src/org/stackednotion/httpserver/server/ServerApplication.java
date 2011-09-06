@@ -26,6 +26,7 @@ public class ServerApplication extends Application {
 		router.attach("/contacts/{id}", ContactResource.class);
 		router.attach("/contacts/{id}/photo",
 				ContactResource.class);
+		router.attach("/messages", MessageResource.class);
 		router.attach("/messages/{id}", MessageResource.class);
 		router.attach("/messages/{id}/resend", MessageResource.class);
 		router.attach("/messages/{id}/read", MessageResource.class);

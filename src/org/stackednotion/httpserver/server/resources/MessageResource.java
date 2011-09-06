@@ -34,7 +34,12 @@ public class MessageResource extends SecuredResource {
 
 	@Get
 	public Representation represent() {
-		return showAction();
+		if (resourceId == null) {
+			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
+			return null;
+		} else {
+			return showAction();
+		}
 	}
 
 	@Post
