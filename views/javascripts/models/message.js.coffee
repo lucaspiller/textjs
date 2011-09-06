@@ -51,20 +51,7 @@ class Application.Models.Message extends Backbone.Model
   initialize: (options) ->
     unless @get('type')
       @set({'type': @TYPE_QUEUED})
-    Application.Contacts.bind 'all', =>
-      @fetchContact()
-    @fetchContact()
     super options
-
-  fetchContact: ->
-    contactId = @get('sender_key')
-    @set({'contact': Application.Contacts.get(contactId)})
-
-  contactName: ->
-    if @get('contact')
-      @get('contact').get('name')
-    else
-      @get('address')
 
   date: ->
     unixDateMs = @get('date')
