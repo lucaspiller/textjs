@@ -14,30 +14,11 @@ import android.provider.Telephony.Sms;
 // for reading SMS messages
 // based upon: http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob;f=core/java/android/provider/Telephony.java;h=bf9e8549aaaf406230cff15346eb1ff2add862e1;hb=HEAD
 public class MessagesAdapter {
+	public static final Integer THREAD_PAGE_SIZE = 50;
+	
 	public static final String[] MESSAGES_PROJECTION = { Sms._ID,
 			Sms.TYPE, Sms.THREAD_ID,
 			Sms.ADDRESS, Sms.DATE, Sms.READ, Sms.BODY };
-
-	public static Collection<Message> all(Integer page, Integer limit) {
-		Cursor cursor = Settings.getContext().getContentResolver().query(
-				Sms.CONTENT_URI, MESSAGES_PROJECTION, null, null,
-				null);
-
-		ArrayList<Message> messages = new ArrayList<Message>();
-
-		Integer offset = limit * (page - 1);
-		Integer remaining = limit;
-
-		cursor.moveToPosition(offset);
-		while (remaining > 0 && cursor.moveToNext()) {
-			Message c = createMessageFromCursor(cursor);
-			messages.add(c);
-			remaining--;
-		}
-		cursor.close();
-
-		return messages;
-	}
 	
 	public static Message find_by_id(String id) {
 		Cursor cursor = Settings.getContext().getContentResolver().query(
@@ -50,13 +31,25 @@ public class MessagesAdapter {
 		} else {
 			return null;
 		}
+
 	}
 
+	public static Collection<Message> find_by_thread_id(Integer threadId, Integer latestMessageId) {
+		Cursor cursor = Settings.getContext().getContentResolver().query(
+				Sms.CONTENT_URI, MESSAGES_PROJECTION,
+				"thread_id=" + Integer.toString(threadId) + " AND " + Sms._ID + " < " + latestMessageId,
+				null, Sms.DATE + " DESC LIMIT " + THREAD_PAGE_SIZE);
+		return generate_find_by_thread_id_response(cursor);		
+	}
+	
 	public static Collection<Message> find_by_thread_id(Integer threadId) {
 		Cursor cursor = Settings.getContext().getContentResolver().query(
 				Sms.CONTENT_URI, MESSAGES_PROJECTION,
-				"thread_id=" + Integer.toString(threadId), null, null);
-
+				"thread_id=" + Integer.toString(threadId), null, Sms.DATE + " DESC LIMIT " + THREAD_PAGE_SIZE);
+		return generate_find_by_thread_id_response(cursor);
+	}
+	
+	private static Collection<Message> generate_find_by_thread_id_response(Cursor cursor) {
 		ArrayList<Message> messages = new ArrayList<Message>();
 
 		cursor.moveToPosition(-1);

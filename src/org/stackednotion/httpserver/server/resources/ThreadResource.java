@@ -3,6 +3,7 @@ package org.stackednotion.httpserver.server.resources;
 import java.util.Collection;
 
 import org.json.JSONArray;
+import org.restlet.data.Form;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -17,11 +18,14 @@ import org.stackednotion.httpserver.server.SecuredResource;
 
 public class ThreadResource extends SecuredResource {
 	private String resourceId;
+	private String paginationId;
 
 	@Override
 	protected void doInit() throws ResourceException {
 		verifyAccessToken();
 		resourceId = (String) getRequest().getAttributes().get("id");
+		paginationId = (String) getRequest().getAttributes()
+				.get("paginationId");
 	}
 
 	@Get
@@ -47,22 +51,34 @@ public class ThreadResource extends SecuredResource {
 	public Representation showAction() {
 		try {
 			Integer threadId = Integer.valueOf(resourceId);
-
-			Collection<Message> messages = MessagesAdapter
-					.find_by_thread_id(threadId);
-
-			if (!messages.isEmpty()) {
-				JSONArray array = new JSONArray();
-
-				for (Message m : messages) {
-					array.put(m.toJson());
-				}
-				return new JsonRepresentation(array);
+			
+			Collection<Message> messages;
+			if (paginationId == null) {
+				messages = MessagesAdapter.find_by_thread_id(threadId);
 			} else {
-				setStatus(Status.CLIENT_ERROR_NOT_FOUND);
-				return new StringRepresentation("thread #" + resourceId
-						+ " doesn't exist.");
+				Integer paginationKey = Integer.valueOf(paginationId);
+				messages = MessagesAdapter.find_by_thread_id(threadId, paginationKey);
 			}
+
+			JSONArray array = new JSONArray();
+			int nextId = Integer.MAX_VALUE;
+			for (Message m : messages) {
+				array.put(m.toJson());
+				if (m.id < nextId)
+					nextId = m.id;
+			}
+				
+			if (!messages.isEmpty() && messages.size() == MessagesAdapter.THREAD_PAGE_SIZE) {
+				Form responseHeaders = (Form) getResponse().getAttributes().get("org.restlet.http.headers");  
+				if (responseHeaders == null)  
+				{  
+					responseHeaders = new Form();  
+					getResponse().getAttributes().put("org.restlet.http.headers", responseHeaders);  
+				}
+				responseHeaders.add("X-Next-Page", String.valueOf(nextId));
+			}
+				
+			return new JsonRepresentation(array);
 		} catch (java.lang.NumberFormatException e) {
 			setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
 			return new StringRepresentation("Invalid Thread #" + resourceId);

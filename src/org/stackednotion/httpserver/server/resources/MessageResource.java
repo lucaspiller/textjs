@@ -34,11 +34,7 @@ public class MessageResource extends SecuredResource {
 
 	@Get
 	public Representation represent() {
-		if (resourceId == null) {
-			return indexAction();
-		} else {
-			return showAction();
-		}
+		return showAction();
 	}
 
 	@Post
@@ -58,38 +54,6 @@ public class MessageResource extends SecuredResource {
 	@Delete
 	public void removeRepresentations() {
 		destroyAction();
-	}
-
-	public Representation indexAction() {
-		// fetch query params for pagination
-		Form queryParams = getRequest().getResourceRef().getQueryAsForm();
-
-		Integer page = 1;
-		try {
-			page = Integer.valueOf(queryParams.getFirstValue("page"));
-			if (page < 1) {
-				page = 1;
-			}
-		} catch (java.lang.NumberFormatException e) {
-		}
-
-		Integer limit = 20;
-		try {
-			limit = Integer.valueOf(queryParams.getFirstValue("limit"));
-			if (limit < 0) {
-				limit = 1;
-			}
-		} catch (java.lang.NumberFormatException e) {
-		}
-
-		Collection<Message> messages = MessagesAdapter.all(page, limit);
-		JSONArray array = new JSONArray();
-
-		for (Message m : messages) {
-			array.put(m.toJson());
-		}
-
-		return new JsonRepresentation(array);
 	}
 
 	public Representation showAction() {
