@@ -19,7 +19,7 @@ public class ThreadsAdapter {
 
 	public static Collection<Thread> all() {
 		Cursor cursor = Settings.getContext().getContentResolver()
-				.query(THREADS_URI, THREADS_PROJECTION, null, null, null);
+				.query(THREADS_URI, THREADS_PROJECTION, null, null, ThreadColumns.DATE + " DESC");
 
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		cursor.moveToPosition(-1);
