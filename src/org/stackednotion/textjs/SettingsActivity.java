@@ -1,4 +1,4 @@
-package org.stackednotion.httpserver;
+package org.stackednotion.textjs;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;

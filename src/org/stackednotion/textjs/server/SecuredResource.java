@@ -1,10 +1,10 @@
-package org.stackednotion.httpserver.server;
+package org.stackednotion.textjs.server;
 
 import org.restlet.data.Form;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
-import org.stackednotion.httpserver.Settings;
+import org.stackednotion.textjs.Settings;
 
 public abstract class SecuredResource extends ServerResource {
 	protected void verifyAccessToken() throws ResourceException {

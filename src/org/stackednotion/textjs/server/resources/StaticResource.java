@@ -1,4 +1,4 @@
-package org.stackednotion.httpserver.server.resources;
+package org.stackednotion.textjs.server.resources;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,8 +9,8 @@ import org.restlet.representation.InputRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
-import org.stackednotion.httpserver.Settings;
-import org.stackednotion.httpserver.server.SecuredResource;
+import org.stackednotion.textjs.Settings;
+import org.stackednotion.textjs.server.SecuredResource;
 
 import android.content.res.AssetManager;
 import android.util.Log;

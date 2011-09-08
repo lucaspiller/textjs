@@ -1,6 +1,6 @@
-package org.stackednotion.httpserver;
+package org.stackednotion.textjs;
 
-import org.stackednotion.httpserver.adapters.SmsAdapter;
+import org.stackednotion.textjs.adapters.SmsAdapter;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -13,9 +13,9 @@ import android.net.wifi.WifiManager;
 import android.provider.Telephony.Sms;
 import android.util.Log;
 
-public class SmsJsReceiver extends BroadcastReceiver {
-	public static final String SMS_SEND_QUEUED_ACTION = "com.stackednotion.httpserver.SEND_QUEUED";
-	public static final String SMS_SENT_ACTION = "com.stackednotion.httpserver.SMS_SENT";
+public class TextJsReceiver extends BroadcastReceiver {
+	public static final String SMS_SEND_QUEUED_ACTION = "com.stackednotion.textjs.SEND_QUEUED";
+	public static final String SMS_SENT_ACTION = "com.stackednotion.textjs.SMS_SENT";
 	public static final String CONNECTION_STATE_CHANGE_ACTION = ConnectivityManager.CONNECTIVITY_ACTION;
 	public static final String EXTRA_SMS_SENT_SEND_NEXT = "sms_sent_send_next";
 	public static final String EXTRA_RESULT_CODE = "result_code";
@@ -71,7 +71,7 @@ public class SmsJsReceiver extends BroadcastReceiver {
 
 	private void sendNextSms(Context context) {
 		context.sendBroadcast(new Intent(SMS_SEND_QUEUED_ACTION, null, context,
-				SmsJsReceiver.class));
+				TextJsReceiver.class));
 	}
 
 	private void handleSendQueuedSms(Context context, Intent intent) {

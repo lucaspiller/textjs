@@ -1,4 +1,4 @@
-package org.stackednotion.httpserver.server.resources;
+package org.stackednotion.textjs.server.resources;
 
 import java.io.InputStream;
 import java.util.Collection;
@@ -11,9 +11,9 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
-import org.stackednotion.httpserver.adapters.ContactsAdapter;
-import org.stackednotion.httpserver.adapters.ContactsAdapter.Contact;
-import org.stackednotion.httpserver.server.SecuredResource;
+import org.stackednotion.textjs.adapters.ContactsAdapter;
+import org.stackednotion.textjs.adapters.ContactsAdapter.Contact;
+import org.stackednotion.textjs.server.SecuredResource;
 
 public class ContactResource extends SecuredResource {
 	private String resourceId;

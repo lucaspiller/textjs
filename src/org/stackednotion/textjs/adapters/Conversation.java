@@ -1,4 +1,4 @@
-package org.stackednotion.httpserver.adapters;
+package org.stackednotion.textjs.adapters;
 
 
 /**

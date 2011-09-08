@@ -1,4 +1,4 @@
-package org.stackednotion.httpserver.adapters;
+package org.stackednotion.textjs.adapters;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.stackednotion.httpserver.Settings;
+import org.stackednotion.textjs.Settings;
 
 import android.database.Cursor;
 import android.net.Uri;

@@ -1,4 +1,4 @@
-package org.stackednotion.httpserver;
+package org.stackednotion.textjs;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">SmsJs</string>
-	<string name="notification_title">SmsJs</string>
+	<string name="app_name">TextJs</string>
+	<string name="notification_title">TextJs</string>
 	<string name="notification_text_pre"></string>
 	<string name="notification_text_post">- Touch to configure</string>
 
-	<string name="settings_service_started">SmsJs Service</string>
-	<string name="settings_service_started_substring_inactive">Touch to start the SmsJs service</string>
-	<string name="settings_service_started_substring_active">Touch to stop the SmsJs service</string>
+	<string name="settings_service_started">TextJs Service</string>
+	<string name="settings_service_started_substring_inactive">Touch to start the TextJs service</string>
+	<string name="settings_service_started_substring_active">Touch to stop the TextJs service</string>
 
 	<string name="settings_service_settings_category">Service Settings</string>
 
 	<string name="settings_start_on_wifi">Start On Wi-Fi</string>
-	<string name="settings_start_on_wifi_substring">Start the SmsJs service when a Wi-Fi connection is active</string>
+	<string name="settings_start_on_wifi_substring">Start the TextJs service when a Wi-Fi connection is active</string>
 </resources>

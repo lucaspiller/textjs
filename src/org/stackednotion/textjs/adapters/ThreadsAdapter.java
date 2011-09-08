@@ -1,10 +1,10 @@
-package org.stackednotion.httpserver.adapters;
+package org.stackednotion.textjs.adapters;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.json.JSONObject;
-import org.stackednotion.httpserver.Settings;
+import org.stackednotion.textjs.Settings;
 
 import android.database.Cursor;
 import android.net.Uri;

@@ -1,6 +1,6 @@
-package org.stackednotion.httpserver;
+package org.stackednotion.textjs;
 
-import org.stackednotion.httpserver.server.ServerApplication;
+import org.stackednotion.textjs.server.ServerApplication;
 
 import android.app.Notification;
 import android.app.NotificationManager;

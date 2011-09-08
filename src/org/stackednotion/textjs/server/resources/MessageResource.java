@@ -1,4 +1,4 @@
-package org.stackednotion.httpserver.server.resources;
+package org.stackednotion.textjs.server.resources;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -16,10 +16,10 @@ import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
-import org.stackednotion.httpserver.adapters.MessagesAdapter;
-import org.stackednotion.httpserver.adapters.MessagesAdapter.Message;
-import org.stackednotion.httpserver.adapters.SmsAdapter;
-import org.stackednotion.httpserver.server.SecuredResource;
+import org.stackednotion.textjs.adapters.MessagesAdapter;
+import org.stackednotion.textjs.adapters.SmsAdapter;
+import org.stackednotion.textjs.adapters.MessagesAdapter.Message;
+import org.stackednotion.textjs.server.SecuredResource;
 
 import android.net.Uri;
 
