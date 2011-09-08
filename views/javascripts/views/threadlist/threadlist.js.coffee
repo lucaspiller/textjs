@@ -1,5 +1,6 @@
 class Application.Views.Threadlist extends Backbone.View
-  THREAD_UPDATE_INTERVAL: 5
+  THREAD_FOCUS_UPDATE_INTERVAL: 5
+  THREAD_BLUR_UPDATE_INTERVAL: 300
 
   threadsFetched: false
   currentThreadId: -1
@@ -20,8 +21,12 @@ class Application.Views.Threadlist extends Backbone.View
       @render()
 
   runPeriodicUpdate: ->
-    $(@el).oneTime @THREAD_UPDATE_INTERVAL * 1000, =>
-      @updateCollection()
+    if Application.Focus
+      $(@el).oneTime @THREAD_FOCUS_UPDATE_INTERVAL * 1000, =>
+        @updateCollection()
+    else
+      $(@el).oneTime @THREAD_BLUR_UPDATE_INTERVAL * 1000, =>
+        @updateCollection()
 
   updateCollection: ->
     @collection.fetch {

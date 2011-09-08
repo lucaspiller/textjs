@@ -11,9 +11,11 @@ Application = {
     AccessToken: '1234',
     Contacts: undefined,
     Threads: undefined,
+    Focus: false,
 
     init: (config) ->
       @buildUi()
+      @bindWindowFocus()
       Application.Config = config
       Application.Contacts = new Application.Collections.Contacts()
       Application.Threads = new Application.Collections.Threads()
@@ -30,4 +32,11 @@ Application = {
       $('#rightColumn').width(
         ($('body').width() - 320) + 'px'
       )
+
+    bindWindowFocus: ->
+      $(window).bind 'focus', (evt) ->
+        Application.Focus = true
+      .bind 'blur', (evt) ->
+        Application.Focus = false
+      .focus()
 }
