@@ -13,6 +13,7 @@ class Application.Views.Threadlist extends Backbone.View
 
   initialize: ->
     @bindCollectionResetEvent()
+    @bindApplicationFocusEvent()
     @updateCollection()
     @render()
 
@@ -20,7 +21,12 @@ class Application.Views.Threadlist extends Backbone.View
     @collection.bind 'reset', =>
       @render()
 
+  bindApplicationFocusEvent: ->
+    Application.onFocus (evt) =>
+      @updateCollection()
+
   runPeriodicUpdate: ->
+    $(@el).stopTime()
     if Application.Focus
       $(@el).oneTime @THREAD_FOCUS_UPDATE_INTERVAL * 1000, =>
         @updateCollection()

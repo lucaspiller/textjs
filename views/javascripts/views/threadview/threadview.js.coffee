@@ -13,6 +13,7 @@ class Application.Views.Threadview extends Backbone.View
   initialize: ->
     @attachToParent()
     @bindCollectionResetEvent()
+    @bindApplicationFocusEvent()
     @updateCollection()
     @render()
 
@@ -27,7 +28,12 @@ class Application.Views.Threadview extends Backbone.View
     @model.bind 'change', =>
       @render()
 
+  bindApplicationFocusEvent: ->
+    Application.onFocus (evt) =>
+      @updateCollection()
+
   runPeriodicUpdate: ->
+    $(@el).stopTime()
     if Application.Focus
       $(@el).oneTime @THREAD_FOCUS_UPDATE_INTERVAL * 1000, =>
         @updateCollection()

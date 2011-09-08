@@ -39,4 +39,8 @@ Application = {
       .bind 'blur', (evt) ->
         Application.Focus = false
       .focus()
+
+    onFocus: (callback) ->
+      $(window).bind 'focus', (evt) ->
+        callback(evt)
 }
