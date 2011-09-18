@@ -1,24 +1,30 @@
 package org.stackednotion.textjs;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
+import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity {
 	private OnSharedPreferenceChangeListener preferenceListener;
 	private CheckBoxPreference mServiceStartedPreference;
+	
+	private Preference aboutPreference;
+	private Preference introductionPreference;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.layout.preferences_view);
 		
 		// update settings with current context
 		Settings.init(getApplicationContext());
-
+		
 		// create preference listener
 		preferenceListener = new OnSharedPreferenceChangeListener() {
 			public void onSharedPreferenceChanged(
@@ -37,6 +43,10 @@ public class SettingsActivity extends PreferenceActivity {
 				}
 			}
 		};
+		
+		addPreferencesFromResource(R.layout.preferences_view);
+		introductionPreference = findPreference("introduction");
+		aboutPreference = findPreference("about");
 	}
 
 	@Override
@@ -67,4 +77,18 @@ public class SettingsActivity extends PreferenceActivity {
 
 		super.onPause();
 	}
+	
+	@Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+            Preference preference) {
+        if (preference == introductionPreference) {
+        	Intent intent = new Intent(this, Introduction1Activity.class);
+			startActivity(intent);
+        } else {
+        	//Intent intent = new Intent(this, AboutActivity.class);
+			//startActivity(intent);
+        }
+
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
 }
