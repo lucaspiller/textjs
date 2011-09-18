@@ -30,7 +30,7 @@ public class Settings {
 	public static boolean startOnWifi() {
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
-		return sharedPreferences.getBoolean("start_on_wifi", false);
+		return sharedPreferences.getBoolean("start_on_wifi", true);
 	}
 
 	public static boolean isServiceRunning() {
