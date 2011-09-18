@@ -20,6 +20,9 @@ public class Introduction2Activity extends Activity {
 		Button next = (Button) findViewById(R.id.next);
 		next.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
+				// don't automatically show the introduction again
+				Settings.setSkipIntroduction();
+				
 				Intent intent = new Intent(view.getContext(),
 						SettingsActivity.class);
 				startActivity(intent);

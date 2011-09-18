@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
@@ -56,6 +57,14 @@ public class Settings {
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		return sharedPreferences.getBoolean("skip_introduction", false);
+	}
+	
+	public static void setSkipIntroduction() {
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(getContext());
+		Editor editor = sharedPreferences.edit();
+		editor.putBoolean("skip_introduction", true);
+		editor.commit();
 	}
 
 	public static void wakeUpDevice() {

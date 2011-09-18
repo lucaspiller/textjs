@@ -9,7 +9,6 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity {
 	private OnSharedPreferenceChangeListener preferenceListener;
@@ -84,7 +83,7 @@ public class SettingsActivity extends PreferenceActivity {
         if (preference == introductionPreference) {
         	Intent intent = new Intent(this, Introduction1Activity.class);
 			startActivity(intent);
-        } else {
+        } else if (preference == aboutPreference) {
         	Intent intent = new Intent(this, AboutActivity.class);
 			startActivity(intent);
         }
