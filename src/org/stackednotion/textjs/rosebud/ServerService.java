@@ -43,7 +43,7 @@ public class ServerService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Settings.init(getApplicationContext());
 		obtainWifiLock();
-		ServerApplication.startServer(8080);
+		ServerApplication.startServer(Settings.PORT);
 		startForeground(NOTIFICATION_ID, createServiceNotification());
 		return START_STICKY;
 

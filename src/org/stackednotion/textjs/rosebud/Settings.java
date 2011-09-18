@@ -13,6 +13,7 @@ public class Settings {
 	public static final String LOG_TAG = "TextJs";
 	public static final String WAKELOCK_TAG = "TextJs";
 	public static final long WAKELOCK_TIMEOUT = 10000;
+	public static final int PORT = 5982;
 
 	private static PowerManager.WakeLock wakeLock = null;
 	private static Context context = null;
@@ -82,7 +83,6 @@ public class Settings {
 	
 	public static String getAddress() {
 		String ip = Network.getLocalIpAddress();
-		String port = "8080";
-		return "http://" + ip + ":" + port + "/ ";
+		return "http://" + ip + ":" + String.valueOf(PORT) + "/ ";
 	}
 }
