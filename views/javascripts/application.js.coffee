@@ -23,6 +23,7 @@ Application = {
       Backbone.history.start()
 
     buildUi: ->
+      $('.threadView').html('<div class="loading">No Conversation Selected</div>')
       @resizeRightColumn()
       $(window).resize(() =>
         @resizeRightColumn()
