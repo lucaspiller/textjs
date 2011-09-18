@@ -15,6 +15,9 @@ public class SettingsActivity extends PreferenceActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.layout.preferences_view);
+		
+		// update settings with current context
+		Settings.init(getApplicationContext());
 
 		// create preference listener
 		preferenceListener = new OnSharedPreferenceChangeListener() {

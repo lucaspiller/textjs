@@ -51,6 +51,12 @@ public class Settings {
 		}
 		return false;
 	}
+	
+	public static boolean skipIntroduction() {
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		return sharedPreferences.getBoolean("skip_introduction", false);
+	}
 
 	public static void wakeUpDevice() {
 		if (wakeLock == null) {
