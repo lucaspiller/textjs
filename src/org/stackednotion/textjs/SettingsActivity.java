@@ -2,6 +2,7 @@ package org.stackednotion.textjs;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
@@ -44,7 +45,9 @@ public class SettingsActivity extends PreferenceActivity {
 		Settings.init(getApplicationContext());
 
 		// start service
-		ServerService.startService();
+		if (isWifiConnected() && Settings.startOnWifi()) {
+			ServerService.startService();
+		}
 		
 		// update started preference based on whether the service is started
 		mServiceStartedPreference = (CheckBoxPreference) findPreference("service_should_start");
@@ -66,5 +69,10 @@ public class SettingsActivity extends PreferenceActivity {
 				.unregisterOnSharedPreferenceChangeListener(preferenceListener);
 
 		super.onPause();
+	}
+	
+	private boolean isWifiConnected() {
+		ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+		return connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
 	}
 }
