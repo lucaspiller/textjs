@@ -7,7 +7,6 @@ import org.stackednotion.textjs.rosebud.TextJsReceiver;
 
 import android.app.PendingIntent;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -20,8 +19,6 @@ public class SmsAdapter {
 			Sms.CONTENT_URI, "queued");
 
 	public static void sendSms(Uri uri) {
-		// dispatch send event
-		Log.v("HttpServer", "Queued sms: " + uri);
 		Settings.getContext().sendBroadcast(
 				new Intent(TextJsReceiver.SMS_SEND_QUEUED_ACTION, null,
 						Settings.getContext(), TextJsReceiver.class));
@@ -100,7 +97,6 @@ public class SmsAdapter {
 		Cursor cursor = Settings.getContext().getContentResolver()
 				.query(QUEUED_SMSS_URI, null, null, null, "date ASC");
 		if (cursor.moveToFirst() == false) {
-			Log.v("HttpServer", "No more smss to send");
 			return;
 		}
 
@@ -142,9 +138,8 @@ public class SmsAdapter {
 		try {
 			manager.sendMultipartTextMessage(destination, null, smss,
 					sentIntents, null);
-			Log.v("HttpServer", "Sms dispatched: " + uri.toString());
 		} catch (Exception e) {
-			Log.v("HttpServer",
+			Log.e(Settings.LOG_TAG,
 					"Error sending sms: " + uri.toString() + " Exception: "
 							+ e.getClass().getName() + ":" + e.getMessage());
 		}

@@ -1,13 +1,10 @@
 package org.stackednotion.textjs.rosebud.server.resources;
 
 import java.io.IOException;
-import java.util.Collection;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.restlet.data.Form;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -17,8 +14,8 @@ import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.stackednotion.textjs.rosebud.adapters.MessagesAdapter;
-import org.stackednotion.textjs.rosebud.adapters.SmsAdapter;
 import org.stackednotion.textjs.rosebud.adapters.MessagesAdapter.Message;
+import org.stackednotion.textjs.rosebud.adapters.SmsAdapter;
 import org.stackednotion.textjs.rosebud.server.SecuredResource;
 
 import android.net.Uri;

@@ -31,10 +31,9 @@ public class StaticResource extends SecuredResource {
 		if (getOriginalRef().getLastSegment() == null) {
 			try {
 				representation = new InputRepresentation(getAsset("index.html"));
-				Log.d("HttpServer", "Dis: " + representation.getDisposition());
 				representation.setMediaType(MediaType.TEXT_HTML);
 			} catch (IOException e) {
-				Log.e("HttpServer",
+				Log.e(Settings.LOG_TAG,
 						"IoException reading index.html: " + e.getMessage()
 								+ "\n" + e.getStackTrace());
 				setStatus(Status.SERVER_ERROR_INTERNAL);
@@ -44,8 +43,8 @@ public class StaticResource extends SecuredResource {
 				representation = new InputRepresentation(getAsset("favicon.ico"));
 				representation.setMediaType(MediaType.IMAGE_ICON);
 			} catch (IOException e) {
-				Log.e("HttpServer",
-						"IoException reading index.html: " + e.getMessage()
+				Log.e(Settings.LOG_TAG,
+						"IoException reading favicon.ico: " + e.getMessage()
 								+ "\n" + e.getStackTrace());
 				setStatus(Status.SERVER_ERROR_INTERNAL);
 			}

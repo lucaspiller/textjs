@@ -10,8 +10,8 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 
 public class Settings {
-	public static final String LOG_TAG = "HttpServer";
-	public static final String WAKELOCK_TAG = "HttpServer";
+	public static final String LOG_TAG = "TextJs";
+	public static final String WAKELOCK_TAG = "TextJs";
 	public static final long WAKELOCK_TIMEOUT = 10000;
 
 	private static PowerManager.WakeLock wakeLock = null;

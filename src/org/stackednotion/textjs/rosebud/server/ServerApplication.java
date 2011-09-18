@@ -44,8 +44,6 @@ public class ServerApplication extends Application {
 	public static void startServer(int port) {
 		try {
 			if (!Network.isConnected()) {
-				Log.v(Settings.LOG_TAG,
-						"Cannot start server, Wifi not connected.");
 				return;
 			}
 
@@ -53,26 +51,19 @@ public class ServerApplication extends Application {
 			component.getServers().add(Protocol.HTTP, port);
 			component.getDefaultHost().attach(new ServerApplication());
 			component.start();
-
-			String ip = Network.getLocalIpAddress();
-
-			Log.v(Settings.LOG_TAG, "Server started at http://" + ip + ":"
-					+ new Integer(port).toString() + "/");
 		} catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
 
-			Log.e(Settings.LOG_TAG, sw.toString());
+			Log.e(Settings.LOG_TAG, "Exception starting server: " + sw.toString());
 		}
 	}
 
 	public static void stopServer() {
 		try {
 			component.stop();
-
-			Log.v(Settings.LOG_TAG, "Server stopped");
 		} catch (Exception e) {
-			Log.e(Settings.LOG_TAG, e.toString());
+			Log.e(Settings.LOG_TAG, "Exception stopping server: " + e.toString());
 		}
 	}
 }
