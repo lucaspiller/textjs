@@ -44,4 +44,7 @@ Application = {
     onFocus: (callback) ->
       $(window).bind 'focus', (evt) ->
         callback(evt)
+
+    connectionError: ->
+      $('.threadView').html('<div class="loading">Connection Error</div>')
 }

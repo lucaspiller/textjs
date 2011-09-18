@@ -3,6 +3,7 @@ class Application.Views.Threadlist extends Backbone.View
   THREAD_BLUR_UPDATE_INTERVAL: 300
 
   threadsFetched: false
+  connectionError: false
   currentThreadId: -1
 
   el: '#threadList'
@@ -41,15 +42,17 @@ class Application.Views.Threadlist extends Backbone.View
         @render()
         @runPeriodicUpdate()
       error: (collection, response) =>
-        # TODO some sort of offline notification
-        console.log 'Updating threads failed'
-        @runPeriodicUpdate()
+        Application.connectionError()
+        @connectionError = true
+        @render()
       silent: true
     }
 
   render: ->
     if @threadsFetched
       $(@el).html JST['threadlist/threadlist']({ threads: @collection, currentThreadId: @currentThreadId })
+    else if @connectionError
+      $(@el).html ''
     else
       $(@el).html JST['threadlist/threadlist_loading']({})
 
