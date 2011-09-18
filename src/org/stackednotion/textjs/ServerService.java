@@ -76,15 +76,11 @@ public class ServerService extends Service {
 		Notification notification = new Notification(R.drawable.stat_service,
 				null, 0);
 
-		String ip = Network.getLocalIpAddress();
-		String port = "8080";
-		String url = "http://" + ip + ":" + port + "/ ";
-
 		CharSequence contentTitle = context
 				.getText(R.string.notification_title);
 		CharSequence contentText = context
 				.getText(R.string.notification_text_pre)
-				+ url
+				+ Settings.getAddress()
 				+ context.getText(R.string.notification_text_post);
 		Intent notificationIntent = new Intent(this, SettingsActivity.class);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,

@@ -15,7 +15,9 @@
 	<string name="settings_start_on_wifi_substring">Start the TextJs service when a Wi-Fi connection is active</string>
 	
 	<string name="introduction1_instructions1">Make sure your phone and computer are both connected to Wi-Fi.</string>
-	<string name="introduction1_instructions2">Type http into the address bar on your computer\'s browser.</string>
+	<string name="introduction1_instructions2">Type the address into the address bar on your computer\'s browser.</string>
+	<string name="introduction1_instructions2_conn_part1">Type</string>
+	<string name="introduction1_instructions2_conn_part2">into the address bar on your computer\'s browser.</string>
 	<string name="introduction1_instructions3">Start sending and receiving SMS messages!</string>
 	<string name="introduction_next">Next</string>
 </resources>

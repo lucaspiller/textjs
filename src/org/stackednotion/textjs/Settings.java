@@ -70,4 +70,10 @@ public class Settings {
 		ConnectivityManager connectivityManager = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 		return connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
 	}
+	
+	public static String getAddress() {
+		String ip = Network.getLocalIpAddress();
+		String port = "8080";
+		return "http://" + ip + ":" + port + "/ ";
+	}
 }
