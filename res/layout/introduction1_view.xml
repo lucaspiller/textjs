@@ -9,19 +9,19 @@
 			android:layout_height="wrap_content" android:layout_weight="1"
 			android:orientation="vertical">
 			<ImageView android:id="@+id/logo" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:src="@drawable/icon"
+				android:layout_height="wrap_content" android:src="@drawable/icon" android:layout_margin="10dip"
 				android:layout_gravity="center" />
 			<TextView android:id="@+id/instructions1"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:layout_margin="10dip" android:textSize="20sp"
+				android:layout_margin="10dip" android:textSize="20sp" android:textColor="#fff" 
 				android:text="@string/introduction1_instructions1" />
 			<TextView android:id="@+id/instructions2"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:layout_margin="10dip" android:textSize="20sp"
+				android:layout_margin="10dip" android:textSize="20sp" android:textColor="#fff"
 				android:text="@string/introduction1_instructions2" />
 			<TextView android:id="@+id/instructions3"
 				android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:layout_margin="10dip" android:textSize="20sp"
+				android:layout_margin="10dip" android:textSize="20sp" android:textColor="#fff"
 				android:text="@string/introduction1_instructions3" />
 		</LinearLayout>
 

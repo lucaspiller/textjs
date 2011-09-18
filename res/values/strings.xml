@@ -33,5 +33,6 @@
 	<string name="introduction2_instructions2">The address you need to type into your browser is displayed as a notification on your phone.</string>
 	<string name="introduction2_instructions3">If you have a tablet, try typing the address into it\'s browser!</string>
 	
-	<string name="about_copyright">© Luca Spiller 2011. All rights reserved.</string>
+	<string name="about_copyright">© Luca Spiller 2011.\nAll rights reserved.</string>
+	<string name="about_famfam">This project uses the Silk icon\nset by Mark James:\nhttp://www.famfamfam.com/lab/icons/silk/</string>
 </resources>

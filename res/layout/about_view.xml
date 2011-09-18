@@ -5,7 +5,7 @@
 
 	<ImageView android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:src="@drawable/icon"
-		android:layout_gravity="center" android:layout_margin="70dip" />
+		android:layout_gravity="center" android:layout_margin="10dip" />
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_margin="10dip"
 		android:textSize="40sp" android:textStyle="bold" android:gravity="center"
@@ -20,5 +20,9 @@
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_margin="10dip"
 		android:textSize="20sp" android:gravity="center" android:text="@string/about_copyright"
+		android:textColor="#fff" />
+	<TextView android:layout_width="fill_parent" android:autoLink="web"
+		android:layout_height="wrap_content" android:layout_marginTop="50dip"
+		android:gravity="center" android:text="@string/about_famfam"
 		android:textColor="#fff" />
 </LinearLayout>
