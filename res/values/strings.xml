@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">TextJs</string>
+	<string name="support_email">support@textjs.com</string>
+	
 	<string name="notification_title">TextJs</string>
 	<string name="notification_text_pre"></string>
 	<string name="notification_text_post">- Touch to configure</string>
@@ -30,4 +32,6 @@
 	<string name="introduction2_instructions1">TextJs will automatically start when your phone is connected to Wi-Fi.</string>
 	<string name="introduction2_instructions2">The address you need to type into your browser is displayed as a notification on your phone.</string>
 	<string name="introduction2_instructions3">If you have a tablet, try typing the address into it\'s browser!</string>
+	
+	<string name="about_copyright">© Luca Spiller 2011. All rights reserved.</string>
 </resources>

@@ -12,6 +12,7 @@
 		<activity android:label="@string/app_name" android:name=".Introduction1Activity"></activity>
 		<activity android:label="@string/app_name" android:name=".Introduction2Activity"></activity>
 		<activity android:label="@string/app_name" android:name=".SettingsActivity"></activity>
+		<activity android:label="@string/app_name" android:name=".AboutActivity"></activity>
 
 		<receiver android:name=".TextJsReceiver">
 			<intent-filter>

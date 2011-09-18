@@ -85,8 +85,8 @@ public class SettingsActivity extends PreferenceActivity {
         	Intent intent = new Intent(this, Introduction1Activity.class);
 			startActivity(intent);
         } else {
-        	//Intent intent = new Intent(this, AboutActivity.class);
-			//startActivity(intent);
+        	Intent intent = new Intent(this, AboutActivity.class);
+			startActivity(intent);
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
