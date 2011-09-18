@@ -1,4 +1,4 @@
-package org.stackednotion.textjs;
+package org.stackednotion.textjs.rosebud;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;

@@ -1,4 +1,4 @@
-package org.stackednotion.textjs.server;
+package org.stackednotion.textjs.rosebud.server;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -8,12 +8,12 @@ import org.restlet.Component;
 import org.restlet.Restlet;
 import org.restlet.data.Protocol;
 import org.restlet.routing.Router;
-import org.stackednotion.textjs.Network;
-import org.stackednotion.textjs.Settings;
-import org.stackednotion.textjs.server.resources.ContactResource;
-import org.stackednotion.textjs.server.resources.MessageResource;
-import org.stackednotion.textjs.server.resources.StaticResource;
-import org.stackednotion.textjs.server.resources.ThreadResource;
+import org.stackednotion.textjs.rosebud.Network;
+import org.stackednotion.textjs.rosebud.Settings;
+import org.stackednotion.textjs.rosebud.server.resources.ContactResource;
+import org.stackednotion.textjs.rosebud.server.resources.MessageResource;
+import org.stackednotion.textjs.rosebud.server.resources.StaticResource;
+import org.stackednotion.textjs.rosebud.server.resources.ThreadResource;
 
 import android.util.Log;
 

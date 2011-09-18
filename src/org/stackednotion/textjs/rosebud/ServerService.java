@@ -1,6 +1,7 @@
-package org.stackednotion.textjs;
+package org.stackednotion.textjs.rosebud;
 
-import org.stackednotion.textjs.server.ServerApplication;
+import org.stackednotion.textjs.rosebud.R;
+import org.stackednotion.textjs.rosebud.server.ServerApplication;
 
 import android.app.Notification;
 import android.app.NotificationManager;

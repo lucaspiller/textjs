@@ -1,6 +1,6 @@
-package org.stackednotion.textjs;
+package org.stackednotion.textjs.rosebud;
 
-import org.stackednotion.textjs.adapters.SmsAdapter;
+import org.stackednotion.textjs.rosebud.adapters.SmsAdapter;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;

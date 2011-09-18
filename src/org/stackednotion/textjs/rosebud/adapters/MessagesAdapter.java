@@ -1,10 +1,10 @@
-package org.stackednotion.textjs.adapters;
+package org.stackednotion.textjs.rosebud.adapters;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.json.JSONObject;
-import org.stackednotion.textjs.Settings;
+import org.stackednotion.textjs.rosebud.Settings;
 
 import android.database.Cursor;
 import android.provider.Telephony.Sms;

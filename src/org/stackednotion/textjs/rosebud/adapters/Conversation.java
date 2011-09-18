@@ -1,4 +1,4 @@
-package org.stackednotion.textjs.adapters;
+package org.stackednotion.textjs.rosebud.adapters;
 
 
 /**

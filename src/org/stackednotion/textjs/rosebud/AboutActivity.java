@@ -1,4 +1,6 @@
-package org.stackednotion.textjs;
+package org.stackednotion.textjs.rosebud;
+
+import org.stackednotion.textjs.rosebud.R;
 
 import android.app.Activity;
 import android.content.pm.PackageManager.NameNotFoundException;

@@ -1,4 +1,4 @@
-package org.stackednotion.textjs.server.resources;
+package org.stackednotion.textjs.rosebud.server.resources;
 
 import java.util.Collection;
 
@@ -10,11 +10,11 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
-import org.stackednotion.textjs.adapters.MessagesAdapter;
-import org.stackednotion.textjs.adapters.ThreadsAdapter;
-import org.stackednotion.textjs.adapters.MessagesAdapter.Message;
-import org.stackednotion.textjs.adapters.ThreadsAdapter.Thread;
-import org.stackednotion.textjs.server.SecuredResource;
+import org.stackednotion.textjs.rosebud.adapters.MessagesAdapter;
+import org.stackednotion.textjs.rosebud.adapters.ThreadsAdapter;
+import org.stackednotion.textjs.rosebud.adapters.MessagesAdapter.Message;
+import org.stackednotion.textjs.rosebud.adapters.ThreadsAdapter.Thread;
+import org.stackednotion.textjs.rosebud.server.SecuredResource;
 
 public class ThreadResource extends SecuredResource {
 	private String resourceId;

@@ -1,4 +1,6 @@
-package org.stackednotion.textjs;
+package org.stackednotion.textjs.rosebud;
+
+import org.stackednotion.textjs.rosebud.R;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

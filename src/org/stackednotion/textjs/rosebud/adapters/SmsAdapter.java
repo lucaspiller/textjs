@@ -1,9 +1,9 @@
-package org.stackednotion.textjs.adapters;
+package org.stackednotion.textjs.rosebud.adapters;
 
 import java.util.ArrayList;
 
-import org.stackednotion.textjs.Settings;
-import org.stackednotion.textjs.TextJsReceiver;
+import org.stackednotion.textjs.rosebud.Settings;
+import org.stackednotion.textjs.rosebud.TextJsReceiver;
 
 import android.app.PendingIntent;
 import android.content.ContentValues;

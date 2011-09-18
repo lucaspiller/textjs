@@ -1,4 +1,4 @@
-package org.stackednotion.textjs;
+package org.stackednotion.textjs.rosebud;
 
 import android.app.Activity;
 import android.content.Intent;
