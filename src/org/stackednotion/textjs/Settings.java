@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 
@@ -17,6 +18,11 @@ public class Settings {
 
 	public static void init(Context applicationContext) {
 		context = applicationContext;
+		
+		// start service
+		if (isWifiConnected() && startOnWifi()) {
+			ServerService.startService();
+		}
 	}
 
 	public static Context getContext() {
@@ -52,5 +58,10 @@ public class Settings {
 			wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, WAKELOCK_TAG);
 		}
 		wakeLock.acquire(WAKELOCK_TIMEOUT);
+	}
+	
+	public static boolean isWifiConnected() {
+		ConnectivityManager connectivityManager = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		return connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
 	}
 }
