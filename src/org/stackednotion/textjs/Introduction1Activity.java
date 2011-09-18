@@ -15,32 +15,27 @@ public class Introduction1Activity extends Activity {
 		// update settings with current context
 		Settings.init(getApplicationContext());
 
-		if (Settings.skipIntroduction()) {
-			Intent intent = new Intent(this, SettingsActivity.class);
-			startActivityForResult(intent, 0);
-		} else {
-			setContentView(R.layout.introduction1_view);
+		setContentView(R.layout.introduction1_view);
 
-			if (Settings.isWifiConnected()) {
-				TextView textView = (TextView) findViewById(R.id.instructions2);
-				CharSequence text = getText(R.string.introduction1_instructions2_conn_part1)
-						+ " "
-						+ Settings.getAddress()
-						+ " "
-						+ getText(R.string.introduction1_instructions2_conn_part2);
-				textView.setText(text);
-			}
-
-			// callback for button
-			Button next = (Button) findViewById(R.id.next);
-			next.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View view) {
-					Intent intent = new Intent(view.getContext(),
-							Introduction2Activity.class);
-					startActivityForResult(intent, 0);
-				}
-			});
+		if (Settings.isWifiConnected()) {
+			TextView textView = (TextView) findViewById(R.id.instructions2);
+			CharSequence text = getText(R.string.introduction1_instructions2_conn_part1)
+					+ " "
+					+ Settings.getAddress()
+					+ " "
+					+ getText(R.string.introduction1_instructions2_conn_part2);
+			textView.setText(text);
 		}
+
+		// callback for button
+		Button next = (Button) findViewById(R.id.next);
+		next.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				Intent intent = new Intent(view.getContext(),
+						Introduction2Activity.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class Introduction2Activity extends Activity {
 			public void onClick(View view) {
 				Intent intent = new Intent(view.getContext(),
 						SettingsActivity.class);
-				startActivityForResult(intent, 0);
+				startActivity(intent);
 			}
 		});
 		
