@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class IntroductionActivity extends Activity {
+public class Introduction1Activity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class IntroductionActivity extends Activity {
 			next.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View view) {
 					Intent intent = new Intent(view.getContext(),
-							SettingsActivity.class);
+							Introduction2Activity.class);
 					startActivityForResult(intent, 0);
 				}
 			});
@@ -46,7 +46,6 @@ public class IntroductionActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-
 		// update settings with current context
 		Settings.init(getApplicationContext());
 	}
