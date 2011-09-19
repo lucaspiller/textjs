@@ -25,6 +25,8 @@ public class SmsAdapter {
 	}
 
 	public static Uri sendSms(String destination, String body) {
+		Settings.analyticsEvent("SmsAdapter SendSms");
+		
 		if (destination == null || body == null || destination.length() == 0
 				|| body.length() == 0) {
 			throw new IllegalArgumentException();
@@ -44,6 +46,8 @@ public class SmsAdapter {
 	}
 
 	public static Uri resendSms(String id) {
+		Settings.analyticsEvent("SmsAdapter ResendSms");
+		
 		Uri uri = Uri.withAppendedPath(Sms.CONTENT_URI, id);
 		Cursor cursor = Settings
 				.getContext()
@@ -62,6 +66,8 @@ public class SmsAdapter {
 	}
 
 	public static Uri readSms(String id) {
+		Settings.analyticsEvent("SmsAdapter ReadSms");
+		
 		Uri uri = Uri.withAppendedPath(Sms.CONTENT_URI, id);
 		Cursor cursor = Settings
 				.getContext()
@@ -79,6 +85,8 @@ public class SmsAdapter {
 	}
 	
 	public static Uri deleteSms(String id) {
+		Settings.analyticsEvent("SmsAdapter DeleteSms");
+		
 		Uri uri = Uri.withAppendedPath(Sms.CONTENT_URI, id);
 		Cursor cursor = Settings
 				.getContext()

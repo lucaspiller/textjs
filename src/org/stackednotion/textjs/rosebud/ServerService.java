@@ -28,6 +28,7 @@ public class ServerService extends Service {
 			Context context = Settings.getContext();
 			Intent service = new Intent(context, ServerService.class);
 			context.startService(service);
+			Settings.analyticsEvent("ServerService Start");
 		}
 	}
 
@@ -36,6 +37,7 @@ public class ServerService extends Service {
 			Context context = Settings.getContext();
 			Intent service = new Intent(context, ServerService.class);
 			context.stopService(service);
+			Settings.analyticsEvent("ServerService Stop");
 		}
 	}
 

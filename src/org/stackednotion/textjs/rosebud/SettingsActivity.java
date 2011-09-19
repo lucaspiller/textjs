@@ -56,6 +56,7 @@ public class SettingsActivity extends PreferenceActivity {
 
 		// update settings with current context
 		Settings.init(getApplicationContext());
+		Settings.analyticsEvent("SettingsActivity Launch");
 		
 		// update started preference based on whether the service is started
 		mServiceStartedPreference = (CheckBoxPreference) findPreference("service_should_start");

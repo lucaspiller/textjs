@@ -47,5 +47,6 @@ public class Introduction2Activity extends Activity {
 		super.onResume();
 		// update settings with current context
 		Settings.init(getApplicationContext());
+		Settings.analyticsEvent("Introduction2Activity Launch");
 	}
 }

@@ -15,6 +15,7 @@ public class Settings {
 	public static final long WAKELOCK_TIMEOUT = 10000;
 	public static final int PORT = 5982;
 
+	private static Analytics analytics = null;
 	private static PowerManager.WakeLock wakeLock = null;
 	private static Context context = null;
 
@@ -25,10 +26,20 @@ public class Settings {
 		if (isWifiConnected() && startOnWifi()) {
 			ServerService.startService();
 		}
+		
+		if (analytics == null) {
+			analytics = new Analytics(applicationContext);
+		}
 	}
 
 	public static Context getContext() {
 		return context;
+	}
+	
+	public static void analyticsEvent(String name) {
+		if (analytics != null) {
+			analytics.event(name);
+		}
 	}
 
 	public static String getAccessCode() {
