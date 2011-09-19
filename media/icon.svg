@@ -22,11 +22,11 @@
      pagecolor="#000000"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0.41960784"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1417458"
-     inkscape:cx="218.79239"
-     inkscape:cy="249.60089"
+     inkscape:zoom="0.5708729"
+     inkscape:cx="189.76874"
+     inkscape:cy="251.22056"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -56,6 +56,23 @@
      transform="translate(0,-540.36218)"
      style="display:inline">
     <rect
+       style="fill:none;stroke:#000000;stroke-width:40;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3788"
+       width="315.65213"
+       height="14.696412"
+       x="98.173965"
+       y="1016.8634"
+       ry="0.70599157" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:20;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3786"
+       width="491.80624"
+       height="435.06036"
+       x="10.09688"
+       y="-1019.4396"
+       ry="20.899584"
+       transform="scale(1,-1)" />
+    <rect
        ry="0.70599157"
        y="1016.8634"
        x="98.173965"
@@ -70,7 +87,7 @@
        height="435.06036"
        width="491.80624"
        id="rect6072"
-       style="fill:#ffffff;fill-opacity:1;stroke:none" />
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1;stroke-width:5.00000029000000001;stroke-miterlimit:4;stroke-dasharray:none" />
     <path
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:5.33619833000000021;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 457.09375,598.78125 c -136.48985,0.72775 -273.05674,-0.40412 -409.5,0.625 -15.120977,2.44288 -24.576597,19.20668 -21.686051,33.71875 0.332133,115.96377 -0.669728,231.96795 0.529801,347.90625 2.773785,15.34702 20.112163,24.00675 34.687499,21.09255 134.680031,-0.3775 269.420601,0.8298 404.062501,-0.6238 14.97361,-3.21679 23.26598,-20.20355 20.43605,-34.5625 -0.3382,-115.70462 0.75928,-231.44045 -0.5923,-347.125 -2.52864,-12.59713 -15.26168,-21.68642 -27.9375,-21.03125 z"
