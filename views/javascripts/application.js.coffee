@@ -30,6 +30,9 @@ Application = {
       )
 
     resizeUi: ->
+      $('#rightBar').width(
+        ($('body').width() - $('#leftColumn').width() - 2) + 'px'
+      )
       $('#rightColumn').width(
         ($('body').width() - $('#leftColumn').width() - 1) + 'px'
       )

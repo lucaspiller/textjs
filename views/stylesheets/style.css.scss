@@ -13,13 +13,13 @@ $mid-background: #fbfbfb;
 $header-background: $hover-background;
 $light-background: #fff;
 $divider: #ebeeee;
-$menubar-height: 20px;
+$section-divider: #b1b1b1;
+$menubar-height: 30px;
 $leftcol-width: 299px;
 
 body {
   font-family: 'Helvetica', Arial, sans-serif;
   font-size: 0.8em;
-  background-color: $mid-background;
   color: $dark-text;
   height: 100%;
   margin: 0;
@@ -32,31 +32,69 @@ body {
   top: 0px;
   width: 100%;
   height: $menubar-height;
-  background-color: $dark-background;
+  border-bottom: 1px solid $section-divider;
+
+  #leftBar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: $leftcol-width;
+    height: 100%;
+    //border-right: 1px solid $section-divider;
+  }
+
+  #rightBar {
+    position: absolute;
+    top: 0px;
+    left: $leftcol-width + 1px;
+    width: 800px - $leftcol-width;
+    height: 100%;
+  }
+
+  background: #ffffff;
+  background: -moz-linear-gradient(top, #ffffff 0%, #eaeaea 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea));
+  background: -webkit-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
+  background: -o-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
+  background: -ms-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 );
+  background: linear-gradient(top, #ffffff 0%,#eaeaea 100%);
 }
 
 #leftColumn {
-  border-right: 2px solid $divider;
   position: absolute;
-  top: $menubar-height;
+  top: $menubar-height + 1px;
   left: 0;
   width: $leftcol-width;
   height: 600px - $menubar-height;
   #threadList {
+    position: absolute;
     width: 100%;
     height: 100%;
     overflow: auto;
-    border-right: 1px solid $divider;
+    border-right: 1px solid $section-divider;
+
     .thread {
       border-bottom: 1px solid $divider;
-      padding: 7px;
+      padding: 9px;
       position: relative;
       cursor: pointer;
       color: $light-text;
+
+background: #fefefe;
+background: -moz-linear-gradient(top, #fefefe 0%, #fbfbfb 99%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(99%,#fbfbfb));
+background: -webkit-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+background: -o-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+background: -ms-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#fbfbfb',GradientType=0 );
+background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+
       header {
         position: relative;
-        margin-bottom: 5px;
+        margin-bottom: 7px;
         .contact {
+          font-size: 1.1em;
           font-weight: bold;
           color: $dark-text;
         }
@@ -68,13 +106,13 @@ body {
       }
     }
     .thread.unread {
-      background-color: $hover-background;
+      background: $hover-background;
     }
     .thread:hover {
-      background-color: $hover-background;
+      background: $hover-background;
     }
     .thread.selected {
-      background-color: $selected-background;
+      background: $selected-background;
       color: #fff;
       header {
         .date {
@@ -101,7 +139,7 @@ body {
 
 #rightColumn {
   position: absolute;
-  top: $menubar-height;
+  top: $menubar-height + 1px;
   left: $leftcol-width + 1;
   width: 800px - $leftcol-width - 1;
   height: 600px - $menubar-height;
