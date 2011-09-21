@@ -3,7 +3,8 @@ class Application.Views.Replyview extends Backbone.View
   attributes: { style: 'display: none' }
 
   events: {
-    'keyup textarea': 'updateCounter'
+    'keydown textarea': 'handleKeyDown'
+    'keyup textarea': 'handleKeyUp'
     'click input[type=button].cancel': 'cancelReply'
     'click input[type=submit]': 'sendReply'
   }
@@ -27,6 +28,22 @@ class Application.Views.Replyview extends Backbone.View
     $(@el).find('textarea').width(
       ($(@el).find('.reply-cont').width() - 22) + 'px'
     )
+
+  handleKeyDown: (evt) ->
+    if evt.keyCode == 27
+      # esc - cancel message
+      evt.preventDefault()
+      @cancelReply()
+    else if evt.keyCode == 13 and (evt.metaKey or evt.ctrlKey)
+      # ctrl/cmd enter - send message
+      evt.preventDefault()
+      @sendReply()
+    else if evt.keyCode == 82 and (evt.metaKey or evt.ctrlKey)
+      # ctrl/cmd r - prevent page reload
+      evt.preventDefault()
+
+  handleKeyUp: (evt) ->
+    @updateCounter()
 
   updateCounter: ->
     length = $(@el).find('textarea')[0].value.length - 1
