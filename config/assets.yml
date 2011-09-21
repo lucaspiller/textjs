@@ -9,6 +9,7 @@ javascripts:
     - public/javascripts/jquery.timers.js
     - public/javascripts/json2.js
     - public/javascripts/patches.js
+    - public/javascripts/keymaster.js
     - public/javascripts/underscore.js
     - public/javascripts/backbone.js
     - public/javascripts/stacktrace.js
