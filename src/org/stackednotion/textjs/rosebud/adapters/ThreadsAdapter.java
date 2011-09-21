@@ -40,9 +40,6 @@ public class ThreadsAdapter {
 		thread.address = cursor.getString(cursor
 				.getColumnIndex(ThreadColumns.ADDRESS));
 
-		thread.sender_key = ContactsAdapter
-				.find_key_from_phone_number(thread.address);
-
 		thread.body = cursor.getString(cursor
 				.getColumnIndex(ThreadColumns.BODY));
 
@@ -56,7 +53,6 @@ public class ThreadsAdapter {
 	public static class Thread {
 		public int id;
 		public String address;
-		public String sender_key;
 		public String body;
 		public long date;
 		public int read;
@@ -67,7 +63,6 @@ public class ThreadsAdapter {
 
 				json.put("id", id);
 				json.put("address", address);
-				json.put("sender_key", sender_key);
 				json.put("body", body);
 				json.put("date", date);
 				json.put("read", read);
