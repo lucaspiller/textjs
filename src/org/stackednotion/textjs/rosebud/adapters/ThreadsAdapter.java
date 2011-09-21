@@ -10,6 +10,9 @@ import android.database.Cursor;
 import android.net.Uri;
 
 public class ThreadsAdapter {
+	// body,person,sub,subject,retr_st,type,date,ct_cls,sub_cs,_id,read,ct_l,tr_id,st,msg_box,thread_id,
+	// reply_path_present,m_cls,read_status,ct_t,status,retr_txt_cs,d_rpt,error_code,m_id,m_type,v,exp,
+	// pri,service_center,address,rr,rpt_a,resp_txt,locked,resp_st,m_size
 	public static final String[] THREADS_PROJECTION = { ThreadColumns.ID,
 			ThreadColumns.ADDRESS, ThreadColumns.DATE, ThreadColumns.BODY,
 			ThreadColumns.READ };
