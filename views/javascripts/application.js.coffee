@@ -24,14 +24,20 @@ Application = {
 
     buildUi: ->
       $('.threadView').html('<div class="loading">No Conversation Selected</div>')
-      @resizeRightColumn()
+      @resizeUi()
       $(window).resize(() =>
-        @resizeRightColumn()
+        @resizeUi()
       )
 
-    resizeRightColumn: ->
+    resizeUi: ->
       $('#rightColumn').width(
-        ($('body').width() - 320) + 'px'
+        ($('body').width() - $('#leftColumn').width() - 1) + 'px'
+      )
+      $('#leftColumn').height(
+        ($('body').height() - $('#menuBar').height()) + 'px'
+      )
+      $('#rightColumn').height(
+        ($('body').height() - $('#menuBar').height()) + 'px'
       )
 
     bindWindowFocus: ->
