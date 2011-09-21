@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.stackednotion.textjs.rosebud.Settings;
 
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.ContactsContract;
 
 public class ContactsAdapter {
@@ -15,12 +16,28 @@ public class ContactsAdapter {
 	// in_visible_group,_id,starred,sort_key,display_name_alt,contact_presence,display_name_source,
 	// contact_status_res_package,contact_chat_capability,contact_status_ts,photo_id,send_to_voicemail
 	public static final String[] CONTACTS_PROJECTION = {
-		ContactsContract.Contacts.LOOKUP_KEY, ContactsContract.Contacts.DISPLAY_NAME,
-	};
-	
-	public static Collection<Contact> all() {
+			ContactsContract.Contacts.LOOKUP_KEY,
+			ContactsContract.Contacts.DISPLAY_NAME };
+
+	public static Contact find_by_address(String address) {
+		Uri contactUri = Uri.withAppendedPath(
+				ContactsContract.PhoneLookup.CONTENT_FILTER_URI, address);
 		Cursor cursor = Settings.getContext().getContentResolver()
-				.query(ContactsContract.Contacts.CONTENT_URI, CONTACTS_PROJECTION,
+				.query(contactUri, CONTACTS_PROJECTION, null, null, null);
+		
+		if (cursor.moveToFirst()) {
+			return createContactFromCursor(cursor);
+		} else {
+			return null;
+		}
+	}
+
+	public static Collection<Contact> all() {
+		Cursor cursor = Settings
+				.getContext()
+				.getContentResolver()
+				.query(ContactsContract.Contacts.CONTENT_URI,
+						CONTACTS_PROJECTION,
 						ContactsContract.Contacts.HAS_PHONE_NUMBER + " = 1",
 						null, null);
 

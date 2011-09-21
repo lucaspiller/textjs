@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.json.JSONObject;
 import org.stackednotion.textjs.rosebud.Settings;
+import org.stackednotion.textjs.rosebud.adapters.ContactsAdapter.Contact;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -43,6 +44,9 @@ public class ThreadsAdapter {
 		thread.address = cursor.getString(cursor
 				.getColumnIndex(ThreadColumns.ADDRESS));
 
+		thread.contact = ContactsAdapter
+				.find_by_address(thread.address);
+
 		thread.body = cursor.getString(cursor
 				.getColumnIndex(ThreadColumns.BODY));
 
@@ -56,9 +60,11 @@ public class ThreadsAdapter {
 	public static class Thread {
 		public int id;
 		public String address;
+		public String sender_key;
 		public String body;
 		public long date;
 		public int read;
+		public Contact contact;
 
 		public JSONObject toJson() {
 			try {
@@ -66,6 +72,10 @@ public class ThreadsAdapter {
 
 				json.put("id", id);
 				json.put("address", address);
+				if (contact != null)
+				{
+					json.put("name", contact.name);
+				}
 				json.put("body", body);
 				json.put("date", date);
 				json.put("read", read);
