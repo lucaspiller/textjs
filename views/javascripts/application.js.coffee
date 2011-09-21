@@ -37,10 +37,10 @@ Application = {
         ($('body').width() - $('#leftColumn').width() - 1) + 'px'
       )
       $('#leftColumn').height(
-        ($('body').height() - $('#menuBar').height()) + 'px'
+        ($('body').height() - $('#menuBar').height() - 1) + 'px'
       )
       $('#rightColumn').height(
-        ($('body').height() - $('#menuBar').height()) + 'px'
+        ($('body').height() - $('#menuBar').height() - 1) + 'px'
       )
 
     bindWindowFocus: ->
