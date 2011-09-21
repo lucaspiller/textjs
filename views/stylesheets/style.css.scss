@@ -81,14 +81,14 @@ body {
       cursor: pointer;
       color: $light-text;
 
-background: #fefefe;
-background: -moz-linear-gradient(top, #fefefe 0%, #fbfbfb 99%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(99%,#fbfbfb));
-background: -webkit-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-background: -o-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-background: -ms-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#fbfbfb',GradientType=0 );
-background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+      background: #fefefe;
+      background: -moz-linear-gradient(top, #fefefe 0%, #fbfbfb 99%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(99%,#fbfbfb));
+      background: -webkit-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+      background: -o-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+      background: -ms-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#fbfbfb',GradientType=0 );
+      background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
 
       header {
         position: relative;
@@ -149,47 +149,41 @@ background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
     top: 0;
     left: 0;
     height: 100%;
-    width: 100%;
     overflow: auto;
-    .replyView {
-      position: absolute;
-      top: 35px;
-      left: 0;
-      width: 100%;
-      z-index: 999;
-      .reply-cont {
-        width: 90%;
-        margin: 0 auto;
-        background-color: $header-background;
-        border: 1px solid $divider;
-        padding: 5px;
-        textarea {
-          height: 200px;
-          padding: 10px;
-          font-family: 'Helvetica', Arial, sans-serif;
-          font-size: 1.8em;
+
+    .cont {
+      padding: 20px 50px 20px 20px;
+      > header {
+        position: relative;
+        padding: 0px 15px;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+        .reply-button {
+          position: absolute;
+          right: 15px;
+          top: 0px;
+          cursor: pointer;
         }
       }
     }
-    .cont > header {
-      background-color: $header-background;
-      font-weight: bold;
-      padding: 10px 15px;
-      font-size: 1.2em;
-      .reply-button {
-        position: absolute;
-        right: 15px;
-        top: 10px;
-        cursor: pointer;
-      }
-    }
+
     .message {
       font-size: 1.2em;
-      border-bottom: 1px solid $divider;
-      padding: 10px 20px;
+      padding: 10px 15px;
+      margin-bottom: 15px;
       position: relative;
       line-height: 130%;
+
+      border: 1px solid $divider;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      -webkit-box-shadow: 1px 1px 1px 0px #ddd;
+      -moz-box-shadow: 1px 1px 1px 0px #ddd;
+      box-shadow: 1px 1px 1px 0px #ddd;
+
       header {
+        font-size: 0.9em;
         position: relative;
         margin-bottom: 5px;
         .contact {
@@ -215,7 +209,14 @@ background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
       }
     }
     .message.you {
-      background-color: $mid-background;
+      background: #fefefe;
+      background: -moz-linear-gradient(top, #fefefe 0%, #fbfbfb 99%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(99%,#fbfbfb));
+      background: -webkit-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+      background: -o-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+      background: -ms-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#fbfbfb',GradientType=0 );
+      background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
     }
     .message:hover {
       .date {
@@ -223,6 +224,23 @@ background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
       }
       .menu {
         display: inline;
+      }
+    }
+
+    .replyView {
+      background-color: $mid-background;
+      padding: 20px 50px 10px 20px;
+      border-bottom: 1px solid $section-divider;
+      textarea {
+        height: 60px;
+        padding: 10px;
+        font-family: 'Helvetica', Arial, sans-serif;
+        font-size: 1.4em;
+        border: 1px solid $divider;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin-bottom: 5px;
       }
     }
   }
