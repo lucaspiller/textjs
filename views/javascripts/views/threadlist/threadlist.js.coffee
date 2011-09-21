@@ -9,12 +9,13 @@ class Application.Views.Threadlist extends Backbone.View
   el: '#threadList'
 
   events: {
-    "click .thread": "showThread"
+    "click .thread": "showThreadEvent"
   }
 
   initialize: ->
     @bindCollectionResetEvent()
     @bindApplicationFocusEvent()
+    @setupShortcuts()
     @updateCollection()
     @render()
 
@@ -25,6 +26,12 @@ class Application.Views.Threadlist extends Backbone.View
   bindApplicationFocusEvent: ->
     Application.onFocus (evt) =>
       @updateCollection()
+
+  setupShortcuts: ->
+    key '⌘+j, ctrl+j', =>
+      @showNextThread()
+    key '⌘+k, ctrl+k', =>
+      @showPreviousThread()
 
   runPeriodicUpdate: ->
     $(@el).stopTime()
@@ -56,9 +63,29 @@ class Application.Views.Threadlist extends Backbone.View
     else
       $(@el).html JST['threadlist/threadlist_loading']({})
 
-  showThread: (evt) ->
+  showNextThread: ->
+    nextThreadId = if @currentThreadId != -1
+       $('.thread[data-id=' + @currentThreadId + ']').next('.thread').attr('data-id')
+    else
+      $('.thread').first().attr('data-id')
+    if nextThreadId
+      @showThread nextThreadId
+
+  showPreviousThread: ->
+    prevThreadId = if @currentThreadId != -1
+       $('.thread[data-id=' + @currentThreadId + ']').prev('.thread').attr('data-id')
+    else
+      $('.thread').first().attr('data-id')
+    if prevThreadId
+      @showThread prevThreadId
+
+  showThread: (id) ->
     $('.thread').removeClass('selected')
-    $(evt.currentTarget).addClass('selected')
-    @currentThreadId = $(evt.currentTarget).attr('data-id')
+    $('.thread[data-id=' + id + ']').addClass('selected')
+    @currentThreadId = id
     thread = @collection.get(@currentThreadId)
     new Application.Views.Threadview({ model: thread, collection: thread.messages })
+
+  showThreadEvent: (evt) ->
+    $(evt.currentTarget).addClass('selected')
+    @showThread $(evt.currentTarget).attr('data-id')
