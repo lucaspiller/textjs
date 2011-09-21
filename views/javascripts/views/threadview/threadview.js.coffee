@@ -14,6 +14,7 @@ class Application.Views.Threadview extends Backbone.View
     @attachToParent()
     @bindCollectionResetEvent()
     @bindApplicationFocusEvent()
+    @setupShortcuts()
     @updateCollection()
     @render()
 
@@ -31,6 +32,11 @@ class Application.Views.Threadview extends Backbone.View
   bindApplicationFocusEvent: ->
     Application.onFocus (evt) =>
       @updateCollection()
+
+  setupShortcuts: ->
+    key '⌘+r, ctrl+r', =>
+      @showReply()
+      off
 
   runPeriodicUpdate: ->
     $(@el).stopTime()
