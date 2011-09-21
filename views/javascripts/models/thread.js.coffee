@@ -39,8 +39,8 @@ class Application.Models.Thread extends Backbone.Model
     @set({'contact': Application.Contacts.get(contactId)})
 
   contactName: ->
-    if @get('contact')
-      @get('contact').get('name')
+    if @get('name')
+      @get('name')
     else
       @get('address')
 
