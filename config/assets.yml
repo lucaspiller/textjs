@@ -5,10 +5,8 @@ compress_assets: off
 javascripts:
   libs:
     - public/javascripts/jquery-1.6.2.js
-    - public/javascripts/jquery.layout-1.3.0.js
     - public/javascripts/jquery.timers.js
     - public/javascripts/jquery.autocomplete.js
-    - public/javascripts/json2.js
     - public/javascripts/patches.js
     - public/javascripts/keymaster.js
     - public/javascripts/underscore.js
