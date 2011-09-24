@@ -19,9 +19,18 @@ class Application.Views.Composeview extends Backbone.View
 
   render: ->
     $(@el).html JST['composeview/composeview']({})
-    $(@el).slideDown => 
-      #     $(@el).find('input[type=text]').width( $(@el).find('textarea').width() + 'px')
+    $(@el).find('input[type=text]').autocomplete @contactAutocomplete(), {
+      matchContains: true,
+      autoFill: true,
+      multiple: true,
+      multipleSeparator: "; "
+    }
+    $(@el).slideDown =>
       $(@el).find('input[type=text]')[0].focus()
+
+  contactAutocomplete: ->
+    @collection.map (contact) ->
+      contact.autocompleteText()
 
   handleKeyDown: (evt) ->
     if evt.keyCode == 27
@@ -59,10 +68,24 @@ class Application.Views.Composeview extends Backbone.View
   cancelCompose: ->
     $(@el).slideUp 'fast', => @remove()
 
+  extractRecipients: ->
+    regex = /\<(.*)\>/
+    recipients = []
+    _.each $(@el).find('input[type=text]').val().split(';'), (text) =>
+      text = text.trim()
+      if text
+        match = regex.exec(text)
+        if match
+          recipients.push match[1]
+        else
+          recipients.push text
+    recipients
+
   sendCompose: ->
     body = $(@el).find('textarea')[0].value
-    model = new @collection.model({'body': body})
-    @collection.add(model)
-    @collection.trigger('reset')
-    model.save()
+    _.each @extractRecipients(), (recipient) =>
+      new Application.Models.Message({
+        'body': body,
+        'address': recipient
+      }).save()
     $(@el).slideUp 'fast', => @remove()

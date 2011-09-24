@@ -5,6 +5,9 @@ class Application.Models.Contact extends Backbone.Model
       attributes.key = undefined
     super attributes
 
+  autocompleteText: ->
+    @get('name') + " <" + @get('address') + ">"
+
 class Application.Collections.Contacts extends Backbone.Collection
   model: Application.Models.Contact
   url: ->

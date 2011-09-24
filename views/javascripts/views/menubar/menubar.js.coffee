@@ -59,4 +59,4 @@ class Application.Views.Menubar extends Backbone.View
     )
 
   showCompose: ->
-    new Application.Views.Composeview({ parent: $('body') })
+    new Application.Views.Composeview({ collection: @collection, parent: $('body') })
