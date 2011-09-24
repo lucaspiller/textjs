@@ -34,8 +34,7 @@ public class StaticResource extends SecuredResource {
 				representation.setMediaType(MediaType.TEXT_HTML);
 			} catch (IOException e) {
 				Log.e(Settings.LOG_TAG,
-						"IoException reading index.html: " + e.getMessage()
-								+ "\n" + e.getStackTrace());
+						"IoException reading index.html", e);
 				setStatus(Status.SERVER_ERROR_INTERNAL);
 			}
 		} else if (getOriginalRef().getLastSegment().equals("favicon.ico")) {
@@ -44,8 +43,7 @@ public class StaticResource extends SecuredResource {
 				representation.setMediaType(MediaType.IMAGE_ICON);
 			} catch (IOException e) {
 				Log.e(Settings.LOG_TAG,
-						"IoException reading favicon.ico: " + e.getMessage()
-								+ "\n" + e.getStackTrace());
+						"IoException reading favicon.ico", e);
 				setStatus(Status.SERVER_ERROR_INTERNAL);
 			}
 		} else if (getOriginalRef().getLastSegment().equals("version")) {

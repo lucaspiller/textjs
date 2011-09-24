@@ -109,8 +109,7 @@ public class Analytics {
 			httppost.setEntity(new UrlEncodedFormEntity(params));
 			new AnalyticsClientTask().execute(httppost);
 		} catch (Exception e) {
-			Log.e("Analytics", "Caught error building request: "
-					+ e.getClass().getName() + " : " + e.getMessage());
+			Log.e(Settings.LOG_TAG, "Analytics caught error building request", e);
 		}
 	}
 	
@@ -171,10 +170,9 @@ public class Analytics {
 		        ClientConnectionManager clientConnectionManager = new ThreadSafeClientConnManager(params, schemeRegistry);
 		        HttpClient httpclient = new DefaultHttpClient(clientConnectionManager, params);
 				httpclient.execute(request[0]);
-				Log.d("Analytics", "Submitted to server");
+				Log.d(Settings.LOG_TAG, "Analytics submitted to server");
 			} catch (Exception e) {
-				Log.e("Analytics", "Caught error sending request: "
-						+ e.getClass().getName() + " : " + e.getMessage());
+				Log.e(Settings.LOG_TAG, "Analytics caught error sending request", e);
 			}
 			return null;
 		}

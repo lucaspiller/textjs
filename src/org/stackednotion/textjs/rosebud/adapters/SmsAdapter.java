@@ -147,9 +147,7 @@ public class SmsAdapter {
 			manager.sendMultipartTextMessage(destination, null, smss,
 					sentIntents, null);
 		} catch (Exception e) {
-			Log.e(Settings.LOG_TAG,
-					"Error sending sms: " + uri.toString() + " Exception: "
-							+ e.getClass().getName() + ":" + e.getMessage());
+			Log.e(Settings.LOG_TAG, "Error sending sms: " + uri.toString(), e);
 		}
 	}
 

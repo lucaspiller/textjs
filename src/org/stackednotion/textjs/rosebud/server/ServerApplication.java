@@ -1,8 +1,5 @@
 package org.stackednotion.textjs.rosebud.server;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.restlet.Application;
 import org.restlet.Component;
 import org.restlet.Restlet;
@@ -52,10 +49,7 @@ public class ServerApplication extends Application {
 			component.getDefaultHost().attach(new ServerApplication());
 			component.start();
 		} catch (Exception e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-
-			Log.e(Settings.LOG_TAG, "Exception starting server: " + sw.toString());
+			Log.e(Settings.LOG_TAG, "Exception starting server", e);
 		}
 	}
 
@@ -63,7 +57,7 @@ public class ServerApplication extends Application {
 		try {
 			component.stop();
 		} catch (Exception e) {
-			Log.e(Settings.LOG_TAG, "Exception stopping server: " + e.toString());
+			Log.e(Settings.LOG_TAG, "Exception stopping server", e);
 		}
 	}
 }
