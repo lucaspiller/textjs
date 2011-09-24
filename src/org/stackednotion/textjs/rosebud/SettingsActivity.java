@@ -26,6 +26,12 @@ public class SettingsActivity extends PreferenceActivity {
 		// update settings with current context
 		Settings.init(getApplicationContext());
 		
+		// show we show the introduction
+		if (Settings.skipIntroduction() == false) {
+			Intent intent = new Intent(this, Introduction1Activity.class);
+			startActivity(intent);
+		}
+		
 		// create preference listener
 		preferenceListener = new OnSharedPreferenceChangeListener() {
 			public void onSharedPreferenceChanged(
@@ -93,4 +99,12 @@ public class SettingsActivity extends PreferenceActivity {
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
+
+	@Override
+	public void onBackPressed() {
+		Intent setIntent = new Intent(Intent.ACTION_MAIN);
+		setIntent.addCategory(Intent.CATEGORY_HOME);
+		setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(setIntent);
+	}
 }
