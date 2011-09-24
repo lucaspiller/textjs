@@ -14,7 +14,7 @@ $header-background: $hover-background;
 $light-background: #fff;
 $divider: #ebeeee;
 $section-divider: #b1b1b1;
-$menubar-height: 40px;
+$menubar-height: 20px;
 $leftcol-width: 299px;
 
 body {
@@ -40,7 +40,13 @@ body {
     left: 0px;
     width: $leftcol-width;
     height: 100%;
-    //border-right: 1px solid $section-divider;
+
+    .compose-button {
+      position: relative;
+      cursor: pointer;
+      top: 2px;
+      left: 5px;
+    }
   }
 
   #rightBar {
@@ -49,6 +55,13 @@ body {
     left: $leftcol-width + 1px;
     width: 800px - $leftcol-width;
     height: 100%;
+    text-align: right;
+
+    .version {
+      position: relative;
+      right: 5px;
+      top: 2px;
+    }
   }
 
   background: #ffffff;
