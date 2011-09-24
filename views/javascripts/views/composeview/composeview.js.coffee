@@ -15,6 +15,7 @@ class Application.Views.Composeview extends Backbone.View
     @startCounterTimer()
 
   attachToParent: (parent) ->
+    $(parent).find('#composeView').remove()
     $(parent).prepend(@el)
 
   render: ->

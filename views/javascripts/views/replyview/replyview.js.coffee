@@ -18,6 +18,7 @@ class Application.Views.Replyview extends Backbone.View
     @startCounterTimer()
 
   attachToParent: (parent) ->
+    $(parent).find('.replyView').remove()
     $(parent).prepend(@el)
 
   render: ->
