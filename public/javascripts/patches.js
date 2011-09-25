@@ -1,3 +1,14 @@
+// support console.log on other browsers
+if (typeof console == "undefined" || typeof console.log == "undefined") var console = { log: function() {} };
+
+// String#trim doesn't work in IE
+if(typeof String.prototype.trim !== 'function') {
+  String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g, '');
+  }
+}
+
+// add Xaccesscode and pagination to jQuery Ajax
 (function( $ ){
   var __ajax = $.ajax;
   $.ajax = function(options) {

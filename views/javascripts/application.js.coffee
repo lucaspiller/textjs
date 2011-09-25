@@ -1,6 +1,3 @@
-window.onerror = (msg, file, line) ->
-  alert('Uh-oh! Something went wrong... please send this to the developers!\n\n' + msg + ' ' + file + ':' + line + '\n\n' + printStackTrace().join('\n\n'));
-
 Application = {
     Views: {},
     Controllers: {},
