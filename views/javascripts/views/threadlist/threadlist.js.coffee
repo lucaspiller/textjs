@@ -30,13 +30,15 @@ class Application.Views.Threadlist extends Backbone.View
   setupShortcuts: ->
     key '⌘+r, ctrl+r', (evt) =>
       # ctrl / cmd r - prevent page reload
-      evt.preventDefault()
+      false
     key '⌘+j, ctrl+j', =>
       # ctrl / cmd j - next thread
       @showNextThread()
+      false
     key '⌘+k, ctrl+k', =>
       # ctrl / cmd k - prev thread
       @showPreviousThread()
+      false
 
   runPeriodicUpdate: ->
     $(@el).stopTime()

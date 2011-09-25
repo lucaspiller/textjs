@@ -36,7 +36,7 @@ class Application.Views.Threadview extends Backbone.View
   setupShortcuts: ->
     key '⌘+r, ctrl+r', =>
       @showReply()
-      off
+      false
 
   runPeriodicUpdate: ->
     $(@el).stopTime()

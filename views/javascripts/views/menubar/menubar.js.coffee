@@ -29,8 +29,8 @@ class Application.Views.Menubar extends Backbone.View
   setupShortcuts: ->
     key '⌘+n, ctrl+n', (evt) =>
       # ctrl / cmd n - compose message
-      evt.preventDefault()
       @showCompose()
+      false
 
   runPeriodicUpdate: ->
     $(@el).stopTime()
