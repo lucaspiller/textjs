@@ -20,6 +20,8 @@ javascripts:
     - build/javascripts/controllers/*.js
     - views/javascripts/views/**/*.jst
     - build/javascripts/sb.js
+  ie:
+    - public/javascripts/ie_html5.js
 
 stylesheets:
   all:

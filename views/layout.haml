@@ -7,6 +7,9 @@
     %title TextJs
     = javascript_include_tag '/assets/libs.js'
     = javascript_include_tag '/assets/application.js'
+    <!--[if lte IE 8]>
+    = javascript_include_tag '/assets/ie.js'
+    <![endif]-->
     = include_stylesheets :all
     = yield_content :head
     :javascript
