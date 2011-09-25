@@ -88,3 +88,8 @@ task :varnish do
   system("killall varnishd || true")
   system("/usr/local/Cellar/varnish/3.0.0/sbin/varnishd -a :8081 -f varnish.vcl -s malloc")
 end
+
+desc "Run demo"
+task :demo do
+  system("ruby demo.rb -p 5982")
+end
