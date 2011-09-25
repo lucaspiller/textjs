@@ -17,7 +17,7 @@ if(typeof String.prototype.trim !== 'function') {
     // set accesscode if defined
     if (Application != undefined) {
       options.beforeSend = function(xhr) {
-        xhr.setRequestHeader('Xaccesscode', Application.AccessToken);
+        xhr.setRequestHeader('xaccesscode', Application.AccessToken);
       };
     }
 
