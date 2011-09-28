@@ -10,7 +10,15 @@ public abstract class SecuredResource extends ServerResource {
 	protected void verifyAccessToken() throws ResourceException {
 		Settings.wakeUpDevice();
 		Form requestHeaders = (Form) getRequest().getAttributes().get("org.restlet.http.headers");
-		String suppliedAccessCode = requestHeaders.getFirstValue("xaccesscode");
+		
+		String suppliedAccessCode;
+		
+		// header should be lowercase, but some proxies / browsers may uppercase the X
+		suppliedAccessCode = requestHeaders.getFirstValue("xaccesscode");
+		if (suppliedAccessCode == null) {
+			suppliedAccessCode = requestHeaders.getFirstValue("Xaccesscode");
+		}
+		
 		if (!Settings.getAccessCode().equals(suppliedAccessCode)) {
 			throw new ResourceException(Status.CLIENT_ERROR_UNAUTHORIZED);
 		}
