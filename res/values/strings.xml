@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">TextJs</string>
-	<string name="support_email">support@textjs.com</string>
+	<string name="support_email">textjs@stackednotion.com</string>
 	
 	<string name="notification_title">TextJs</string>
 	<string name="notification_text_pre"></string>
@@ -33,6 +33,6 @@
 	<string name="introduction2_instructions2">The address you need to type into your browser is displayed as a notification on your phone.</string>
 	<string name="introduction2_instructions3">If you have a tablet, try typing the address into it\'s browser!</string>
 	
-	<string name="about_copyright">Copyright © 2011 Luca Spiller.\nAll rights reserved.</string>
+	<string name="about_copyright">Copyright © 2011 - 2014 Luca Spiller.\nAll rights reserved.</string>
 	<string name="about_famfam">This project uses the Silk icon\nset by Mark James:\nhttp://www.famfamfam.com/lab/icons/silk/</string>
 </resources>
