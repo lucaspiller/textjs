@@ -1,35 +1,24 @@
-Installation
-============
+# Setup
 
-Create and use gemset (you are using RVM right?):
+For build tool and proxy:
 
-    rvm gemset create smsjs
-    rvm gemset use smsjs
+    npm install -g gulp
+    npm install
 
-Install the gems:
+For dev server:
 
-    bundle
+    bundle install
 
-Install CoffeeScript:
+# Development
 
-    brew install node
-    npm install -g coffee-script
+Start the dev server:
 
-Developing
-==========
+    make server
 
-Start Sinatra server to dynamically render pages
+Build the app:
 
-    rake server
+    make build
 
-Start Watchr to compile CoffeeScript and Asset bundles on code change
+Start the proxy server (update device IP in tools/proxy.js):
 
-    rake watchr
-
-Generate production app to build/
-
-    rake generate
-
-Create a release tarball to dist/
-
-    rake tarball
+    make proxy

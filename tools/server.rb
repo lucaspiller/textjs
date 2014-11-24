@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'json'
 
+set :public_folder, File.join(File.dirname(__FILE__), '../build')
+
 get '/threads' do
   [
     {
@@ -75,7 +77,31 @@ get '/contacts' do
   ].to_json
 end
 
-get '/threads/3' do
+get '/threads/1' do
+  [
+    {
+      :id => 1,
+      :body => "Hey, how was your weekend, did you get away in the end?",
+      :date => 1316361559753,
+      :type => 1,
+      :read => 0
+    },
+  ].to_json
+end
+
+get '/threads/2' do
+  [
+    {
+      :id => 1,
+      :body => "Sounds like a plan :)",
+      :date => 1316346452685,
+      :type => 0,
+      :read => 0
+    },
+  ].to_json
+end
+
+get '/threads/*' do
   [
     {
       :id => 1,
@@ -106,4 +132,8 @@ get '/threads/3' do
       :read => 1
     }
   ].to_json
+end
+
+get '/' do
+  redirect 'index.html'
 end
