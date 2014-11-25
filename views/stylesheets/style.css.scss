@@ -179,8 +179,7 @@ input[type=submit].btn, input[type=button].btn {
 }
 
 .loading {
-  width: 300px;
-  padding-top: 300px;
+  padding-top: 150px;
   font-size: 1.8em;
   color: $light-text;
   margin: 0 auto;
@@ -189,6 +188,10 @@ input[type=submit].btn, input[type=button].btn {
   img {
     display: block;
     margin: 10px auto;
+  }
+
+  p {
+    margin-bottom: 20px;
   }
 }
 

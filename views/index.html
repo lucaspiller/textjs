@@ -15,8 +15,22 @@
     <div id="rightColumn">
       <div class="threadView">
         <div class="loading">
-          <p>
-            TextJs requires Javascript to be enabled in your browser.
+          <noscript>
+            <p>
+              TextJs requires Javascript to be enabled in your browser.
+            </p>
+            <p>
+              Please visit <a href="http://www.enable-javascript.com/">http://www.enable-javascript.com/</a> for instructions.
+            </p>
+          </noscript>
+
+          <p style="display: none" id="loading-js-enabled">
+            <p>
+              Loading...
+            </p>
+            <p>
+              If this message doesn't go away, please update your browser. Visit <a href="http://browsehappy.com/">http://browsehappy.com/</a> for instructions.
+            </p>
           </p>
         </div>
       </div>
@@ -25,6 +39,7 @@
     <script type="text/javascript" src="application.js"></script>
     <script>
       $(function() {
+        $('#loading-js-enabled').show();
         Application.init({});
       });
     </script>
