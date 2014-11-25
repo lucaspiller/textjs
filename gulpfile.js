@@ -4,6 +4,8 @@ var concat    = require('gulp-concat');
 var jstConcat = require('gulp-jst-concat');
 var sass      = require('gulp-sass');
 var run       = require('gulp-run');
+var uglify    = require('gulp-uglify');
+var minifyCSS = require('gulp-minify-css');
 
 gulp.task('coffee', function() {
   return gulp.src('./views/**/*.coffee')
@@ -65,3 +67,17 @@ gulp.task('combine', function() {
 });
 
 gulp.task('default', ['combine']);
+
+gulp.task('dist', function() {
+  gulp.src([
+    'build/*.js',
+    ])
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist'))
+
+  gulp.src([
+    'build/*.css',
+    ])
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('./dist'))
+});

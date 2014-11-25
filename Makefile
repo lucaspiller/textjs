@@ -1,4 +1,4 @@
-.PHONY: build clean server
+.PHONY: build clean server dist
 
 build:
 	gulp
@@ -12,3 +12,6 @@ server:
 
 proxy:
 	node tools/proxy.js
+
+dist:
+	gulp dist
