@@ -1,6 +1,9 @@
 <header>
-  Conversation with <%= thread.contactName() %>
-  <img src="<%= SB['message_reply.png'] %>" class="reply-button" alt="Reply" title="Reply" />
+  <strong>Conversation with <%= thread.contactName() %></strong>
+  <a href="#" class="reply-button btn btn-primary">
+    <img src="<%= SB['message_reply.png'] %>" alt="Reply" title="Reply" />
+    Reply
+  </a>
 </header>
 </div>
 <% messages.each(function(message) { %>

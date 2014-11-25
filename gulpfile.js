@@ -35,7 +35,9 @@ gulp.task('html', function() {
     .pipe(gulp.dest('./build'))
 });
 
-gulp.task('combine', ['coffee', 'jst', 'images', 'sass', 'html'], function() {
+gulp.task('combine', function() {
+  gulp.start(['coffee', 'jst', 'images', 'sass', 'html']);
+
   gulp.src([
     'public/javascripts/jquery-1.6.2.js',
     'public/javascripts/jquery.timers.js',

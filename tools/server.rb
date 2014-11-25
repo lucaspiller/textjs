@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 
 set :public_folder, File.join(File.dirname(__FILE__), '../build')
+set :bind, '0.0.0.0'
 
 get '/threads' do
   [

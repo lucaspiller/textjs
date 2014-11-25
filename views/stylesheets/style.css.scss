@@ -14,16 +14,65 @@ $header-background: $hover-background;
 $light-background: #fff;
 $divider: #ebeeee;
 $section-divider: #b1b1b1;
-$menubar-height: 20px;
+$menubar-height: 45px;
 $leftcol-width: 299px;
 
+$brand-primary: rgb(102, 105, 255);
+$brand-default: rgb(133, 135, 135);
+
 body {
-  font-family: 'Helvetica', Arial, sans-serif;
-  font-size: 0.8em;
-  color: $dark-text;
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body, input {
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-size: 14px;
+  color: $dark-text;
+}
+
+input[type=submit].btn, input[type=button].btn {
+  border: none;
+}
+
+.btn {
+  padding: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  line-height: 32px;
+  height: 32px;
+  display: inline-block;
+  text-align: center;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+  min-width: 88px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.btn:hover {
+  -webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  -moz-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  -o-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.btn.btn-primary {
+  background-color: lighten($brand-primary, 10);
+}
+
+.btn.btn-primary:hover {
+  background-color: $brand-primary;
+}
+
+.btn.btn-default {
+  background-color: lighten($brand-default, 10);
+}
+
+.btn.btn-default:hover {
+  background-color: $brand-default;
 }
 
 #menuBar {
@@ -41,11 +90,16 @@ body {
     width: $leftcol-width;
     height: 100%;
 
-    .compose-button {
-      position: relative;
-      cursor: pointer;
-      top: 2px;
-      left: 5px;
+    a.compose-button {
+      margin: 6px 10px;
+
+      img {
+        position: relative;
+        cursor: pointer;
+        top: 4px;
+        left: 5px;
+        margin-right: 5px;
+      }
     }
   }
 
@@ -59,19 +113,13 @@ body {
 
     .version {
       position: relative;
-      right: 5px;
-      top: 4px;
+      right: 10px;
+      top: 14px;
+      font-size: 16px;
     }
   }
 
-  background: #ffffff;
-  background: -moz-linear-gradient(top, #ffffff 0%, #eaeaea 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea));
-  background: -webkit-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
-  background: -o-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
-  background: -ms-linear-gradient(top, #ffffff 0%,#eaeaea 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 );
-  background: linear-gradient(top, #ffffff 0%,#eaeaea 100%);
+  background-color: #eaeaea;
 }
 
 #leftColumn {
@@ -95,13 +143,6 @@ body {
       color: $light-text;
 
       background: #fefefe;
-      background: -moz-linear-gradient(top, #fefefe 0%, #fbfbfb 99%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(99%,#fbfbfb));
-      background: -webkit-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-      background: -o-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-      background: -ms-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#fbfbfb',GradientType=0 );
-      background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
 
       // rules are on here not header due to IE weirdness...
       .contact {
@@ -172,12 +213,23 @@ body {
         position: relative;
         padding: 0px 15px;
         margin-bottom: 20px;
-        font-size: 1.2em;
-        .reply-button {
-          position: absolute;
-          right: 15px;
-          top: 0px;
-          cursor: pointer;
+
+        strong {
+          font-size: 1.2em;
+        }
+
+        a.reply-button {
+          float: right;
+          margin-top: -8px;
+          margin-right: -10px;
+
+          img {
+            position: relative;
+            cursor: pointer;
+            top: 4px;
+            left: 5px;
+            margin-right: 5px;
+          }
         }
       }
     }
@@ -190,15 +242,22 @@ body {
       line-height: 130%;
 
       border: 1px solid $divider;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px;
+      border-radius: 2px;
       -webkit-box-shadow: 1px 1px 1px 0px #ddd;
       -moz-box-shadow: 1px 1px 1px 0px #ddd;
       box-shadow: 1px 1px 1px 0px #ddd;
 
       background: #fff;
       filter: progid:DXImageTransform.Microsoft.Shadow(color='#d0d0d0', Direction=135, Strength=3);
+
+      &.other {
+        margin-right: 50px;
+      }
+
+      &.you {
+        margin-left: 50px;
+      }
+
 
       header {
         font-size: 0.9em;
@@ -228,13 +287,6 @@ body {
     }
     .message.you {
       background: #fefefe;
-      background: -moz-linear-gradient(top, #fefefe 0%, #fbfbfb 99%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(99%,#fbfbfb));
-      background: -webkit-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-      background: -o-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-      background: -ms-linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#fbfbfb',GradientType=0 ), progid:DXImageTransform.Microsoft.Shadow(color='#d0d0d0', Direction=135, Strength=3);
-      background: linear-gradient(top, #fefefe 0%,#fbfbfb 99%);
     }
     .message:hover {
       .date {
