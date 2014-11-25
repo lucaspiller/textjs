@@ -1,47 +1,47 @@
-<!DOCTYPE html> 
-<html lang='en'> 
-  <head> 
-    <meta charset='utf-8' /> 
-    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' /> 
-    <link href='/favicon.ico' rel='shortcut icon' type='image/x-icon' /> 
-    <title>TextJs</title> 
-    <link rel="stylesheet" href="http://d1flqt463t8x1y.cloudfront.net/1.1.1-all.css" />
-    <script src="http://d1flqt463t8x1y.cloudfront.net/1.1.1-libs.js" type="text/javascript"></script>
-    <script src="http://d1flqt463t8x1y.cloudfront.net/1.1.1-application.js" type="text/javascript"></script>
-    <!--[if lte IE 8]>
-      <script src="http://d1flqt463t8x1y.cloudfront.net/1.1.1-ie.js" type="text/javascript"></script>
-    <![endif]-->
-  </head> 
-  <body class='index'> 
-    <div id='menuBar'>
-      <div id='leftBar'></div>
-      <div id='rightBar'></div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <title>TextJs</title>
+    <link rel="stylesheet" href="https://s3.amazonaws.com/assets.textjs.com/1.3.0-style.css" />
+  </head>
+  <body>
+    <div id="menuBar"></div>
+    <div id="leftColumn">
+      <div id="threadList"></div>
+      <div id="contactsList"></div>
     </div>
-    <div id='leftColumn'>
-      <div id='threadList'></div>
-      <div id='contactsList'></div>
-    </div>
-    <div id='rightColumn'>
-      <div class='threadView'>
-        <div class='loading'>
+    <div id="rightColumn">
+      <div class="threadView">
+        <div class="loading">
           <noscript>
-            TextJs requires JavaScript to be enabled in your browser. Please visit http://enable-javascript.com/ for instructions.  
+            <p>
+              TextJs requires Javascript to be enabled in your browser.
+            </p>
+            <p>
+              Please visit <a href="http://www.enable-javascript.com/">http://www.enable-javascript.com/</a> for instructions.
+            </p>
           </noscript>
-          <p id="helper"></p>
-          <script type="text/javascript">
-          	document.getElementById("helper").innerHTML = "Uh-oh! We couldn't connect to the TextJs server on your phone. Check that it is still running, and if you continue to experience problems please email <a href=\"mailto:textjs@stackednotion.com\">textjs@stackednotion.com</a>.";
-          </script>
+
+          <p style="display: none" id="loading-js-enabled">
+            <p>
+              Loading...
+            </p>
+            <p>
+              If this message doesn"t go away, please update your browser. Visit <a href="http://browsehappy.com/">http://browsehappy.com/</a> for instructions.
+            </p>
+          </p>
         </div>
       </div>
     </div>
-  </body> 
-  <script type='text/javascript'> 
-    //<![CDATA[
-      var config = {
-      };
+    <script src="https://s3.amazonaws.com/assets.textjs.com/1.3.0-libs.js" type="text/javascript"></script>
+    <script src="https://s3.amazonaws.com/assets.textjs.com/1.3.0-application.js" type="text/javascript"></script>
+    <script>
       $(function() {
-        Application.init(config);
+        $("#loading-js-enabled").show();
+        Application.init({});
       });
-    //]]>
-  </script>
-</html> 
+    </script>
+  </body>
+</html>
