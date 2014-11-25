@@ -24,7 +24,10 @@ public class AboutActivity extends Activity {
 			versionView.setText(version);
 		} catch (NameNotFoundException e) {
 		}
-
+		
+		TextView addressView = (TextView) findViewById(R.id.address);
+		String address = Settings.getAddress();
+		addressView.setText(address);
 	}
 
 	@Override

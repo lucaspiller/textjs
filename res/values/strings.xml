@@ -34,5 +34,6 @@
 	<string name="introduction2_instructions3">If you have a tablet, try typing the address into it\'s browser!</string>
 	
 	<string name="about_copyright">Copyright © 2011 - 2014 Luca Spiller.\nAll rights reserved.</string>
+	<string name="about_address">To use TextJs, open this address in your PC\'s browser:</string>
 	<string name="about_famfam">This project uses the Silk icon\nset by Mark James:\nhttp://www.famfamfam.com/lab/icons/silk/</string>
 </resources>
