@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<CheckBoxPreference android:key="service_should_start"
+		android:title="@string/settings_service_started" android:summaryOff="@string/settings_service_started_substring_inactive"
+		android:summaryOn="@string/settings_service_started_substring_active" />
+	<PreferenceCategory android:title="@string/settings_service_settings_category">
+		<CheckBoxPreference android:key="start_on_wifi"
+			android:title="@string/settings_start_on_wifi" android:summary="@string/settings_start_on_wifi_substring"
+			android:defaultValue="true" />
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/settings_about_category">
+		<Preference android:persistent="false" android:key="introduction"
+			android:title="@string/settings_show_introduction" />
+		<Preference android:persistent="false" android:key="about"
+			android:title="@string/settings_about_textjs" />
+	</PreferenceCategory>
+</PreferenceScreen>
