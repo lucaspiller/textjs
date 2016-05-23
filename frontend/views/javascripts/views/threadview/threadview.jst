@@ -1,0 +1,47 @@
+<header>
+  <strong>Conversation with <%= thread.contactName() %></strong>
+  <a href="#" class="reply-button btn btn-primary">
+    <img src="<%= SB['message_reply.png'] %>" alt="Reply" title="Reply" />
+    Reply
+  </a>
+</header>
+</div>
+<% messages.each(function(message) { %>
+  <% if (message.inbox()) { %>
+    <div class="message other" data-id="<%= message.id %>">
+  <% } else { %>
+    <div class="message you" data-id="<%= message.id %>">
+  <% } %>
+    <header>
+      <span class="contact">
+        <% if (message.inbox()) { %>
+          <%= thread.contactName() %>
+        <% } else { %>
+          You
+        <% } %>
+      </span>
+      <span class="date">
+        <% if (message.sending()) { %>
+          <img src="<%= SB['message_sending.png'] %>" alt="Sending"/>
+        <% } else if (message.failed()) { %>
+          <img src="<%= SB['message_failed.png'] %>" alt="Failed"/>
+        <% } else { %>
+          <%= message.date() %>
+        <% } %>
+      </span>
+      <span class="menu">
+        <% if (message.failed()) { %>
+          <a href="#" class="message-resend-button" title="Resend">
+            <img src="<%= SB['message_retry.png'] %>" alt="Resend"/>
+          </a>
+        <% } %>
+        <a href="#" class="message-delete-button" title="Delete">
+          <img src="<%= SB['message_delete.png'] %>" alt="Failed"/>
+        </a>
+      </span>
+    </header>
+    <p>
+      <%= message.body() %>
+    </p>
+  </div>
+<% }); %>

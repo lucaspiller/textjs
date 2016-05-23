@@ -1,0 +1,15 @@
+<% threads.each(function(thread) { %>
+  <div class="thread <%= thread.unreadMessages() ? "unread" : "" %> <%= (thread.id == currentThreadId) ? "selected" : "" %>" data-id="<%= thread.id %>">
+    <header>
+      <span class="contact">
+        <%= thread.contactName() %>
+      </span>
+      <span class="date">
+        <%= thread.date() %>
+      </span>
+    </header>
+    <p>
+      <%= thread.preview() %>
+    </p>
+  </div>
+<% }); %>
